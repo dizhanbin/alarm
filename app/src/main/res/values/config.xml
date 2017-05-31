@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <integer name="anim_short_time">200</integer>
+    <integer name="anim_long_time">200</integer>
+    <integer name="anim_fade_time">200</integer>
+</resources>

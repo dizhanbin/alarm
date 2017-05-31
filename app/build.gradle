@@ -1,0 +1,141 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
+
+
+    signingConfigs {
+
+        debug {
+            keyAlias 'dym_alarm'
+            keyPassword 'dym_alarm'
+            storeFile file('src/main/dym_alarm.jks')
+            storePassword 'dym_alarm'
+        }
+        release {
+            keyAlias 'dym_alarm'
+            keyPassword 'dym_alarm'
+            storeFile file('src/main/dym_alarm.jks')
+            storePassword 'dym_alarm'
+        }
+    }
+
+
+
+    defaultConfig {
+        applicationId "com.dym.alarm"
+        minSdkVersion 21
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+
+        externalNativeBuild {
+            cmake {
+                cppFlags ""
+            }
+        }
+    }
+    buildTypes {
+        debug {
+
+
+            buildConfigField "boolean", "LOG_DEBUG", "true"
+            minifyEnabled false
+            zipAlignEnabled false
+            shrinkResources false
+
+            signingConfig signingConfigs.release
+
+            multiDexEnabled true
+            //proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            jniDebuggable false
+
+
+        }
+
+
+        release {
+            // 不显示Log
+            buildConfigField "boolean", "LOG_DEBUG", "false"
+            minifyEnabled true
+            // 移除无用的resource
+            // 文件
+            shrinkResources true
+            zipAlignEnabled true
+            multiDexEnabled true
+            useProguard true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'
+            //signingConfig signingConfigs.release
+            applicationVariants.all { variant ->
+                variant.outputs.each { output ->
+                    variant.productFlavors.each { flavor ->
+                        //Access our custom property "customerName"
+                        def outputFile = output.outputFile
+                        def today = new Date().format('yyyy-MM-dd');
+                        if (outputFile != null && outputFile.name.endsWith('.apk')) {
+
+                            // 输出apk名称为FotoRus_vXX_2015-01-15.apk
+                            //def fileName = "FotoRus_v${defaultConfig.versionName}_${today}.apk"
+                            def fileName = "${variant.productFlavors[0].name}_v${variant.productFlavors[0].versionName}_${today}_release.apk"
+
+                            output.outputFile = new File(outputFile.parent, fileName)
+                        }
+                    }
+
+                }
+            }
+        }
+
+
+
+    }
+    externalNativeBuild {
+        cmake {
+            path "CMakeLists.txt"
+        }
+    }
+
+
+    //多渠道打包
+    productFlavors {
+        abroad {
+
+            signingConfig signingConfigs.release
+            applicationId "com.dym.alarm"
+            versionCode 1
+            versionName "1.0.0"
+
+        }
+    }
+
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha7'
+    compile 'com.android.support:design:25.3.1'
+    compile 'com.android.support:multidex:1.0.1'
+    compile ('com.github.niorgai:StatusBarCompat:2.1.3', {
+        exclude group: 'com.android.support'
+    })
+
+    //firebase
+    compile 'com.google.firebase:firebase-core:10.2.1'
+    compile 'com.google.firebase:firebase-auth:10.2.1'
+    compile 'com.google.firebase:firebase-storage:10.2.1'
+    compile 'com.google.firebase:firebase-database:10.2.1'
+    compile 'com.google.android.gms:play-services-auth:10.2.1'
+    compile 'com.google.android.gms:play-services:10.2.1'
+    compile 'com.google.firebase:firebase-config:10.2.1'
+    compile 'com.android.support:cardview-v7:25.3.1'
+
+
+    compile 'com.airbnb.android:lottie:2.0.0-rc1'
+    compile 'uk.co.chrisjenx:calligraphy:2.3.0'
+
+
+}
+apply plugin: 'com.google.gms.google-services'

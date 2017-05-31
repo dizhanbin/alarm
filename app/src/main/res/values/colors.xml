@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--system-->
+    <color name="colorPrimary">#0B4E6F</color>
+    <color name="colorPrimaryDark">#0B4E6F</color>
+    <color name="colorAccent">#2a7ca6</color>
+
+    <!--common-->
+    <color name="gray">#b2b2b2</color>
+
+    <!--content -->
+
+    <color name="content">#c7c7c7</color>
+
+    <color name="text_click_change">#ECE9EC</color>
+    <color name="f7_bg">#F0F0EC</color>
+
+
+</resources>

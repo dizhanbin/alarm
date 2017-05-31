@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/content"
+    android:orientation="vertical"
+
+    >
+
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/actionbar_height"
+            android:background="@color/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay">
+
+
+            <ImageButton
+                android:id="@+id/btn_back"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/v_click"
+                android:clickable="true"
+                android:onClick="onClick"
+                android:scaleType="centerInside"
+                android:src="@mipmap/v_icon_back" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical|right"
+
+                android:paddingRight="15dp"
+                >
+
+                <ImageButton
+                    android:id="@+id/btn_save"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/v_click"
+                    android:clickable="true"
+                    android:onClick="onClick"
+                    android:scaleType="centerInside"
+                    android:src="@android:drawable/ic_menu_save" />
+
+
+            </LinearLayout>
+
+
+m
+        </android.support.v7.widget.Toolbar>
+
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+
+        >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/content_padding_left"
+        android:paddingRight="@dimen/content_padding_left"
+
+        >
+
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="10dp"
+            app:cardCornerRadius="7dp"
+            app:cardElevation="3dp"
+            app:cardPreventCornerOverlap="true"
+            app:cardUseCompatPadding="true">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/edit_label"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Label"
+                        android:inputType="text"
+                        android:maxLines="1" />
+                </android.support.design.widget.TextInputLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp"
+
+                    >
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Begin time：" />
+
+                    <TextView
+                        android:id="@+id/text_begin_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/v_click"
+                        android:clickable="true"
+                        android:onClick="onClick"
+                        android:padding="10dp"
+                        android:text="10:00"
+                        fontPath="fonts/r-b.ttf"
+                        />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <android.support.v7.widget.AppCompatCheckBox
+                        android:id="@+id/checkbox_repeat_week"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="onClick"
+                        android:text="Repeat Week" />
+
+                    <LinearLayout
+
+                        android:id="@+id/repeat_week_group"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:minHeight="50dp"
+
+                        >
+
+
+                        <com.dym.alarm.views.DToggleButton
+                            android:id="@+id/tb_rep0"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/repeat_ele_margin"
+                            android:background="@drawable/circle_select"
+                            android:gravity="center"
+                            android:text="S"
+                            android:textOff="S"
+                            android:textOn="S"
+
+                            />
+
+                        <com.dym.alarm.views.DToggleButton
+                            android:id="@+id/tb_rep1"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/repeat_ele_margin"
+                            android:background="@drawable/circle_select"
+                            android:gravity="center"
+                            android:text="M"
+                            android:textOff="M"
+                            android:textOn="M" />
+
+                        <com.dym.alarm.views.DToggleButton
+                            android:id="@+id/tb_rep2"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/repeat_ele_margin"
+                            android:background="@drawable/circle_select"
+                            android:gravity="center"
+                            android:text="T"
+                            android:textOff="T"
+                            android:textOn="T" />
+
+                        <com.dym.alarm.views.DToggleButton
+                            android:id="@+id/tb_rep3"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/repeat_ele_margin"
+                            android:background="@drawable/circle_select"
+                            android:gravity="center"
+                            android:text="W"
+                            android:textOff="W"
+                            android:textOn="W" />
+
+                        <com.dym.alarm.views.DToggleButton
+                            android:id="@+id/tb_rep4"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/repeat_ele_margin"
+                            android:background="@drawable/circle_select"
+                            android:gravity="center"
+                            android:text="T"
+                            android:textOff="T"
+                            android:textOn="T" />
+
+                        <com.dym.alarm.views.DToggleButton
+                            android:id="@+id/tb_rep5"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/repeat_ele_margin"
+                            android:background="@drawable/circle_select"
+                            android:gravity="center"
+                            android:text="F"
+                            android:textOff="F"
+                            android:textOn="F"
+
+
+                            />
+
+                        <com.dym.alarm.views.DToggleButton
+                            android:id="@+id/tb_rep6"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/repeat_ele_margin"
+                            android:background="@drawable/circle_select"
+                            android:gravity="center"
+                            android:text="S"
+                            android:textOff="S"
+                            android:textOn="S"
+
+                            />
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+
+                    >
+
+                    <!--android:drawableLeft="@drawable/quantum_ic_volume_up_grey600_36"-->
+                    <!--android:drawableLeft="@drawable/quantum_ic_volume_off_grey600_36"-->
+                    <TextView
+                        android:id="@+id/text_sound"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:clickable="true"
+
+
+                        android:drawableLeft="@drawable/quantum_ic_volume_off_grey600_36"
+                        android:gravity="center_vertical"
+                        android:onClick="onClick"
+                        android:text="Silent" />
+
+
+                    <CheckBox
+                        android:id="@+id/checkbox_vibrate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right|center_vertical"
+                        android:text="Vibrate" />
+
+
+                </FrameLayout>
+            </LinearLayout>
+
+
+        </android.support.v7.widget.CardView>
+
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="7dp"
+            app:cardElevation="3dp"
+            app:cardPreventCornerOverlap="true"
+            app:cardUseCompatPadding="true">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <android.support.v7.widget.AppCompatCheckBox
+                    android:id="@+id/checkbox_repeat_day"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="onClick"
+                    android:text="Repeat Day" />
+
+                <LinearLayout
+                    android:id="@+id/repeat_day_group"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center_vertical"
+
+                    android:visibility="visible">
+
+                    <com.dym.alarm.views.DToggleButton
+                        android:id="@+id/repeat_day_second"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/repeat_ele_margin"
+                        android:background="@drawable/circle_select"
+                        android:gravity="center"
+                        android:onClick="onClick"
+                        android:text="S"
+                        android:textOff="S"
+                        android:textOn="S" />
+
+                    <com.dym.alarm.views.DToggleButton
+                        android:id="@+id/repeat_day_minute"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/repeat_ele_margin"
+                        android:background="@drawable/circle_select"
+                        android:gravity="center"
+                        android:onClick="onClick"
+                        android:text="M"
+                        android:textOff="M"
+                        android:textOn="M" />
+
+                    <com.dym.alarm.views.DToggleButton
+                        android:id="@+id/repeat_day_hour"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/repeat_ele_margin"
+                        android:background="@drawable/circle_select"
+                        android:gravity="center"
+                        android:onClick="onClick"
+                        android:text="H"
+                        android:textOff="H"
+                        android:textOn="H" />
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp"
+                    android:id="@+id/group_end_time"
+                    >
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="End time：" />
+
+                    <TextView
+                        android:id="@+id/text_end_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="onClick"
+                        android:padding="10dp"
+                        android:text="10:00"
+                        fontPath="fonts/r-b.ttf"
+                        />
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+        </android.support.v7.widget.CardView>
+
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="7dp"
+            app:cardElevation="3dp"
+            app:cardPreventCornerOverlap="true"
+            app:cardUseCompatPadding="true">
+
+
+            <TextView
+                android:id="@+id/text_alarm_descript"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+
+                />
+
+
+        </android.support.v7.widget.CardView>
+
+
+    </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>
