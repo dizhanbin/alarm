@@ -16,5 +16,7 @@
     <color name="text_click_change">#ECE9EC</color>
     <color name="f7_bg">#F0F0EC</color>
 
+    <color name="black_overlay">#66000000</color>
+
 
 </resources>

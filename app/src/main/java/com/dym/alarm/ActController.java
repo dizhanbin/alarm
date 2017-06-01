@@ -12,6 +12,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.view.ContextMenu;
 import android.view.KeyEvent;
 import android.view.View;
@@ -42,7 +43,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 /**
  * Created by dzb on 16/5/17.
  */
-public class ActController extends FragmentActivity implements IToDo, IController {
+public class ActController extends AppCompatActivity implements IToDo, IController {
 
 
     public static ActController instance;

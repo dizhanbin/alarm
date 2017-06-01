@@ -22,10 +22,16 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 
-    <style name="fdialoganimation" parent="android:Animation" mce_bogus="1">
+    <style name="fdialoganimation" mce_bogus="1" parent="android:Animation">
         <item name="android:windowEnterAnimation">@anim/slide_in_left</item>
         <item name="android:windowExitAnimation">@anim/slide_out_right</item>
     </style>
+
+    <style name="dialog_animation_bottom" mce_bogus="1" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/slide_in_bottom</item>
+        <item name="android:windowExitAnimation">@anim/slide_out_bottom</item>
+    </style>
+
 
     <style name="DDialog" parent="@android:style/Theme.Holo.DialogWhenLarge">
         <item name="android:windowFrame">@null</item>
@@ -36,6 +42,29 @@
         <item name="android:windowExitAnimation">@anim/dialog_exit</item>
         <item name="android:windowAnimationStyle">@style/fdialoganimation</item>
 
+    </style>
+
+    <style name="BDialog" parent="@android:style/Theme.Holo.DialogWhenLarge">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowAnimationStyle">@style/dialog_animation_bottom</item>
+
+    </style>
+
+
+    <style name="FullscreenTheme" parent="AppTheme">
+        <item name="android:actionBarStyle">@style/FullscreenActionBarStyle</item>
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:windowBackground">@null</item>
+        <item name="metaButtonBarStyle">?android:attr/buttonBarStyle</item>
+        <item name="metaButtonBarButtonStyle">?android:attr/buttonBarButtonStyle</item>
+    </style>
+
+    <style name="FullscreenActionBarStyle" parent="Widget.AppCompat.ActionBar">
+        <item name="android:background">@color/black_overlay</item>
     </style>
 
 

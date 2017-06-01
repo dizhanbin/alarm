@@ -25,7 +25,13 @@ public class AlarmUtil {
         intent.putExtra("json","json_str");
         PendingIntent sender = PendingIntent.getBroadcast(DUMAPP.getInstance(),1001, intent, PendingIntent
                 .FLAG_CANCEL_CURRENT);
-        am.set(0, System.currentTimeMillis()+10000, sender);
+
+        long notify_time = System.currentTimeMillis()+5000;
+        am.set(0, notify_time , sender);
+        am.set(0, notify_time , sender);
+
+
+
 
     }
 }

@@ -113,6 +113,16 @@ public class DDialog extends Dialog {
 
         private int tag;
 
+        private int style = R.style.DDialog;
+
+
+        public Builder setStyle(int styleid){
+
+            style = styleid;
+            return this;
+
+        }
+
 
         public Builder setTag(int t){
 
@@ -164,7 +174,7 @@ public class DDialog extends Dialog {
             fdimiss();
 
             // instantiate the dialog with the custom Theme
-            final DDialog dialog = new DDialog(context, R.style.DDialog);
+            final DDialog dialog = new DDialog(context, style);
 
             View contentView = View.inflate(context, layout, null);
 
