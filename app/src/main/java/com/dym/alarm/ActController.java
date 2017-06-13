@@ -569,7 +569,12 @@ public class ActController extends AppCompatActivity implements IToDo, IControll
                     return true;
                 }
                 else {
-                    printforms();
+
+                    if( form_manager.getStack().size() == 1 ){
+                        if( form_manager.getCurrentForm().onMessage(Event.REQ_FORM_BACK,null) )
+                            return true;
+                    }
+                    //printforms();
                     break;
                 }
 

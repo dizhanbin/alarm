@@ -2,8 +2,12 @@ package com.dym.alarm;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 
 import com.dym.alarm.common.NLog;
+
+import java.util.Calendar;
 
 import qiu.niorgai.StatusBarCompat;
 
@@ -12,6 +16,13 @@ import qiu.niorgai.StatusBarCompat;
  */
 
 public class RP {
+
+    static {
+
+        Calendar calendar = Calendar.getInstance();
+        today = calendar.get(Calendar.DAY_OF_WEEK);
+
+    }
 
     public static class CK{
 
@@ -22,6 +33,8 @@ public class RP {
 
     }
 
+
+    public static int today;
 
     public static class Statusbar{
 
@@ -102,6 +115,72 @@ public class RP {
         public final static String[] weeks = new String[]{
           "Sun","Mon","Tue","Wed","Thu","Fri","Sat"
         };
+
+    }
+
+
+
+    public static class NetState{
+
+
+        public static final int NETWORKTYPE_INVALID = 0;
+
+        public static final int NETWORKTYPE_GSM = 1;
+
+        public static final int NETWORKTYPE_WIFI = 2;
+
+        public static int state;
+
+        public static boolean isValide(){
+
+            return NETWORKTYPE_INVALID != state;
+        }
+        public static boolean isWifi(){
+            return state == NETWORKTYPE_WIFI;
+        }
+        public static boolean isGsm(){
+            return state == NETWORKTYPE_GSM;
+        };
+
+
+        public static int scanNetState(){
+
+
+            int value = NETWORKTYPE_INVALID;
+
+            ConnectivityManager manager = (ConnectivityManager) DUMAPP.getInstance().getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo networkInfo = manager.getActiveNetworkInfo();
+
+            if (networkInfo != null && networkInfo.isConnected()) {
+                int type = networkInfo.getType();
+                if (type == ConnectivityManager.TYPE_WIFI ) {
+                    value = NETWORKTYPE_WIFI;
+                } else {
+                    value = NETWORKTYPE_GSM;
+                }
+            } else {
+                value = NETWORKTYPE_INVALID;
+            }
+
+            state = value;
+            return value;
+
+        }
+
+        /* 检查网络状态并同步 */
+        public static void scanNetTypeAndSync() {
+
+
+            int last = state;
+            scanNetState();
+            if( last != state ) {
+                ///@// TODO: 17/6/5
+            }
+            NLog.i("Net state is:%d",state);
+
+        }
+
+
 
     }
 

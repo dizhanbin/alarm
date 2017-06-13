@@ -7,27 +7,45 @@
     android:background="@android:color/white">
 
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/actionbar_height"
+        android:background="@color/colorPrimary"
+        app:popupTheme="@style/AppTheme.PopupOverlay">
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/actionbar_height"
-            android:background="@color/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            android:layout_height="match_parent"
+            android:gravity="center_vertical|right"
+
+            android:paddingRight="15dp">
+
+            <ImageButton
+                android:id="@+id/btn_setting"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/v_click"
+                android:clickable="true"
+                android:onClick="onClick"
+                android:scaleType="centerInside"
+                android:src="@mipmap/v_icon_setting" />
 
 
+        </LinearLayout>
+    </android.support.v7.widget.Toolbar>
 
 
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/actionbar_height"
         android:background="@color/content"
-        android:id="@+id/recyclerview"
         android:paddingTop="5dp"
 
         >
-
-
 
 
     </android.support.v7.widget.RecyclerView>

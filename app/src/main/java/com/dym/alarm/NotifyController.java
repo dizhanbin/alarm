@@ -76,12 +76,7 @@ public class NotifyController extends Activity {
                         //text_begin_time.setText(  );
                     }
                 })
-                .addButtonListener(R.id.btn_cancel, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                })
+
                 .setOnDimissListener(new DialogInterface.OnDismissListener() {
                     @Override
                     public void onDismiss(DialogInterface dialog) {

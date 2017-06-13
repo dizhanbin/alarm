@@ -18,6 +18,7 @@ import com.airbnb.lottie.LottieAnimationView;
 import com.airbnb.lottie.LottieComposition;
 import com.airbnb.lottie.OnCompositionLoadedListener;
 import com.dym.alarm.R;
+import com.dym.alarm.common.NLog;
 import com.dym.alarm.common.UIUtil;
 
 import java.util.ArrayList;
@@ -39,6 +40,7 @@ public class LottieFontViewGroup extends LinearLayout {
   public LottieFontViewGroup(Context context, AttributeSet attrs) {
     super(context, attrs);
     setGravity(Gravity.CENTER);
+    setOrientation(HORIZONTAL);
     //init();
   }
 
@@ -46,33 +48,11 @@ public class LottieFontViewGroup extends LinearLayout {
     super(context, attrs, defStyleAttr);
     //init();
     setGravity(Gravity.CENTER);
+    setOrientation(HORIZONTAL);
   }
 
-  /*
-  private void init() {
-    setFocusableInTouchMode(true);
-    LottieComposition.Factory.fromAssetFileName(getContext(), "Mobilo/BlinkingCursor.json",
-        new OnCompositionLoadedListener() {
-          @Override
-          public void onCompositionLoaded(LottieComposition composition) {
-            cursorView = new LottieAnimationView(getContext());
-            cursorView.setLayoutParams(new LayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT
-            ));
-            cursorView.setComposition(composition);
-            cursorView.loop(true);
-            cursorView.playAnimation();
-            addView(cursorView);
-          }
-        });
-  }
-  */
 
-  private void addSpace() {
-    int index = indexOfChild(cursorView);
-    addView(createSpaceView(), index);
-  }
+
 
   @Override
   public void addView(View child, int index) {
@@ -84,64 +64,41 @@ public class LottieFontViewGroup extends LinearLayout {
     }
   }
 
-  private void removeLastView() {
-    if (views.size() > 1) {
-      int position = views.size() - 2;
-      removeView(views.get(position));
-      views.remove(position);
-    }
-  }
 
   @Override
   protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
     super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
-    if (views.isEmpty()) {
-      return;
-    }
-    int currentX = getPaddingTop();
-    int currentY = getPaddingLeft();
 
-    for (int i = 0; i < views.size(); i++) {
-      View view = views.get(i);
-      if (!fitsOnCurrentLine(currentX, view)) {
-        if (view.getTag() != null && view.getTag().equals("Space")) {
-          continue;
-        }
-        currentX = getPaddingLeft();
-        currentY += view.getMeasuredHeight();
-      }
-      currentX += view.getWidth();
-    }
-
-    setMeasuredDimension(getMeasuredWidth(),
-        currentY + views.get(views.size() - 1).getMeasuredHeight() * 2);
   }
 
-  /*
+
+
   @Override
   protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
     if (views.isEmpty()) {
       return;
     }
-    int currentX = getPaddingTop();
-    int currentY = getPaddingLeft();
+
+
+
+    int L = UIUtil.dip2px (getContext(),30);
+
+    int R = right -  UIUtil.dip2px (getContext(),80);
+
+
+    int v_x_w = (R - L)/views.size();
+
+    int currentY = UIUtil.height/3;
 
     for (int i = 0; i < views.size(); i++) {
       View view = views.get(i);
-      if (!fitsOnCurrentLine(currentX, view)) {
-        if (view.getTag() != null && view.getTag().equals("Space")) {
-          continue;
-        }
-        currentX = getPaddingLeft();
-        currentY += view.getMeasuredHeight();
-      }
-      view.layout(currentX, currentY, currentX + view.getMeasuredWidth(),
+      view.layout(L+v_x_w*i, currentY, L+v_x_w*i + view.getMeasuredWidth(),
           currentY + view.getMeasuredHeight());
-      currentX += view.getWidth();
     }
   }
-  */
+
+
   @Override
   public InputConnection onCreateInputConnection(EditorInfo outAttrs) {
     BaseInputConnection fic = new BaseInputConnection(this, false);
@@ -155,71 +112,6 @@ public class LottieFontViewGroup extends LinearLayout {
   public boolean onCheckIsTextEditor() {
     return true;
   }
-
-  @Override
-  public boolean onKeyUp(int keyCode, KeyEvent event) {
-    if (keyCode == KeyEvent.KEYCODE_SPACE) {
-      addSpace();
-      return true;
-    }
-
-    if (keyCode == KeyEvent.KEYCODE_DEL) {
-      removeLastView();
-      return true;
-    }
-
-    if (!isValidKey(event)) {
-      return super.onKeyUp(keyCode, event);
-    }
-
-
-    String letter = "" + Character.toUpperCase((char) event.getUnicodeChar());
-    // switch (letter) {
-    //     case ",":
-    //         letter = "Comma";
-    //         break;
-    //     case "'":
-    //         letter = "Apostrophe";
-    //         break;
-    //     case ";":
-    //     case ":":
-    //         letter = "Colon";
-    //         break;
-    // }
-    final String fileName = "Mobilo/" + letter + ".json";
-    if (compositionMap.containsKey(fileName)) {
-      addComposition(compositionMap.get(fileName));
-    } else {
-      LottieComposition.Factory.fromAssetFileName(getContext(), fileName,
-          new OnCompositionLoadedListener() {
-            @Override
-            public void onCompositionLoaded(LottieComposition composition) {
-              compositionMap.put(fileName, composition);
-              addComposition(composition);
-            }
-          });
-    }
-
-    return true;
-  }
-
-  private boolean isValidKey(KeyEvent event) {
-    if (!event.hasNoModifiers()) {
-      return false;
-    }
-    if (event.getKeyCode() >= KeyEvent.KEYCODE_A && event.getKeyCode() <= KeyEvent.KEYCODE_Z) {
-      return true;
-    }
-
-    // switch (keyCode) {
-    //     case KeyEvent.KEYCODE_COMMA:
-    //     case KeyEvent.KEYCODE_APOSTROPHE:
-    //     case KeyEvent.KEYCODE_SEMICOLON:
-    //         return true;
-    // }
-    return false;
-  }
-
 
 
 
@@ -245,29 +137,18 @@ public class LottieFontViewGroup extends LinearLayout {
   private void addComposition(LottieComposition composition) {
     LottieAnimationView lottieAnimationView = new LottieAnimationView(getContext());
 
-    int wp = MeasureSpec.makeMeasureSpec(UIUtil.width/4,MeasureSpec.EXACTLY);
+    NLog.i("uiuitil.width:%d",UIUtil.width);
+    int wp = MeasureSpec.makeMeasureSpec( (UIUtil.width)/3,MeasureSpec.EXACTLY );
     lottieAnimationView.setLayoutParams(new LayoutParams(wp,wp));
     lottieAnimationView.setComposition(composition);
+    //lottieAnimationView.setBackgroundColor(0x88ff0000);
     addView(lottieAnimationView);
 
-   // lottieAnimationView.setBackgroundColor(0x88ff0000);
 
     lottieAnimationView.playAnimation();
 
-    //requestLayout();
   }
 
-  private boolean fitsOnCurrentLine(int currentX, View view) {
-    return currentX + view.getMeasuredWidth() < getWidth() - getPaddingRight();
-  }
 
-  private View createSpaceView() {
-    View spaceView = new View(getContext());
-    spaceView.setLayoutParams(new LayoutParams(
-        getResources().getDimensionPixelSize(R.dimen.font_space_width),
-        ViewGroup.LayoutParams.WRAP_CONTENT
-    ));
-    spaceView.setTag("Space");
-    return spaceView;
-  }
+
 }

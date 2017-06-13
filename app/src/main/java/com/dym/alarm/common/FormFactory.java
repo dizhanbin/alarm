@@ -7,6 +7,7 @@ public class FormFactory{
           case FORM_MAIN: return FormMain.class;
           case FORM_FLASH: return FormFlash.class;
           case FORM_EDIT: return FormEdit.class;
+          case FORM_SETTING: return FormSetting.class;
           }
       return null;
   }
@@ -15,6 +16,7 @@ public class FormFactory{
           case FORM_MAIN: return "首页";
           case FORM_FLASH: return "启动页";
           case FORM_EDIT: return "提醒编辑页";
+          case FORM_SETTING: return "设置页面";
           }
       return "";
   }

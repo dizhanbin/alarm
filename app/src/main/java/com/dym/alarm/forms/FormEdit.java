@@ -28,7 +28,7 @@ import com.dym.alarm.common.NLog;
 public class FormEdit extends Form {
 
 
-    ToggleButton repeat_day_s;
+
     ToggleButton repeat_day_m;
     ToggleButton repeat_day_h;
 
@@ -79,7 +79,6 @@ public class FormEdit extends Form {
             mView = inflater.inflate(R.layout.form_edit, null);
             setView(mView);
 
-            repeat_day_s = (ToggleButton) ViewInject(R.id.repeat_day_second);
             repeat_day_m = (ToggleButton) ViewInject(R.id.repeat_day_minute);
             repeat_day_h = (ToggleButton) ViewInject(R.id.repeat_day_hour);
 
@@ -133,27 +132,6 @@ public class FormEdit extends Form {
         group_end_time.setVisibility(model.repeat_day ? View.VISIBLE : View.GONE);
 
 
-        /*
-        if (model.repeat_day) {
-            switch (model.repeat_day_unit) {
-                case 0:
-                    repeat_day_s.setChecked(true);
-                    repeat_day_s.setTextOn(model.repeat_day_value + "S");
-                    break;
-                case 1:
-                    repeat_day_m.setChecked(true);
-                    repeat_day_m.setTextOn(model.repeat_day_value + "M");
-                    break;
-                case 2:
-                    repeat_day_h.setChecked(true);
-                    repeat_day_h.setTextOn(model.repeat_day_value + "H");
-                    break;
-
-            }
-
-        }
-
-        */
         if( model.repeat_day) {
             last_repeat_day = model.repeat_day_value + model.getDayRepeatUnitStr();
             setRepeatDay(last_repeat_day);
@@ -179,7 +157,6 @@ public class FormEdit extends Form {
             case R.id.btn_back:
                 sendMessage(Event.REQ_FORM_BACK);
                 break;
-            case R.id.repeat_day_second:
             case R.id.repeat_day_minute:
             case R.id.repeat_day_hour:
 
@@ -199,10 +176,11 @@ public class FormEdit extends Form {
 
             case R.id.btn_save:
 
-
-                AlarmUtil.addAlarm();
                 AnalyseUtil.addEvent("编辑页面","操作","点击保存");
                 saveAlarm();
+
+                if( model.on )
+                    AlarmUtil.addAlarm(getContext(), model );
 
                 break;
             case R.id.text_begin_time: {
@@ -314,19 +292,12 @@ public class FormEdit extends Form {
         model.vibrate = checkbox_vibrate.isChecked();
 
 
-        if (repeat_day_s.isChecked()) {
+        if (repeat_day_m.isChecked()) {
             model.repeat_day_unit = 0;
-            String sv = repeat_day_s.getTextOn().toString();
-
-            model.repeat_day_value = Integer.parseInt(sv.substring(0, sv.length() - 1));
-
-
-        } else if (repeat_day_m.isChecked()) {
-            model.repeat_day_unit = 1;
             String sv = repeat_day_m.getTextOn().toString();
             model.repeat_day_value = Integer.parseInt(sv.substring(0, sv.length() - 1));
         } else if (repeat_day_h.isChecked()) {
-            model.repeat_day_unit = 2;
+            model.repeat_day_unit = 1;
             String sv = repeat_day_h.getTextOn().toString();
             model.repeat_day_value = Integer.parseInt(sv.substring(0, sv.length() - 1));
         }
@@ -347,11 +318,10 @@ public class FormEdit extends Form {
     private void repeat_change(View sel) {
 
 
-        repeat_day_s.setChecked(repeat_day_s == sel);
         repeat_day_m.setChecked(repeat_day_m == sel);
         repeat_day_h.setChecked(repeat_day_h == sel);
 
-        final int index = repeat_day_s == sel ? 0 : (repeat_day_m == sel ? 1 : 2);
+        final int index =  (repeat_day_m == sel ? 0 : 1);
 
         int max = 0;
         int min = 1;
@@ -359,16 +329,8 @@ public class FormEdit extends Form {
 
         switch (index) {
 
-            case 0: {
-                max = 100;
-                int v_len = repeat_day_s.getTextOn().length();
-                if (v_len > 1) {
 
-                    value = Integer.parseInt(repeat_day_s.getTextOn().toString().substring(0, v_len - 1));
-                }
-            }
-            break;
-            case 1: {
+            case 0: {
                 max = 100;
                 int v_len = repeat_day_m.getTextOn().length();
                 if (v_len > 1) {
@@ -377,7 +339,7 @@ public class FormEdit extends Form {
                 }
             }
             break;
-            case 2: {
+            case 1: {
                 max = 12;
                 int v_len = repeat_day_h.getTextOn().length();
                 if (v_len > 1) {
@@ -417,14 +379,10 @@ public class FormEdit extends Form {
                             switch (index) {
 
                                 case 0:
-                                    repeat_day_s.setTextOn(np.getValue() + "S");
-                                    last_repeat_day = repeat_day_s.getTextOn().toString();
-                                    break;
-                                case 1:
                                     repeat_day_m.setTextOn(np.getValue() + "M");
                                     last_repeat_day = repeat_day_m.getTextOn().toString();
                                     break;
-                                case 2:
+                                case 1:
                                     repeat_day_h.setTextOn(np.getValue() + "H");
                                     last_repeat_day = repeat_day_h.getTextOn().toString();
                                     break;
@@ -473,29 +431,22 @@ public class FormEdit extends Form {
 
     public void setRepeatDay(String v_u) {
 
-        int index = v_u.endsWith("S") ? 0 : v_u.endsWith("M") ? 1 : 2;
+        int index =  v_u.endsWith("M") ? 0 : 1;
 
-        repeat_day_s.setChecked(false);
         repeat_day_m.setChecked(false);
         repeat_day_h.setChecked(false);
 
         switch (index) {
 
+
             case 0:
-                repeat_day_s.setChecked(true);
-                if (v_u.length() > 1)
-                    repeat_day_s.setTextOn(v_u);
-                else
-                    repeat_day_s.setTextOn("S");
-                break;
-            case 1:
                 repeat_day_m.setChecked(true);
                 if (v_u.length() > 1)
                     repeat_day_m.setTextOn(v_u);
                 else
                     repeat_day_m.setTextOn("M");
                 break;
-            case 2:
+            case 1:
                 repeat_day_h.setChecked(true);
                 if (v_u.length() > 1)
                     repeat_day_h.setTextOn(v_u);

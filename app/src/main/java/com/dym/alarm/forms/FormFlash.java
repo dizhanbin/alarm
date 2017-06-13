@@ -58,7 +58,7 @@ public class FormFlash extends Form {
 
                     sendMessage(Event.FORM_MAIN);
                 }
-            },1000);
+            },2000);
         else{
 
             fontview.setChar(letters.charAt(index++));
@@ -77,5 +77,18 @@ public class FormFlash extends Form {
     @Override
     public boolean isScreen() {
         return true;
+    }
+
+
+    @Override
+    public boolean onMessage(Event event, Object value) {
+
+        switch (event){
+
+            case REQ_FORM_BACK:
+                return true;
+        }
+
+        return false;
     }
 }

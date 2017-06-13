@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import com.dym.alarm.Form;
 import com.dym.alarm.R;
+import com.dym.alarm.common.AlarmUtil;
 import com.dym.alarm.common.Event;
 import com.dym.alarm.common.NLog;
 import com.dym.alarm.datacenter.DataRequest;
@@ -77,8 +78,18 @@ public class FormMain extends Form implements View.OnClickListener {
 
                 sendMessage(Event.REQ_ALARM_SAVE,mDatas.get(pos));
 
+                if( !mDatas.get(pos).on )
+                    AlarmUtil.cancel(getContext(),mDatas.get(pos));
+                else
+                    AlarmUtil.addAlarm(getContext(),mDatas.get(pos));
+
+
             }
             break;
+            case R.id.btn_setting:
+
+                sendMessage(Event.FORM_SETTING);
+                break;
 
 
         }
@@ -142,6 +153,14 @@ public class FormMain extends Form implements View.OnClickListener {
 
 
 
+
+        for(MAlarm mAlarm : mDatas){
+            if( mAlarm.on )
+                AlarmUtil.addAlarm(getContext(),mAlarm);
+            else
+                AlarmUtil.cancel(getContext(),mAlarm);
+
+        }
 
     }
 }

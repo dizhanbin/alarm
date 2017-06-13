@@ -53,7 +53,7 @@
             </LinearLayout>
 
 
-m
+
         </android.support.v7.widget.Toolbar>
 
 
@@ -325,17 +325,6 @@ m
 
                     android:visibility="visible">
 
-                    <com.dym.alarm.views.DToggleButton
-                        android:id="@+id/repeat_day_second"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/repeat_ele_margin"
-                        android:background="@drawable/circle_select"
-                        android:gravity="center"
-                        android:onClick="onClick"
-                        android:text="S"
-                        android:textOff="S"
-                        android:textOn="S" />
 
                     <com.dym.alarm.views.DToggleButton
                         android:id="@+id/repeat_day_minute"
