@@ -9,6 +9,7 @@ import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.OvershootInterpolator;
 
 import com.dym.alarm.Form;
 import com.dym.alarm.R;
@@ -21,6 +22,9 @@ import com.dym.alarm.views.VHAlarmItem;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator;
+import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
 
 public class FormMain extends Form implements View.OnClickListener {
 
@@ -40,6 +44,16 @@ public class FormMain extends Form implements View.OnClickListener {
 
             mRecyclerView = (RecyclerView) ViewInject(R.id.recyclerview);
 
+            //SlideInUpAnimator animator = new SlideInUpAnimator(new OvershootInterpolator(5f));
+
+            SlideInLeftAnimator animator = new SlideInLeftAnimator();
+            animator.setInterpolator(new OvershootInterpolator());
+
+            mRecyclerView.setItemAnimator(animator);
+            mRecyclerView.getItemAnimator().setAddDuration(1000);
+            mRecyclerView.getItemAnimator().setRemoveDuration(1000);
+            mRecyclerView.getItemAnimator().setMoveDuration(1000);
+            mRecyclerView.getItemAnimator().setChangeDuration(1000);
             initUI();
 
 
@@ -119,7 +133,9 @@ public class FormMain extends Form implements View.OnClickListener {
     private void initRecyclerView(List<MAlarm> value) {
 
         mDatas.clear();
-        mDatas.addAll(value);
+
+
+
 
         mRecyclerView.setLayoutManager(new GridLayoutManager(getContext(),1));
 
@@ -152,8 +168,25 @@ public class FormMain extends Form implements View.OnClickListener {
         });
 
 
+        //for(mDatas.addAll(value);)
+
+        for(int i=0;i<value.size();i++){
 
 
+            MAlarm mAlarm = value.get(i);
+            mDatas.add( mAlarm );
+            mRecyclerView.getAdapter().notifyItemInserted(i);
+
+            if( mAlarm.on )
+                AlarmUtil.addAlarm(getContext(),mAlarm);
+            else
+                AlarmUtil.cancel(getContext(),mAlarm);
+
+
+        }
+
+
+/*
         for(MAlarm mAlarm : mDatas){
             if( mAlarm.on )
                 AlarmUtil.addAlarm(getContext(),mAlarm);
@@ -161,6 +194,7 @@ public class FormMain extends Form implements View.OnClickListener {
                 AlarmUtil.cancel(getContext(),mAlarm);
 
         }
+*/
 
     }
 }

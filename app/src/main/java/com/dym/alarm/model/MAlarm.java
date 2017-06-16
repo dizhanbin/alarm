@@ -22,7 +22,7 @@ public class MAlarm {
     public String label;
     public String begintime;
     public boolean repeat_week;
-    public List<Integer> repeat_weeks ;
+    public List<Integer> repeat_weeks = new ArrayList<>() ;
 
     public String sound;
     public boolean vibrate;
@@ -74,7 +74,7 @@ public class MAlarm {
         if( repeat_day )
             sb.append("begintime: ").append(begintime).append("\n");
         else
-            sb.append("alarm time: ").append(begintime).append("\n");
+            sb.append("alarm time: ").append(begintime);
         if( repeat_day ){
 
             sb.append("one alarm/").append(repeat_day_value ).append(repeat_day_unit==0?"minute":"hour").append("\n");
@@ -117,7 +117,8 @@ public class MAlarm {
 
             }
         }
-        return repeat_weeks.get(0)+1;
+        return 0;
+        //return repeat_weeks.get(0)+1;
 
     }
 
