@@ -1,21 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <elements>
     
-    
-    
-    
-    <element id="0011" name="描述" iconpath=":/image/117.png" descript="描述文本" c_android="com.fotoable.photoplus.flows.FlowNone"	 c_ios="FlowNone"  group="事件">
+    <element id="0011" name="描述" iconpath=":/image/117.png" descript="描述文本" c_android="com.dym.alarm.flows.FlowNone"	 c_ios="FlowNone"  group="事件">
         <property name="descript" title="描述" type="0" args="" value="描述" />
     </element>
 
-	<element id="001" name="事件" iconpath=":/image/001.png" descript="指定事件处理，业务从这里开始" c_android="com.fotoable.photoplus.flows.EventStart"	 c_ios="EventStart"  group="事件">
+	<element id="001" name="事件" iconpath=":/image/001.png" descript="指定事件处理，业务从这里开始" c_android="com.dym.alarm.flows.EventStart"	 c_ios="EventStart"  group="事件">
 				<property name="event" title="事件" type="1"  args="$event" value="" />
 				<property name="params" title="参数" type="0"  args="" value="" />
 				<property name="static" title="常驻内存(true,false)" type="0"  args="" value="" />
 				<property name="descript" title="描述" type="0" args="" value="事件" />
 				
 	</element>
-	<element id="002" name="网络请求" iconpath=":/image/002.png"  descript="指定网络请求" c_android="com.fotoable.photoplus.flows.Http"	 c_ios="Http">
+	<element id="002" name="网络请求" iconpath=":/image/002.png"  descript="指定网络请求" c_android="com.dym.alarm.flows.Http"	 c_ios="Http">
 				  <property name="url" title="请求地址" type="0" args="" value=""/>
                 <property name="out" title="输出字符保存至" type="0" args="" value="$http_result"/>
                 <property name="status" title="状态码" type="0" args="" value="$flag"/>
@@ -24,14 +21,14 @@
                  <property name="descript" title="描述" type="0" args="" value="Http请求"/>
 	</element>
 
-	<element id="0024" name="网络状态" iconpath=":/image/002.png"  descript="网络状态 \n  0 不可用 1 gsm  2 wifi " c_android="com.fotoable.photoplus.flows.NetState"	 c_ios="NetState">
+	<element id="0024" name="网络状态" iconpath=":/image/002.png"  descript="网络状态 \n  0 不可用 1 gsm  2 wifi " c_android="com.dym.alarm.flows.NetState"	 c_ios="NetState">
 
 		<property name="state" title="是否可用" type="0" args="" value=""/>
 		<property name="descript" title="描述" type="0" args="" value="网络状态"/>
 	</element>
 
 
-<element id="0021" name="文件上传" iconpath=":/image/002.png"  descript="文件上传" c_android="com.fotoable.photoplus.flows.HttpUpload"	 c_ios="HttpUpload">
+<element id="0021" name="文件上传" iconpath=":/image/002.png"  descript="文件上传" c_android="com.dym.alarm.flows.HttpUpload"	 c_ios="HttpUpload">
 				  <property name="url" title="请求地址" type="1" args="$url" value=""/>
                 <property name="out" title="输出字符保存至" type="0" args="" value="$http_result"/>
                 <property name="status" title="状态码" type="0" args="" value=""/>
@@ -45,7 +42,7 @@
 	
 	
 
-	<element id="0022" name="Http字典组装" iconpath=":/image/002.png"  descript="Http字典组装 对象字段获取 " c_android="com.fotoable.photoplus.flows.com.fotoable.photoplus.flows.HttpObjectsField"	 c_ios="HttpObjectsField">
+	<element id="0022" name="Http字典组装" iconpath=":/image/002.png"  descript="Http字典组装 对象字段获取 " c_android="com.dym.alarm.flows.com.dym.alarm.flows.HttpObjectsField"	 c_ios="HttpObjectsField">
 				   <property name="data" title="数据数组" type="0" args="" value=""/>
                 <property name="dic" title="输出字典（Map）" type="0" args="" value=""/>
                  <property name="field" title="字段" type="0" args="" value="" />	           	
@@ -55,7 +52,7 @@
 	
 	
 
-	<element id="003"  name="json解析" iconpath=":/image/json_parse.png"  descript="json解析为对象或数组" c_android="com.fotoable.photoplus.flows.JSONParse"	 c_ios="JSONParse">
+	<element id="003"  name="json解析" iconpath=":/image/json_parse.png"  descript="json解析为对象或数组" c_android="com.dym.alarm.flows.JSONParse"	 c_ios="JSONParse">
 
        
             <property name="key" title="json路径" type="0" args=""  value=""/>
@@ -67,7 +64,7 @@
 
     </element>
 	
-		<element id="004"  name="对象组装Map" iconpath=":/image/004.png"  descript="对象组装为map	\n 按对象组装选择为true	指定字段将不起作用" c_android="com.fotoable.photoplus.flows.EventStart"	 c_ios="EventStart">
+		<element id="004"  name="对象组装Map" iconpath=":/image/004.png"  descript="对象组装为map	\n 按对象组装选择为true	指定字段将不起作用" c_android="com.dym.alarm.flows.EventStart"	 c_ios="EventStart">
 
        
    				<property name="reflect" title="按对象组装" type="1" args="$boolean" value="false"/>
@@ -77,7 +74,7 @@
 
     </element>
     
-	<element id="005" name="发送事件" iconpath=":/image/005.png"  descript="发送指定事件到页面处理" c_android="com.fotoable.photoplus.flows.EventSend"	 c_ios="EventSend">
+	<element id="005" name="发送事件" iconpath=":/image/005.png"  descript="发送指定事件到页面处理" c_android="com.dym.alarm.flows.EventSend"	 c_ios="EventSend">
 				<property name="event" title="事件" type="1"  args="$event" value="" />
 				<property name="params" title="参数" type="0"  args="" value="" />
 				<property name="delay" title="延迟" type="0"  args="" value="" />
@@ -86,14 +83,14 @@
 
 
 
-	<element id="008" name="对象到JSON" iconpath=":/image/json_tostring.png"  descript="对象转化为json" c_android="com.fotoable.photoplus.flows.JSONOut"	 c_ios="JSONOut">
+	<element id="008" name="对象到JSON" iconpath=":/image/json_tostring.png"  descript="对象转化为json" c_android="com.dym.alarm.flows.JSONOut"	 c_ios="JSONOut">
 				<property name="in" title="转化对象" type="0"  args="" value="" />
 				<property name="out" title="输出字符到" type="0"  args="" value="" />
 				<property name="descript" title="描述" type="0" args="" value="对象转化为json" />
 	
 		</element>
 		
-	<element id="009" name="文件存储路径" iconpath=":/image/store.png"  descript="获取存储路径" c_android="com.fotoable.photoplus.flows.StorePath"	 c_ios="StorePath">
+	<element id="009" name="文件存储路径" iconpath=":/image/store.png"  descript="获取存储路径" c_android="com.dym.alarm.flows.StorePath"	 c_ios="StorePath">
 				<property name="sdcard_path" title="存储卡路径" type="0"  args="" value="" />
 				<property name="sdcard_app_path" title="存储卡应用路径" type="0"  args="" value="" />
 				<property name="private_path" title="应用私有路径" type="0"  args="" value="" />
@@ -102,32 +99,32 @@
 		</element>
 		
 
-	<element id="010" name="读取文件" iconpath=":/image/read.png"  descript="读取文件字符" c_android="com.fotoable.photoplus.flows.FileIn"	 c_ios="FileIn">
+	<element id="010" name="读取文件" iconpath=":/image/read.png"  descript="读取文件字符" c_android="com.dym.alarm.flows.FileIn"	 c_ios="FileIn">
 				<property name="filepath" title="路径" type="0"  args="" value="" />
 				<property name="out" title="变量名" type="0"  args="" value="" />
 				<property name="descript" title="描述" type="0" args="" value="读取文件" />
 	</element>
 		
 		
-		<element id="011" name="保存文件" iconpath=":/image/write.png"  descript="保存数据到文件，目前是字符" c_android="com.fotoable.photoplus.flows.FileOut"	 c_ios="FileOut">
+		<element id="011" name="保存文件" iconpath=":/image/write.png"  descript="保存数据到文件，目前是字符" c_android="com.dym.alarm.flows.FileOut"	 c_ios="FileOut">
 				<property name="in" title="变量名" type="0"  args="" value="" />
 				<property name="filepath" title="路径" type="0"  args="" value="" />
 				<property name="descript" title="描述" type="0" args="" value="保存文件" />
 	</element>	
 		
-	<element id="012" name="字符处理" iconpath=":/image/string.png"  descript="字符处理\n 字符连接 变量以{}相隔 $json_path = {$field}.xml" c_android="com.fotoable.photoplus.flows.StringUtil"	 c_ios="StringUtil">
+	<element id="012" name="字符处理" iconpath=":/image/string.png"  descript="字符处理\n 字符连接 变量以{}相隔 $json_path = {$field}.xml" c_android="com.dym.alarm.flows.StringUtil"	 c_ios="StringUtil">
 				<property name="condition" title="条件" type="0"  args="" value="" />
 				<property name="isnumber" title="数字(true,false)" type="0"  args="" value="false" />
 				<property name="descript" title="描述" type="0" args="" value="字符处理" />
 	</element>	
 	
-	<element id="0121" name="整数处理" iconpath=":/image/string.png"  descript="整数处理" c_android="com.fotoable.photoplus.flows.IntUtil"	 c_ios="IntUtil">
+	<element id="0121" name="整数处理" iconpath=":/image/string.png"  descript="整数处理" c_android="com.dym.alarm.flows.IntUtil"	 c_ios="IntUtil">
 				<property name="condition" title="条件" type="0"  args="" value="" />
 				<property name="descript" title="描述" type="0" args="" value="整数处理" />
 	</element>	
 	
 		
-	<element id="013" name="对象拷贝" iconpath=":/image/copy.png"  descript="对象拷贝、可以是对象或数组。\n对行字段:\n a=b,c=d " c_android="com.fotoable.photoplus.flows.ObjectCopy"	 c_ios="ObjectCopy">
+	<element id="013" name="对象拷贝" iconpath=":/image/copy.png"  descript="对象拷贝、可以是对象或数组。\n对行字段:\n a=b,c=d " c_android="com.dym.alarm.flows.ObjectCopy"	 c_ios="ObjectCopy">
              
 				<property name="from" title="拷贝数据" type="0"  args="" value="" />		
 				<property name="to" title="目的数据" type="0"  args="" value="" />		
@@ -138,7 +135,7 @@
 
 
 	
-	<element id="015" name="对象取值" iconpath=":/image/readobj.png"  descript="读取字段属性值（输入为数组 输出为字段数组）" c_android="com.fotoable.photoplus.flows.ReadObj"	 c_ios="ReadObj">
+	<element id="015" name="对象取值" iconpath=":/image/readobj.png"  descript="读取字段属性值（输入为数组 输出为字段数组）" c_android="com.dym.alarm.flows.ReadObj"	 c_ios="ReadObj">
              
 				<property name="data" title="数据" type="0"  args="" value="" />		
 				<property name="field"  title="字段" type="0"  args="" value="" />
@@ -149,7 +146,7 @@
 	</element>
     
     
-    <element id="017" name="对象赋值" iconpath=":/image/setobj.png"  descript="对象赋值" c_android="com.fotoable.photoplus.flows.SetObj"	 c_ios="SetObj">
+    <element id="017" name="对象赋值" iconpath=":/image/setobj.png"  descript="对象赋值" c_android="com.dym.alarm.flows.SetObj"	 c_ios="SetObj">
         
         <property name="data" title="数据" type="0"  args="" value="" />
         <property name="field" title="字段" type="0"  args="" value="" />
@@ -158,7 +155,7 @@
         
     </element>
     
-    <element id="014" name="遍历执行" iconpath=":/image/recycle.png"  descript="遍历集合执行 \n、判断是否结束 放到 结束标志字段" c_android="com.fotoable.photoplus.flows.RecycleDo"	 c_ios="RecycleDo">
+    <element id="014" name="遍历执行" iconpath=":/image/recycle.png"  descript="遍历集合执行 \n、判断是否结束 放到 结束标志字段" c_android="com.dym.alarm.flows.RecycleDo"	 c_ios="RecycleDo">
         
         <property name="data" title="数据集合" type="0"  args="" value="" />
         <property name="out"  title="输出参数" type="0"  args="" value="" />
@@ -168,7 +165,7 @@
         
     </element>
 
-	<element id="0141" name="批量导入" iconpath=":/image/recycle.png"  descript="批量导入 \n、判断是否结束 放到 结束标志字段 \n导入一条 保存到输出变量中" c_android="com.fotoable.photoplus.flows.FileImportPoint"	 c_ios="FileImportPoint">
+	<element id="0141" name="批量导入" iconpath=":/image/recycle.png"  descript="批量导入 \n、判断是否结束 放到 结束标志字段 \n导入一条 保存到输出变量中" c_android="com.dym.alarm.flows.FileImportPoint"	 c_ios="FileImportPoint">
 
 		<property name="data" title="数据集合" type="0"  args="" value="" />
 		<property name="userid" title="用户id" type="0"  args="" value="#email_64" />
@@ -184,7 +181,7 @@
 
 
 
-	<element id="019" name="字符分隔成数组" iconpath=":/image/strsplite.png"  descript="字符分隔成数组" c_android="com.fotoable.photoplus.flows.StrSplite"	 c_ios="StrSplite">
+	<element id="019" name="字符分隔成数组" iconpath=":/image/strsplite.png"  descript="字符分隔成数组" c_android="com.dym.alarm.flows.StrSplite"	 c_ios="StrSplite">
              
 				<property name="data" title="字符串" type="0"  args="" value="" />		
 				<property name="regex" title="分隔字符" type="0"  args="" value="" />	
@@ -193,7 +190,7 @@
 				
 	</element>
     
-    <element id="021" name="字符赋值" iconpath=":/image/101.png"  descript="字符赋值 $var='$type' .... $var='1' " c_android="com.fotoable.photoplus.flows.StrSet"	 c_ios="StrSet">
+    <element id="021" name="字符赋值" iconpath=":/image/101.png"  descript="字符赋值 $var=‘$type’ …. $var=‘1’ " c_android="com.dym.alarm.flows.StrSet"	 c_ios="StrSet">
         
         <property name="condition" title="赋值语句" type="0"  args="" value="" />
         
@@ -201,7 +198,7 @@
         
     </element>
 
-	<element id="02101" name="字符位置" iconpath=":/image/101.png"  descript="字符位置 $var='$type' .... $var='1' " c_android="com.fotoable.photoplus.flows.StrPos"	 c_ios="StrPos">
+	<element id="02101" name="字符位置" iconpath=":/image/101.png"  descript="字符位置 $var=‘$type’ …. $var=‘1’ " c_android="com.dym.alarm.flows.StrPos"	 c_ios="StrPos">
 
 		<property name="parent" title="字符串" type="0"  args="" value="" />
 		<property name="child" title="查找字符" type="0"  args="" value="" />
@@ -212,7 +209,7 @@
 	</element>
 
     
-    <element id="0211" name="格式化当前时间" iconpath=":/image/101.png"  descript="格式化当前时间 yyyyMMss hhmmss  value:android 13位时间 io 10位时间" c_android="com.fotoable.photoplus.flows.StrFormatTime"	 c_ios="StrFormatTime">
+    <element id="0211" name="格式化当前时间" iconpath=":/image/101.png"  descript="格式化当前时间 yyyyMMss hhmmss  value:android 13位时间 io 10位时间" c_android="com.dym.alarm.flows.StrFormatTime"	 c_ios="StrFormatTime">
         
         <property name="format" title="格式化为" type="0"  args="" value="" />
         <property name="outvar" title="赋值给" type="0"  args="" value="" />
@@ -221,7 +218,7 @@
         
     </element>
 
-    <element id="0212" name="Base64" iconpath=":/image/101.png"  descript="Base64" c_android="com.fotoable.photoplus.flows.StrBase64"	 c_ios="StrBase64">
+    <element id="0212" name="Base64" iconpath=":/image/101.png"  descript="Base64" c_android="com.dym.alarm.flows.StrBase64"	 c_ios="StrBase64">
         
         <property name="from" title="字符" type="0"  args="" value="" />
         <property name="to" title="赋值给" type="0"  args="" value="" />
@@ -230,7 +227,7 @@
         
     </element>
 
-    <element id="0213" name="ACE加密字符" iconpath=":/image/101.png"  descript="ACE加密字符" c_android="com.fotoable.photoplus.flows.ACEStr"	 c_ios="ACEStr">
+    <element id="0213" name="ACE加密字符" iconpath=":/image/101.png"  descript="ACE加密字符" c_android="com.dym.alarm.flows.ACEStr"	 c_ios="ACEStr">
         
         <property name="key" title="KEY" type="0"  args="" value="" />
         <property name="src" title="加密前" type="0"  args="" value="" />
@@ -240,7 +237,7 @@
         
     </element>
 
-	<element id="0214" name="ACE文件加密" iconpath=":/image/101.png"  descript="ACE文件加密" c_android="com.fotoable.photoplus.flows.ACEFile"	 c_ios="ACEFile">
+	<element id="0214" name="ACE文件加密" iconpath=":/image/101.png"  descript="ACE文件加密" c_android="com.dym.alarm.flows.ACEFile"	 c_ios="ACEFile">
 
 		<property name="src" title="原文件" type="0"  args="" value="" />
 		<property name="result" title="结果" type="0"  args="" value="" />
@@ -250,7 +247,7 @@
 
 
 
-	<element id="020" name="数组取值" iconpath=":/image/arrayobj.png"  descript="数组取值" c_android="com.fotoable.photoplus.flows.ArrayObj"	 c_ios="ArrayObj">
+	<element id="020" name="数组取值" iconpath=":/image/arrayobj.png"  descript="数组取值" c_android="com.dym.alarm.flows.ArrayObj"	 c_ios="ArrayObj">
              
 				<property name="data" title="数组" type="0"  args="" value="" />		
 				<property name="index" title="索引" type="0"  args="" value="" />	
@@ -260,7 +257,7 @@
 	</element>	
 	
 
-<element id="0201" name="数组添加" iconpath=":/image/arrayobj.png"  descript="向数组添加对象" c_android="com.fotoable.photoplus.flows.ArrayAdd"	 c_ios="ArrayAdd">
+<element id="0201" name="数组添加" iconpath=":/image/arrayobj.png"  descript="向数组添加对象" c_android="com.dym.alarm.flows.ArrayAdd"	 c_ios="ArrayAdd">
              
 				<property name="data" title="数组" type="0"  args="" value="" />		
 				<property name="obj" title="对象" type="0"  args="" value="" />
@@ -270,7 +267,7 @@
 	</element>	
 	
 	
-<element id="0202" name="数组删除" iconpath=":/image/arrayobj.png"  descript="从数组中删除指定对象" c_android="com.fotoable.photoplus.flows.ArrayDel"	 c_ios="ArrayDel">
+<element id="0202" name="数组删除" iconpath=":/image/arrayobj.png"  descript="从数组中删除指定对象" c_android="com.dym.alarm.flows.ArrayDel"	 c_ios="ArrayDel">
              
 			<property name="data" title="数组" type="0"  args="" value="" />		
 				<property name="obj" title="对象" type="0"  args="" value="" />	
@@ -279,7 +276,7 @@
 				
 	</element>
 
-	<element id="0203" name="数组是否包含" iconpath=":/image/arrayobj.png"  descript="是否包含制定对象 1 0" c_android="com.fotoable.photoplus.flows.ArrayContain"	 c_ios="ArrayContain">
+	<element id="0203" name="数组是否包含" iconpath=":/image/arrayobj.png"  descript="是否包含制定对象 1 0" c_android="com.dym.alarm.flows.ArrayContain"	 c_ios="ArrayContain">
 
 		<property name="data" title="数组" type="0"  args="" value="" />
 		<property name="obj" title="对象" type="0"  args="" value="" />
@@ -290,7 +287,7 @@
 
 
 
-	<element id="022" name="文件属性" iconpath=":/image/113.png"  descript="文件属性 " c_android="com.fotoable.photoplus.flows.FileExist"	 c_ios="FileExist">
+	<element id="022" name="文件属性" iconpath=":/image/113.png"  descript="文件属性 " c_android="com.dym.alarm.flows.FileExist"	 c_ios="FileExist">
              
 				<property name="path" title="路径" type="0"  args="" value="" />		
 				<property name="isexist" title="是否存在结果" type="0"  args="" value="isexist" />
@@ -308,7 +305,7 @@
     
     
 	
-	<element id="023" name="拷贝文件" iconpath=":/image/112.png"  descript="拷贝文件 " c_android="com.fotoable.photoplus.flows.FileCopy"	 c_ios="FileCopy">
+	<element id="023" name="拷贝文件" iconpath=":/image/112.png"  descript="拷贝文件 " c_android="com.dym.alarm.flows.FileCopy"	 c_ios="FileCopy">
              
 				<property name="frompath" title="拷贝路径" type="0"  args="" value="" />		
 				<property name="topath" title="目的路径" type="0"  args="" value="" />		
@@ -317,7 +314,7 @@
 				
 	</element>		
 	
-    <element id="027" name="拷贝目录" iconpath=":/image/105.png"  descript="拷贝目录 " c_android="com.fotoable.photoplus.flows.FileCopyDir"	 c_ios="FileCopyDir">
+    <element id="027" name="拷贝目录" iconpath=":/image/105.png"  descript="拷贝目录 " c_android="com.dym.alarm.flows.FileCopyDir"	 c_ios="FileCopyDir">
         
         <property name="frompath" title="拷贝路径" type="0"  args="" value="" />
         <property name="topath" title="目的路径" type="0"  args="" value="" />
@@ -326,7 +323,7 @@
         
     </element>
 
-	<element id="0271" name="删除文件" iconpath=":/image/105.png"  descript="删除文件 " c_android="com.fotoable.photoplus.flows.FileDel"	 c_ios="FileDel">
+	<element id="0271" name="删除文件" iconpath=":/image/105.png"  descript="删除文件 " c_android="com.dym.alarm.flows.FileDel"	 c_ios="FileDel">
 
 		<property name="path" title="路径" type="0"  args="" value="" />
 		<property name="result" title="是否成功" type="0"  args="" value="$result" />
@@ -335,7 +332,7 @@
 	</element>
 
 
-	<element id="025" name="启动定时器" iconpath=":/image/110.png"  descript="启动定时器 指定间隔触发 " c_android="com.fotoable.photoplus.flows.TimerPoint"	 c_ios="TimerPoint">
+	<element id="025" name="启动定时器" iconpath=":/image/110.png"  descript="启动定时器 指定间隔触发 " c_android="com.dym.alarm.flows.TimerPoint"	 c_ios="TimerPoint">
              
 				<property name="interval" title="间隔（秒）" type="0"  args="" value="" />		
 
@@ -343,7 +340,7 @@
 				
 	</element>		
 	
-			<element id="026" name="顺序执行" iconpath=":/image/109.png"  descript="顺序执行所有分支节点 " c_android="com.fotoable.photoplus.flows.StepExec"	 c_ios="StepExec">
+			<element id="026" name="顺序执行" iconpath=":/image/109.png"  descript="顺序执行所有分支节点 " c_android="com.dym.alarm.flows.StepExec"	 c_ios="StepExec">
              
 			<property name="descript" title="描述" type="0" args="" value="顺序执行" />
 				
@@ -351,7 +348,7 @@
 	
 	
 	
-	<element id="028" name="json对象赋值" iconpath=":/image/105.png"  descript="对象通过 json 进行赋值 " c_android="com.fotoable.photoplus.flows.ObjJson"	 c_ios="ObjJson">
+	<element id="028" name="json对象赋值" iconpath=":/image/105.png"  descript="对象通过 json 进行赋值 " c_android="com.dym.alarm.flows.ObjJson"	 c_ios="ObjJson">
              
 				<property name="classz" title="对象类型" type="1"  args="$model" value="" />		
 				<property name="json" title="json字符串" type="0"  args="" value="" />		
@@ -361,14 +358,14 @@
 				
 	</element>		
 	
-	<element id="029" name="集合长度" iconpath=":/image/106.png"  descript="获取数组，集合长度 " c_android="com.fotoable.photoplus.flows.ArrayLength"	 c_ios="ArrayLength">
+	<element id="029" name="集合长度" iconpath=":/image/106.png"  descript="获取数组，集合长度 " c_android="com.dym.alarm.flows.ArrayLength"	 c_ios="ArrayLength">
              
 				<property name="param" title="数据" type="0"  args="" value="" />		
 				<property name="length" title="存储变量" type="0"  args="" value="$length" />				
 				<property name="descript" title="描述" type="0" args="" value="集合长度" />
 				
 	</element>
-	<element id="0291" name="是否为空" iconpath=":/image/106.png"  descript="判断对象是否存在、字符长度是否为0" c_android="com.fotoable.photoplus.flows.ObjectNull"	 c_ios="ObjectNull">
+	<element id="0291" name="是否为空" iconpath=":/image/106.png"  descript="判断对象是否存在、字符长度是否为0" c_android="com.dym.alarm.flows.ObjectNull"	 c_ios="ObjectNull">
 
 		<property name="param" title="变量" type="0"  args="" value="" />
 		<property name="isnull" title="存储变量" type="0"  args="" value="$isnull" />
@@ -376,7 +373,7 @@
 
 	</element>
 
-	<element id="030" name="读取本地数据" iconpath=":/image/107.png"  descript="读取本地数据 iOS ： userdefault android:preference " c_android="com.fotoable.photoplus.flows.UserData"	 c_ios="UserData">
+	<element id="030" name="读取本地数据" iconpath=":/image/107.png"  descript="读取本地数据 iOS ： userdefault android:preference " c_android="com.dym.alarm.flows.UserData"	 c_ios="UserData">
              
 				<property name="key" title="key" type="0"  args="" value="" />		
 				<property name="value" title="存储变量" type="0"  args="" value="" />				
@@ -387,7 +384,7 @@
 	
 		</element>
 		
-	<element id="031" name="保存本地数据" iconpath=":/image/108.png"  descript="保存本地数据 iOS ： userdefault android:preference " c_android="com.fotoable.photoplus.flows.UserSaveData"	 c_ios="UserSaveData">
+	<element id="031" name="保存本地数据" iconpath=":/image/108.png"  descript="保存本地数据 iOS ： userdefault android:preference " c_android="com.dym.alarm.flows.UserSaveData"	 c_ios="UserSaveData">
              
 				<property name="key" title="key" type="0"  args="" value="" />		
 				<property name="value" title="数据" type="0"  args="" value="" />				
@@ -396,7 +393,7 @@
 	
 		</element>
     
-    <element id="0311" name="读取本地媒体库" iconpath=":/image/107.png"  descript="读取本地媒体库 参数参考MediaImages" c_android="com.fotoable.photoplus.flows.MediaImages"	 c_ios="MediaImages"  >
+    <element id="0311" name="读取本地媒体库" iconpath=":/image/107.png"  descript="读取本地媒体库 参数参考MediaImages" c_android="com.dym.alarm.flows.MediaImages"	 c_ios="MediaImages"  >
         
         <property name="medias" title="保存到" type="0"  args="" value="" />
 		<property name="params" title="参数" value=""/>
@@ -405,7 +402,7 @@
         
     </element>
 
-	<element id="0312" name="读取本地媒体库列表" iconpath=":/image/107.png"  descript="读取本地媒体库列表" c_android="com.fotoable.photoplus.flows.MediaAlbums"	 c_ios="MediaAlbums"  >
+	<element id="0312" name="读取本地媒体库列表" iconpath=":/image/107.png"  descript="读取本地媒体库列表" c_android="com.dym.alarm.flows.MediaAlbums"	 c_ios="MediaAlbums"  >
 
 		<property name="medias" title="保存到" type="0"  args="" value="" />
 
@@ -416,7 +413,7 @@
     
     
 		
-		<element id="032" name="清空数据" iconpath=":/image/114.png"  descript="清空数据 ： 全局 或 box	内数据  " c_android="com.fotoable.photoplus.flows.SetNull"	 c_ios="SetNull">
+		<element id="032" name="清空数据" iconpath=":/image/114.png"  descript="清空数据 ： 全局 或 box	内数据  " c_android="com.dym.alarm.flows.SetNull"	 c_ios="SetNull">
              
 				
 				<property name="keys" title="数据变量(,相隔)" type="0"  args="" value="" />				
@@ -426,7 +423,7 @@
 		</element>	
 	
 	
-			<element id="033" name="组装map	字典" iconpath=":/image/111.png"  descript="组装map	字典  " c_android="com.fotoable.photoplus.flows.MapSet"	 c_ios="MapSet">
+			<element id="033" name="组装map	字典" iconpath=":/image/111.png"  descript="组装map	字典  " c_android="com.dym.alarm.flows.MapSet"	 c_ios="MapSet">
              
 				<property name="data" title="数据" type="0"  args="" value="" />	
 				<property name="values" title="数据(,相隔)" type="0"  args="" value="" />	
@@ -436,7 +433,7 @@
 	
 		</element>	
 		
-					<element id="0331" name="map字典取值" iconpath=":/image/111.png"  descript="map字典取值   $abc:abc,$bcd=abc " c_android="com.fotoable.photoplus.flows.MapGet"	 c_ios="MapGet">
+					<element id="0331" name="map字典取值" iconpath=":/image/111.png"  descript="map字典取值   $abc:abc,$bcd=abc " c_android="com.dym.alarm.flows.MapGet"	 c_ios="MapGet">
              
 				<property name="data" title="数据" type="0"  args="" value="" />	
 				<property name="values" title="数据(,相隔)" type="0"  args="" value="" />	
@@ -449,7 +446,7 @@
 		
 				
 		
-		<element id="034" name="等待框" iconpath=":/image/115.png"  descript="等待框  " c_android="com.fotoable.photoplus.flows.DialogWaitting"	 c_ios="DialogWaitting">
+		<element id="034" name="等待框" iconpath=":/image/115.png"  descript="等待框  " c_android="com.dym.alarm.flows.DialogWaitting"	 c_ios="DialogWaitting">
              
 				<property name="show" title="显示隐藏(true,false)" type="0"  args="" value="true" />	
 				<property name="tip" title="信息" type="0"  args="" value="" />	
@@ -457,7 +454,7 @@
 				
 		</element>	
 
-	   <element id="035" name="提示框toast" iconpath=":/image/116.png"  descript="提示框toast" c_android="com.fotoable.photoplus.flows.DialogToast"	 c_ios="DialogToast">
+	   <element id="035" name="提示框toast" iconpath=":/image/116.png"  descript="提示框toast" c_android="com.dym.alarm.flows.DialogToast"	 c_ios="DialogToast">
              
 				<property name="str" title="提示信息" type="0"  args="" value="" />	
 						
@@ -465,7 +462,7 @@
 				
 		</element>		
 	
-	  <element id="036" name="确认对话框" iconpath=":/image/117.png"  descript="确认对话框" c_android="com.fotoable.photoplus.flows.DialogSure"	 c_ios="DialogSure">
+	  <element id="036" name="确认对话框" iconpath=":/image/117.png"  descript="确认对话框" c_android="com.dym.alarm.flows.DialogSure"	 c_ios="DialogSure">
              
 				<property name="str" title="提示信息" type="0"  args="" value="" />	
 				
@@ -477,7 +474,7 @@
 		</element>		
 		
 
-	   <element id="037" name="打开浏览器" iconpath=":/image/002.png"  descript="打开浏览器" c_android="com.fotoable.photoplus.flows.UrlOpen"	 c_ios="UrlOpen">
+	   <element id="037" name="打开浏览器" iconpath=":/image/002.png"  descript="打开浏览器" c_android="com.dym.alarm.flows.UrlOpen"	 c_ios="UrlOpen">
              
 				<property name="url" title="地址" type="0"  args="" value="" />	
 						
@@ -485,26 +482,8 @@
 				
 		</element>		
 
-
-		<element id="038" name="视频加密" iconpath=":/image/117.png"  descript="视频加密" c_android="com.fotoable.photoplus.flows.EncryptVideo"	 c_ios="EncryptVideo">
-
-            <property name="filein" title="输入路径" type="0"  args="" value="" />
-            <property name="fileout" title="输出路径" type="0"  args="" value="" />
-
-            <property name="descript" title="描述" type="0" args="" value="视频加密" />
-
-		</element>
-
-        <element id="039" name="视频解密" iconpath=":/image/117.png"  descript="视频解密" c_android="com.fotoable.photoplus.flows.DecryptVideo"	 c_ios="DecryptVideo">
-            
-            <property name="filein" title="输入路径" type="0"  args="" value="" />
-            <property name="fileout" title="输出路径" type="0"  args="" value="" />
-            
-            <property name="descript" title="描述" type="0" args="" value="视频解密" />
-            
-        </element>
         
-        <element id="040" name="摄像头静拍" iconpath=":/image/100.png"  descript="摄像头静拍" c_android="com.fotoable.photoplus.flows.CameraPickQuiet"	 c_ios="CameraPickQuiet">
+        <element id="040" name="摄像头静拍" iconpath=":/image/100.png"  descript="摄像头静拍" c_android="com.dym.alarm.flows.CameraPickQuiet"	 c_ios="CameraPickQuiet">
             
             
             <property name="fileout" title="输出路径" type="0"  args="" value="" />
@@ -514,7 +493,7 @@
         </element>
         
         
-        <element id="041" name="生成验证码" iconpath=":/image/100.png"  descript="生成验证码" c_android="com.fotoable.photoplus.flows.CheckCode"	 c_ios="CheckCode">
+        <element id="041" name="生成验证码" iconpath=":/image/100.png"  descript="生成验证码" c_android="com.dym.alarm.flows.CheckCode"	 c_ios="CheckCode">
             
             
             <property name="code" title="验证码赋值给" type="0"  args="" value="" />
@@ -522,7 +501,7 @@
             <property name="descript" title="描述" type="0" args="" value="生成验证码" />
             
         </element>
-	<element id="100" name="生成UUID" iconpath=":/image/100.png"  descript="生成UUID" c_android="com.fotoable.photoplus.flows.UUIDCreate"	 c_ios="UUIDCreate">
+	<element id="100" name="生成UUID" iconpath=":/image/100.png"  descript="生成UUID" c_android="com.dym.alarm.flows.UUIDCreate"	 c_ios="UUIDCreate">
 
 
 		<property name="uuid" title="赋值给" type="0" args="" value="$uuid"/>
@@ -532,7 +511,7 @@
 
 
 
-	<element id="101" name="系统信息" iconpath=":/image/100.png"  descript="手机Sdk版本" c_android="com.fotoable.photoplus.flows.SDKUtil"	 c_ios="SDKUtil">
+	<element id="101" name="系统信息" iconpath=":/image/100.png"  descript="手机Sdk版本" c_android="com.dym.alarm.flows.SDKUtil"	 c_ios="SDKUtil">
 
 
 		<property name="sdkint" title="SDK版本(int)" type="0" args="" value="sdkint"/>
@@ -540,7 +519,7 @@
 
 	</element>
 
-	<element id="102" name="判断权限" iconpath=":/image/100.png"  descript="判断权限" c_android="com.fotoable.photoplus.flows.PermUtil"	 c_ios="PermUtil">
+	<element id="102" name="判断权限" iconpath=":/image/100.png"  descript="判断权限" c_android="com.dym.alarm.flows.PermUtil"	 c_ios="PermUtil">
 
 
 		<property name="permissioin" title="权限" type="0" args="" value=""/>
@@ -550,7 +529,7 @@
 
 	</element>
 
-	<element id="103" name="启动授权" iconpath=":/image/100.png"  descript="启动授权" c_android="com.fotoable.photoplus.flows.PermAlert"	 c_ios="PermAlert">
+	<element id="103" name="启动授权" iconpath=":/image/100.png"  descript="启动授权" c_android="com.dym.alarm.flows.PermAlert"	 c_ios="PermAlert">
 
 		<property name="permissioin" title="权限" type="0" args="" value=""/>
 		<property name="descript" title="描述" type="0" args="" value="启动授权"/>
@@ -558,7 +537,7 @@
 	</element>
 
 
-	<element id="104" name="生成缩略图" iconpath=":/image/100.png"  descript="生成缩略图" c_android="com.fotoable.photoplus.flows.ThumbnailCreate"	 c_ios="ThumbnailCreate">
+	<element id="104" name="生成缩略图" iconpath=":/image/100.png"  descript="生成缩略图" c_android="com.dym.alarm.flows.ThumbnailCreate"	 c_ios="ThumbnailCreate">
 
 		<property name="srcpath" title="原图路径" type="0" args="" value=""/>
 		<property name="tarpath" title="缩略图路径" type="0" args="" value=""/>
@@ -568,6 +547,45 @@
 	</element>
 
 
+    <element id="999" name="业务逻辑" iconpath=":/image/117.png"  descript="业务逻辑" c_android="com.dym.alarm.flows.BusinessPoint"	 c_ios="BusinessPoint">
+        
+        
+        <property name="method" title="方法名" type="0" args="" value=""/>
+        <property name="args" title="参数,相隔" type="0" args="" value=""/>
+        <property name="result" title="结果" type="0" args="" value=""/>
+        <property name="descript" title="描述" type="0" args="" value="业务逻辑"/>
+        
+    </element>
+
+    <element id="801" name="获取所有列表" iconpath=":/image/117.png"  descript="获取所有列表" c_android="com.dym.alarm.flows.AlarmList"	 c_ios="BusinessPoint">
+        
+        <property name="result" title="结果" type="0" args="" value=""/>
+        <property name="descript" title="描述" type="0" args="" value="获取所有列表"/>
+        
+    </element>
+    
+    <element id="802" name="是否开启" iconpath=":/image/117.png"  descript="获取是否开启" c_android="com.dym.alarm.flows.AlarmIsOn"	 c_ios="BusinessPoint">
+
+        <property name="args" title="模型" type="0" args="" value=""/>
+        <property name="result" title="结果" type="0" args="" value=""/>
+        <property name="descript" title="描述" type="0" args="" value="获取是否开启"/>
+        
+    </element>
+    
+    <element id="803" name="当前时间" iconpath=":/image/117.png"  descript="当前时间" c_android="com.dym.alarm.flows.CurrentTime"	 c_ios="BusinessPoint">
+        
+        <property name="day_of_week" title="星期" type="0" args="" value=""/>
+        <property name="hour" title="小时" type="0" args="" value=""/>
+        <property name="minute" title="分钟" type="0" args="" value=""/>
+        <property name="descript" title="描述" type="0" args="" value="当前时间"/>
+        
+    </element>
+    
+    
+    
+    
+    
+    
 
 
 </elements>

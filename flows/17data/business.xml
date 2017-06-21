@@ -1,2 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<business/>
+<business>
+    <item name="set alarm" type="1" alia="alarm_set">
+        <view type="IconView">
+            <id>20170605160603524</id>
+            <x>29</x>
+            <y>59</y>
+            <w>40</w>
+            <h>40</h>
+            <elementid>001</elementid>
+            <data>
+                <property name="event" title="事件" type="1" args="$event" value="20170605160518010"/>
+                <property name="params" title="参数" type="0" args="" value=""/>
+                <property name="static" title="常驻内存(true,false)" type="0" args="" value=""/>
+                <property name="descript" title="描述" type="0" args="" value="事件"/>
+            </data>
+        </view>
+    </item>
+</business>

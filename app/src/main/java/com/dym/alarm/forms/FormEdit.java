@@ -263,6 +263,54 @@ public class FormEdit extends Form {
                         .create().show();
             }
             break;
+            case R.id.text_sound:
+
+                setFormtype(FormType.FORM_ONLY);
+                sendMessage(Event.FORM_SOUND_SET);
+                break;
+            case R.id.btn_del:
+
+                new DDialog.Builder(getContext()).setContentView(R.layout.dialog_confirm).setInitListener(new DDialog.ViewInitListener() {
+                    @Override
+                    public void ViewInit(View view) {
+
+                        TextView text_title = (TextView) view.findViewById(R.id.text_title);
+                        TextView text_msg = (TextView) view.findViewById(R.id.text_msg);
+
+
+                        text_title.setText("Confirm");
+                        text_msg.setText("delete the alarm?");
+
+
+                        TextView text_ok = (TextView) view.findViewById(R.id.btn_ok);
+                        TextView text_cancel = (TextView) view.findViewById(R.id.btn_cancel);
+
+
+                        text_ok.setText("Delete");
+                        text_cancel.setText("Cancel");
+
+
+
+                    }
+                }).addButtonListener(R.id.btn_ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        dialog.dismiss();
+
+                    }
+                }).addButtonListener(R.id.btn_cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        dialog.dismiss();
+                    }
+                }).create().show();
+
+
+
+
+                break;
 
 
         }
@@ -348,6 +396,7 @@ public class FormEdit extends Form {
                 }
             }
             break;
+
 
         }
 
@@ -459,4 +508,9 @@ public class FormEdit extends Form {
 
     }
 
+
+    @Override
+    public void onPush(boolean fromback) {
+        setFormtype(FormType.FORM_TOP);
+    }
 }

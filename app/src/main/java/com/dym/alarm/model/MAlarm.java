@@ -77,7 +77,7 @@ public class MAlarm {
             sb.append("alarm time: ").append(begintime);
         if( repeat_day ){
 
-            sb.append("one alarm/").append(repeat_day_value ).append(repeat_day_unit==0?"minute":"hour").append("\n");
+            sb.append("one alarm/").append(repeat_day_value ).append(repeat_day_unit==0?" minute":" hour").append(repeat_day_value>1?"s":"").append("\n");
             sb.append("endtime:    ").append(endtime).append("  ");
 
         }

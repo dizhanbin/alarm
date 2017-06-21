@@ -20,6 +20,9 @@
   if( [eventstr isEqual:@"REQ_ALARM_SAVE"] ) return REQ_ALARM_SAVE;
   if( [eventstr isEqual:@"REP_ALARM_SAVE_SUCCESS"] ) return REP_ALARM_SAVE_SUCCESS;
   if( [eventstr isEqual:@"REP_ALARM_SAVE_FAIL"] ) return REP_ALARM_SAVE_FAIL;
+  if( [eventstr isEqual:@"REQ_ALARM_NEXT"] ) return REQ_ALARM_NEXT;
+  if( [eventstr isEqual:@"FORM_SETTING"] ) return FORM_SETTING;
+  if( [eventstr isEqual:@"FORM_SOUND_SET"] ) return FORM_SOUND_SET;
   return -1;
 }
 
@@ -43,6 +46,9 @@
   case REQ_ALARM_SAVE : return @"REQ_ALARM_SAVE";
   case REP_ALARM_SAVE_SUCCESS : return @"REP_ALARM_SAVE_SUCCESS";
   case REP_ALARM_SAVE_FAIL : return @"REP_ALARM_SAVE_FAIL";
+  case REQ_ALARM_NEXT : return @"REQ_ALARM_NEXT";
+  case FORM_SETTING : return @"FORM_SETTING";
+  case FORM_SOUND_SET : return @"FORM_SOUND_SET";
 }
 
   return @"not define";

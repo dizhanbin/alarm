@@ -20,6 +20,7 @@ public enum Event{
   REP_ALARM_SAVE_SUCCESS,//闹钟保存成功
   REP_ALARM_SAVE_FAIL,//闹钟保存失败
   REQ_ALARM_NEXT,//生成下一个闹钟
-  FORM_SETTING;//设置页面
+  FORM_SETTING,//设置页面
+  FORM_SOUND_SET;//设置铃声
 
 }

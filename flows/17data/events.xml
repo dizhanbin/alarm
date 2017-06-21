@@ -102,4 +102,22 @@
         <type>1</type>
         <descript>闹钟保存失败</descript>
     </event>
+    <event>
+        <id>20170605160518010</id>
+        <name>REQ_ALARM_NEXT</name>
+        <type>1</type>
+        <descript>生成下一个闹钟</descript>
+    </event>
+    <event>
+        <id>20170613112943520</id>
+        <name>FORM_SETTING</name>
+        <type>1</type>
+        <descript>设置页面</descript>
+    </event>
+    <event>
+        <id>20170616193318532</id>
+        <name>FORM_SOUND_SET</name>
+        <type>1</type>
+        <descript>设置铃声</descript>
+    </event>
 </events>

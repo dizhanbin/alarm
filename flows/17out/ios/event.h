@@ -18,7 +18,10 @@ typedef enum{
   REP_ALARM_LIST,//闹钟列表
   REQ_ALARM_SAVE,//保存闹钟
   REP_ALARM_SAVE_SUCCESS,//闹钟保存成功
-  REP_ALARM_SAVE_FAIL//闹钟保存失败
+  REP_ALARM_SAVE_FAIL,//闹钟保存失败
+  REQ_ALARM_NEXT,//生成下一个闹钟
+  FORM_SETTING,//设置页面
+  FORM_SOUND_SET//设置铃声
 } Event;
 
 @interface EventUtil : NSObject

@@ -36,6 +36,30 @@
             <property name="descript" title="描述" type="0" args="" value="提醒编辑页"/>
         </data>
     </form>
+    <form id="20170613113014002">
+        <x>469</x>
+        <y>151</y>
+        <w>60</w>
+        <h>80</h>
+        <data>
+            <property name="event" title="事件" type="1" args="$event" value="20170613112943520"/>
+            <property name="android" title="androd类" type="0" args="" value="FormSetting"/>
+            <property name="ios" title="ios类" type="0" args="" value="FormSetting"/>
+            <property name="descript" title="描述" type="0" args="" value="设置页面"/>
+        </data>
+    </form>
+    <form id="20170616193353714">
+        <x>468</x>
+        <y>284</y>
+        <w>60</w>
+        <h>80</h>
+        <data>
+            <property name="event" title="事件" type="1" args="$event" value="20170616193318532"/>
+            <property name="android" title="androd类" type="0" args="" value="FormSoundSet"/>
+            <property name="ios" title="ios类" type="0" args="" value="FormSoundSet"/>
+            <property name="descript" title="描述" type="0" args="" value="选择铃声"/>
+        </data>
+    </form>
     <Line id="20170504113938728">
         <from>20170504113826900</from>
         <to>20170504113826409</to>
@@ -46,6 +70,20 @@
     <Line id="20170510110106271">
         <from>20170504113826900</from>
         <to>20170510105948966</to>
+        <condition>
+            <property name="value" title="条件" type="0" args="" value=""/>
+        </condition>
+    </Line>
+    <Line id="20170613113050056">
+        <from>20170504113826409</from>
+        <to>20170613113014002</to>
+        <condition>
+            <property name="value" title="条件" type="0" args="" value=""/>
+        </condition>
+    </Line>
+    <Line id="20170616193357294">
+        <from>20170510105948966</from>
+        <to>20170616193353715</to>
         <condition>
             <property name="value" title="条件" type="0" args="" value=""/>
         </condition>

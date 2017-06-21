@@ -410,6 +410,23 @@
         </android.support.v7.widget.CardView>
 
 
+
+        <Button
+            android:id="@+id/btn_del"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="30dp"
+            android:layout_marginLeft="@dimen/btn_match_margin"
+            android:layout_marginRight="@dimen/btn_match_margin"
+            android:background="@drawable/btn_def"
+            android:onClick="onClick"
+            android:text="Delete the alarm"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/btn_text_size" />
+
     </LinearLayout>
 
     </ScrollView>

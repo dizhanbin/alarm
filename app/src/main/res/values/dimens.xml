@@ -5,4 +5,9 @@
     <dimen name="repeat_ele_margin">5dp</dimen>
     <dimen name="font_space_width">2dp</dimen>
     <dimen name="actionbar_height">44dp</dimen>
+
+    <dimen name="btn_match_margin">30dp</dimen>
+    <dimen name="btn_text_size">16sp</dimen>
+    <dimen name="card_border_size">3dp</dimen>
+
 </resources>

@@ -8,6 +8,7 @@ public class FormFactory{
           case FORM_FLASH: return FormFlash.class;
           case FORM_EDIT: return FormEdit.class;
           case FORM_SETTING: return FormSetting.class;
+          case FORM_SOUND_SET: return FormSoundSet.class;
           }
       return null;
   }
@@ -17,6 +18,7 @@ public class FormFactory{
           case FORM_FLASH: return "启动页";
           case FORM_EDIT: return "提醒编辑页";
           case FORM_SETTING: return "设置页面";
+          case FORM_SOUND_SET: return "选择铃声";
           }
       return "";
   }
