@@ -18,6 +18,7 @@ public class VHAlarmItem extends ViewHolder {
 
     public TextView text_label;
     public TextView text_descript;
+    public View btn_del;
 
 
     public SwitchCompat switch_on;
@@ -27,6 +28,7 @@ public class VHAlarmItem extends ViewHolder {
         text_label = (TextView) itemView.findViewById(R.id.text_alarm_label);
         switch_on = (SwitchCompat) itemView.findViewById(R.id.switch_on);
         text_descript = (TextView) itemView.findViewById(R.id.text_descript);
+        btn_del = itemView.findViewById(R.id.btn_del);
     }
 
 

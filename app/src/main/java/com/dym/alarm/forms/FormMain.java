@@ -50,10 +50,10 @@ public class FormMain extends Form implements View.OnClickListener {
             animator.setInterpolator(new OvershootInterpolator());
 
             mRecyclerView.setItemAnimator(animator);
-            mRecyclerView.getItemAnimator().setAddDuration(1000);
-            mRecyclerView.getItemAnimator().setRemoveDuration(1000);
-            mRecyclerView.getItemAnimator().setMoveDuration(1000);
-            mRecyclerView.getItemAnimator().setChangeDuration(1000);
+            mRecyclerView.getItemAnimator().setAddDuration(500);
+            mRecyclerView.getItemAnimator().setRemoveDuration(300);
+            mRecyclerView.getItemAnimator().setMoveDuration(300);
+            mRecyclerView.getItemAnimator().setChangeDuration(300);
             initUI();
 
 
@@ -86,7 +86,7 @@ public class FormMain extends Form implements View.OnClickListener {
 
                 SwitchCompat sw = (SwitchCompat) view;
 
-                int pos =  (int)( view.getTag() );
+                int pos =  mDatas.indexOf(  getRootParentTag(R.id.view_alarm_item,view)  );
 
                 mDatas.get(pos).on = sw.isChecked();
 
@@ -104,11 +104,32 @@ public class FormMain extends Form implements View.OnClickListener {
 
                 sendMessage(Event.FORM_SETTING);
                 break;
+            case R.id.btn_del:
+
+                int pos =  mDatas.indexOf(  getRootParentTag(R.id.view_alarm_item,view)  );
+                mDatas.remove(pos);
+                mRecyclerView.getAdapter().notifyItemRemoved(pos);
+
+                break;
 
 
         }
     }
 
+    private Object getRootParentTag(int parentid,View view){
+
+
+        View parent = (View)view.getParent();
+        while(parent != null){
+
+            if( parent.getId() == parentid )
+                return parent.getTag();
+            parent = (View) parent.getParent();
+
+        }
+        return null;
+
+    }
 
 
     private void initUI() {
@@ -150,12 +171,17 @@ public class FormMain extends Form implements View.OnClickListener {
 
             }
 
+
+
             @Override
             public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
+                NLog.i("onBindViewHolder %d",position);
+
                 VHAlarmItem vh = (VHAlarmItem) holder;
-                vh.itemView.setTag( position );
-                vh.switch_on.setTag( position );
+                vh.itemView.setTag( mDatas.get(position) );
+               // vh.switch_on.setTag( position );
+               // vh.btn_del.setTag(position);
                 vh.bind( mDatas.get(position) );
 
             }
@@ -184,6 +210,7 @@ public class FormMain extends Form implements View.OnClickListener {
 
 
         }
+
 
 
 /*

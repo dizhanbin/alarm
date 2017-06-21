@@ -75,6 +75,7 @@
 
 
                 <ImageButton
+                    android:id="@+id/btn_del"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/v_click"
@@ -82,6 +83,7 @@
                     android:src="@android:drawable/ic_menu_delete"
                     android:padding="10dp"
                     android:layout_gravity="bottom"
+                    android:onClick="onClick"
                     />
 
             </LinearLayout>
