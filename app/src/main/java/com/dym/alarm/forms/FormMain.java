@@ -1,6 +1,7 @@
 /* create my 17 */
 package com.dym.alarm.forms;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
@@ -10,10 +11,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.OvershootInterpolator;
+import android.widget.TextView;
 
 import com.dym.alarm.Form;
 import com.dym.alarm.R;
 import com.dym.alarm.common.AlarmUtil;
+import com.dym.alarm.common.DDialog;
 import com.dym.alarm.common.Event;
 import com.dym.alarm.common.NLog;
 import com.dym.alarm.datacenter.DataRequest;
@@ -64,7 +67,7 @@ public class FormMain extends Form implements View.OnClickListener {
     }
 
     @Override
-    public void onClick(View view) {
+    public void onClick(final View view) {
 
         NLog.i("FormMain.onClick :%s",view);
         if( mView == null)
@@ -74,12 +77,12 @@ public class FormMain extends Form implements View.OnClickListener {
             case R.id.btn_add:
                 sendMessage(Event.FORM_EDIT);
                 break;
-            case R.id.view_alarm_item:
+            case R.id.view_alarm_item: {
 
-                NLog.i("view_alarm_item tag:%d",view.getTag());
+                int pos = mDatas.indexOf(getRootParentTag(R.id.view_alarm_item, view));
 
-                sendMessage(Event.FORM_EDIT,mDatas.get((int)view.getTag()));
-
+                sendMessage(Event.FORM_EDIT, mDatas.get(pos));
+            }
                 break;
             case R.id.switch_on:
             {
@@ -104,12 +107,53 @@ public class FormMain extends Form implements View.OnClickListener {
 
                 sendMessage(Event.FORM_SETTING);
                 break;
-            case R.id.btn_del:
+            case R.id.btn_del: {
 
-                int pos =  mDatas.indexOf(  getRootParentTag(R.id.view_alarm_item,view)  );
-                mDatas.remove(pos);
-                mRecyclerView.getAdapter().notifyItemRemoved(pos);
 
+                new DDialog.Builder(getContext()).setContentView(R.layout.dialog_confirm).setInitListener(new DDialog.ViewInitListener() {
+                    @Override
+                    public void ViewInit(View view) {
+
+                        TextView text_title = (TextView) view.findViewById(R.id.text_title);
+                        TextView text_msg = (TextView) view.findViewById(R.id.text_msg);
+
+
+                        text_title.setText("Confirm");
+                        text_msg.setText("delete the alarm?");
+
+
+                        TextView text_ok = (TextView) view.findViewById(R.id.btn_ok);
+                        TextView text_cancel = (TextView) view.findViewById(R.id.btn_cancel);
+
+
+                        text_ok.setText("Delete");
+                        text_cancel.setText("Cancel");
+
+
+
+                    }
+                }).addButtonListener(R.id.btn_ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        dialog.dismiss();
+
+                        int pos = mDatas.indexOf(getRootParentTag(R.id.view_alarm_item, view));
+                        mDatas.remove(pos);
+                        mRecyclerView.getAdapter().notifyItemRemoved(pos);
+
+
+                    }
+                }).addButtonListener(R.id.btn_cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        dialog.dismiss();
+                    }
+                }).setCancelable(true).create().show();
+
+
+            }
                 break;
 
 
@@ -119,6 +163,8 @@ public class FormMain extends Form implements View.OnClickListener {
     private Object getRootParentTag(int parentid,View view){
 
 
+        if( view.getId() == parentid )
+            return view.getTag();
         View parent = (View)view.getParent();
         while(parent != null){
 

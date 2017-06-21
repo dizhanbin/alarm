@@ -305,7 +305,8 @@ public class FormEdit extends Form {
 
                         dialog.dismiss();
                     }
-                }).create().show();
+                }).setCancelable(true)
+                .create().show();
 
 
 
@@ -451,6 +452,7 @@ public class FormEdit extends Form {
                     }
                 })
 
+                .setCancelable(false)
                 .create().show();
 
 
