@@ -1,5 +1,6 @@
 package com.dym.alarm.services;
 
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -23,6 +24,7 @@ public class AlarmReceiver  extends BroadcastReceiver{
 
 
         Intent notify_intent = new Intent(context, NotifyController.class);
+        notify_intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(notify_intent);
 
         String json = intent.getStringExtra("json");

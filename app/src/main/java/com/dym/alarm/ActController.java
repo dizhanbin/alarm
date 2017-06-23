@@ -527,6 +527,7 @@ public class ActController extends AppCompatActivity implements IToDo, IControll
             //form.getView().setSystemUiVisibility( View.SYSTEM_UI_FLAG_FULLSCREEN );
             WindowManager.LayoutParams params = getWindow().getAttributes();
             params.flags |= WindowManager.LayoutParams.FLAG_FULLSCREEN;
+            //params.flags |= WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
             getWindow().setAttributes(params);
 
             //getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);

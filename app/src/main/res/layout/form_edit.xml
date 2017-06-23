@@ -29,6 +29,16 @@
                 android:scaleType="centerInside"
                 android:src="@mipmap/v_icon_back" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                fontPath="fonts/r-b.ttf"
+                android:layout_marginLeft="50dp"
+                android:text="Alarm"
+                android:textColor="@android:color/white"
+                android:textSize="20sp" />
+
+
 
             <LinearLayout
                 android:layout_width="match_parent"

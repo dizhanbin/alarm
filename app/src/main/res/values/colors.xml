@@ -21,4 +21,6 @@
 
     <color name="btn_def">#009688</color>
 
+    <color name="transparent_half">#20000000</color>
+
 </resources>
