@@ -9,6 +9,8 @@ public class FormFactory{
           case FORM_EDIT: return FormEdit.class;
           case FORM_SETTING: return FormSetting.class;
           case FORM_SOUND_SET: return FormSoundSet.class;
+          case FORM_OPENSOURCE: return FormOpenSource.class;
+          case FORM_HELP: return FormHelp.class;
           }
       return null;
   }
@@ -19,6 +21,8 @@ public class FormFactory{
           case FORM_EDIT: return "提醒编辑页";
           case FORM_SETTING: return "设置页面";
           case FORM_SOUND_SET: return "选择铃声";
+          case FORM_OPENSOURCE: return "开源库";
+          case FORM_HELP: return "帮助页";
           }
       return "";
   }

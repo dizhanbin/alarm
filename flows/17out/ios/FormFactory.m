@@ -10,6 +10,8 @@
           case FORM_EDIT: return @"FormEdit";
           case FORM_SETTING: return @"FormSetting";
           case FORM_SOUND_SET: return @"FormSoundSet";
+          case FORM_OPENSOURCE: return @"FormOpenSource";
+          case FORM_HELP: return @"FormHelp";
      }
      return nil;
 }

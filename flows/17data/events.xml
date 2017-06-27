@@ -1,34 +1,88 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <events>
     <event>
-        <id>20160819144029100</id>
-        <name>REQ_NONE</name>
+        <id>20170510105917597</id>
+        <name>FORM_EDIT</name>
         <type>1</type>
-        <descript>空事件</descript>
+        <descript>闹钟编辑页</descript>
     </event>
     <event>
-        <id>20160830142133249</id>
-        <name>REQ_FORM_BACK</name>
+        <id>20170504113729327</id>
+        <name>FORM_FLASH</name>
         <type>1</type>
-        <descript>页面返回</descript>
+        <descript>启动页</descript>
     </event>
     <event>
-        <id>20160913151004387</id>
-        <name>REQ_TOAST</name>
+        <id>20170627194701574</id>
+        <name>FORM_HELP</name>
         <type>1</type>
-        <descript>提示信息</descript>
+        <descript>帮助页</descript>
     </event>
     <event>
-        <id>20160913151212207</id>
-        <name>REQ_WAITTING_SHOW</name>
+        <id>20170504113711239</id>
+        <name>FORM_MAIN</name>
         <type>1</type>
-        <descript>等待框</descript>
+        <descript>首页</descript>
     </event>
     <event>
-        <id>20160913152435309</id>
-        <name>REQ_WAITTING_HIDE</name>
+        <id>20170626201331161</id>
+        <name>FORM_OPENSOURCE</name>
         <type>1</type>
-        <descript>隐藏等待框</descript>
+        <descript>开源库</descript>
+    </event>
+    <event>
+        <id>20170613112943520</id>
+        <name>FORM_SETTING</name>
+        <type>1</type>
+        <descript>设置页面</descript>
+    </event>
+    <event>
+        <id>20170616193318532</id>
+        <name>FORM_SOUND_SET</name>
+        <type>1</type>
+        <descript>设置铃声</descript>
+    </event>
+    <event>
+        <id>20170520170721546</id>
+        <name>REP_ALARM_LIST</name>
+        <type>1</type>
+        <descript>闹钟列表</descript>
+    </event>
+    <event>
+        <id>20170521221107855</id>
+        <name>REP_ALARM_SAVE_FAIL</name>
+        <type>1</type>
+        <descript>闹钟保存失败</descript>
+    </event>
+    <event>
+        <id>20170521221107225</id>
+        <name>REP_ALARM_SAVE_SUCCESS</name>
+        <type>1</type>
+        <descript>闹钟保存成功</descript>
+    </event>
+    <event>
+        <id>20170627090502536</id>
+        <name>REP_OPENSOURCE_LIST</name>
+        <type>1</type>
+        <descript>返回开源库列表</descript>
+    </event>
+    <event>
+        <id>20170520170659649</id>
+        <name>REQ_ALARM_LIST</name>
+        <type>1</type>
+        <descript>闹钟列表</descript>
+    </event>
+    <event>
+        <id>20170605160518010</id>
+        <name>REQ_ALARM_NEXT</name>
+        <type>1</type>
+        <descript>生成下一个闹钟</descript>
+    </event>
+    <event>
+        <id>20170521221003776</id>
+        <name>REQ_ALARM_SAVE</name>
+        <type>1</type>
+        <descript>保存闹钟</descript>
     </event>
     <event>
         <id>20160907151253303</id>
@@ -43,22 +97,28 @@
         <descript>弹出确认对话框</descript>
     </event>
     <event>
+        <id>20160830142133249</id>
+        <name>REQ_FORM_BACK</name>
+        <type>1</type>
+        <descript>页面返回</descript>
+    </event>
+    <event>
         <id>20161012174351169</id>
         <name>REQ_FROM_CLEAR</name>
         <type>1</type>
         <descript>清空堆栈中所有页面</descript>
     </event>
     <event>
-        <id>20170504113711239</id>
-        <name>FORM_MAIN</name>
+        <id>20160819144029100</id>
+        <name>REQ_NONE</name>
         <type>1</type>
-        <descript>首页</descript>
+        <descript>空事件</descript>
     </event>
     <event>
-        <id>20170504113729327</id>
-        <name>FORM_FLASH</name>
+        <id>20170627090425018</id>
+        <name>REQ_OPENSOURCE_LIST</name>
         <type>1</type>
-        <descript>启动页</descript>
+        <descript>请求开源库列表</descript>
     </event>
     <event>
         <id>20170504211843242</id>
@@ -67,57 +127,21 @@
         <descript>进入并清除所有界面</descript>
     </event>
     <event>
-        <id>20170510105917597</id>
-        <name>FORM_EDIT</name>
+        <id>20160913151004387</id>
+        <name>REQ_TOAST</name>
         <type>1</type>
-        <descript>闹钟编辑页</descript>
+        <descript>提示信息</descript>
     </event>
     <event>
-        <id>20170520170659649</id>
-        <name>REQ_ALARM_LIST</name>
+        <id>20160913152435309</id>
+        <name>REQ_WAITTING_HIDE</name>
         <type>1</type>
-        <descript>闹钟列表</descript>
+        <descript>隐藏等待框</descript>
     </event>
     <event>
-        <id>20170520170721546</id>
-        <name>REP_ALARM_LIST</name>
+        <id>20160913151212207</id>
+        <name>REQ_WAITTING_SHOW</name>
         <type>1</type>
-        <descript>闹钟列表</descript>
-    </event>
-    <event>
-        <id>20170521221003776</id>
-        <name>REQ_ALARM_SAVE</name>
-        <type>1</type>
-        <descript>保存闹钟</descript>
-    </event>
-    <event>
-        <id>20170521221107225</id>
-        <name>REP_ALARM_SAVE_SUCCESS</name>
-        <type>1</type>
-        <descript>闹钟保存成功</descript>
-    </event>
-    <event>
-        <id>20170521221107855</id>
-        <name>REP_ALARM_SAVE_FAIL</name>
-        <type>1</type>
-        <descript>闹钟保存失败</descript>
-    </event>
-    <event>
-        <id>20170605160518010</id>
-        <name>REQ_ALARM_NEXT</name>
-        <type>1</type>
-        <descript>生成下一个闹钟</descript>
-    </event>
-    <event>
-        <id>20170613112943520</id>
-        <name>FORM_SETTING</name>
-        <type>1</type>
-        <descript>设置页面</descript>
-    </event>
-    <event>
-        <id>20170616193318532</id>
-        <name>FORM_SOUND_SET</name>
-        <type>1</type>
-        <descript>设置铃声</descript>
+        <descript>等待框</descript>
     </event>
 </events>

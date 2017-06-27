@@ -25,8 +25,8 @@
         </data>
     </form>
     <form id="20170510105948966">
-        <x>302</x>
-        <y>283</y>
+        <x>270</x>
+        <y>465</y>
         <w>60</w>
         <h>80</h>
         <data>
@@ -49,8 +49,8 @@
         </data>
     </form>
     <form id="20170616193353714">
-        <x>468</x>
-        <y>284</y>
+        <x>441</x>
+        <y>475</y>
         <w>60</w>
         <h>80</h>
         <data>
@@ -58,6 +58,30 @@
             <property name="android" title="androd类" type="0" args="" value="FormSoundSet"/>
             <property name="ios" title="ios类" type="0" args="" value="FormSoundSet"/>
             <property name="descript" title="描述" type="0" args="" value="选择铃声"/>
+        </data>
+    </form>
+    <form id="20170626201833238">
+        <x>629</x>
+        <y>150</y>
+        <w>60</w>
+        <h>80</h>
+        <data>
+            <property name="event" title="事件" type="1" args="$event" value="20170626201331161"/>
+            <property name="android" title="androd类" type="0" args="" value="FormOpenSource"/>
+            <property name="ios" title="ios类" type="0" args="" value="FormOpenSource"/>
+            <property name="descript" title="描述" type="0" args="" value="开源库"/>
+        </data>
+    </form>
+    <form id="20170627200312271">
+        <x>638</x>
+        <y>290</y>
+        <w>60</w>
+        <h>80</h>
+        <data>
+            <property name="event" title="事件" type="1" args="$event" value="20170627194701574"/>
+            <property name="android" title="androd类" type="0" args="" value="FormHelp"/>
+            <property name="ios" title="ios类" type="0" args="" value="FormHelp"/>
+            <property name="descript" title="描述" type="0" args="" value="帮助页"/>
         </data>
     </form>
     <Line id="20170504113938728">
@@ -81,9 +105,23 @@
             <property name="value" title="条件" type="0" args="" value=""/>
         </condition>
     </Line>
-    <Line id="20170616193357294">
+    <Line id="20170626201908144">
+        <from>20170613113014002</from>
+        <to>20170626201833238</to>
+        <condition>
+            <property name="value" title="条件" type="0" args="" value=""/>
+        </condition>
+    </Line>
+    <Line id="20170626201912617">
         <from>20170510105948966</from>
-        <to>20170616193353715</to>
+        <to>20170616193353714</to>
+        <condition>
+            <property name="value" title="条件" type="0" args="" value=""/>
+        </condition>
+    </Line>
+    <Line id="20170627200348099">
+        <from>20170613113014002</from>
+        <to>20170627200312271</to>
         <condition>
             <property name="value" title="条件" type="0" args="" value=""/>
         </condition>
