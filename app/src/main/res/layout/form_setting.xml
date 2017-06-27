@@ -24,17 +24,22 @@
             android:clickable="true"
             android:onClick="onClick"
             android:scaleType="centerInside"
-            android:src="@mipmap/v_icon_back" />
+            android:src="@mipmap/v_icon_back"
+
+            />
 
 
         <TextView
+            fontPath="fonts/r-b.ttf"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            fontPath="fonts/r-b.ttf"
             android:layout_marginLeft="50dp"
-            android:text="Help"
+            android:text="Settings"
             android:textColor="@android:color/white"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:clickable="true"
+            android:onClick="onClick"
+            />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -53,11 +58,12 @@
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
         app:cardCornerRadius="5dp"
         app:cardElevation="3dp"
         app:cardPreventCornerOverlap="true"
         app:cardUseCompatPadding="true"
-        android:layout_marginTop="2dp"
+
         >
 
         <LinearLayout
@@ -69,13 +75,18 @@
             >
 
             <TextView
+                android:id="@+id/card_opensource"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
+                android:background="@drawable/v_click"
+                android:clickable="true"
+                android:onClick="onClick"
                 android:padding="10dp"
                 android:text="Open Source"
                 android:textColor="#212121"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+
+                />
 
 
             <View
@@ -88,11 +99,14 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
+                android:background="@drawable/v_click"
                 android:padding="10dp"
                 android:text="About"
                 android:textColor="#212121"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:clickable="true"
+                android:onClick="onClick"
+                />
 
 
             <View
@@ -106,11 +120,15 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
+                android:id="@+id/card_help"
+                android:background="@drawable/v_click"
                 android:padding="10dp"
                 android:text="Help"
                 android:textColor="#212121"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:clickable="true"
+                android:onClick="onClick"
+                />
 
             <View
                 android:layout_width="match_parent"
@@ -121,13 +139,18 @@
 
 
             <TextView
+                android:id="@+id/card_sendemail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
+                android:background="@drawable/v_click"
+                android:clickable="true"
+                android:onClick="onClick"
                 android:padding="10dp"
                 android:text="Give us advice"
                 android:textColor="#212121"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+
+                />
 
 
         </LinearLayout>
@@ -155,7 +178,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
+                android:background="@drawable/v_click"
                 android:padding="10dp"
                 android:text="Similar App"
                 android:textColor="#212121"
@@ -173,7 +196,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
+                android:background="@drawable/v_click"
                 android:padding="10dp"
                 android:text="Remove AD"
                 android:textColor="#212121"

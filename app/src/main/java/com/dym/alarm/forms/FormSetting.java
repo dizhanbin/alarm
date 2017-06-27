@@ -3,7 +3,6 @@ package com.dym.alarm.forms;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +10,7 @@ import android.view.ViewGroup;
 import com.dym.alarm.Form;
 import com.dym.alarm.R;
 import com.dym.alarm.common.Event;
-import com.dym.alarm.common.NLog;
+import com.dym.alarm.common.Utils;
 
 public class FormSetting extends Form {
 
@@ -38,8 +37,27 @@ public class FormSetting extends Form {
             case R.id.btn_back:
                 sendMessage(Event.REQ_FORM_BACK);
                 break;
+            case R.id.card_opensource:
+                setFormtype(FormType.FORM_ONLY);
+                sendMessage(Event.FORM_OPENSOURCE);
+                break;
+            case R.id.card_sendemail:
+                setFormtype(FormType.FORM_ONLY);
+                Utils.sendTo(getContext());
+                break;
+            case R.id.card_help:
+                setFormtype(FormType.FORM_ONLY);
+                sendMessage(Event.FORM_HELP);
+                break;
 
 
         }
+    }
+
+    @Override
+    public void onPush(boolean fromback) {
+
+        setFormtype(FormType.FORM_TOP);
+
     }
 }

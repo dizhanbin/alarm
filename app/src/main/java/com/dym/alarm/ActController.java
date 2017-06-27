@@ -9,7 +9,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.AnimRes;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -21,16 +20,7 @@ import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
-import com.dym.alarm.common.Event;
-import com.dym.alarm.common.FlowBox;
-import com.dym.alarm.common.FlowBoxs;
-import com.dym.alarm.common.FlowFactory;
-import com.dym.alarm.common.FormFactory;
-import com.dym.alarm.common.IToDo;
-import com.dym.alarm.common.MessageCenter;
-import com.dym.alarm.common.NLog;
-import com.dym.alarm.common.Strings;
-import com.dym.alarm.common.UIUtil;
+import com.dym.alarm.common.*;
 import com.dym.alarm.datacenter.EventBusiness;
 
 import java.util.ArrayList;

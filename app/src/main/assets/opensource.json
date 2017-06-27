@@ -1,0 +1,8 @@
+[
+  {"author":"alibaba","descript_str":"Fastjson is a Java library that can be used to convert Java Objects into their JSON representation. It can also be used to convert a JSON string to an equivalent Java object. Fastjson can work with arbitrary Java objects including pre-existing objects that you do not have source-code of.","name":"fastjson","url":"https://github.com/alibaba/fastjson"},
+  {"author":"wasabeef","descript_str":"RecyclerView Animators is an Android library that allows developers to easily create RecyclerView with animations.","name":"RecyclerView Animators","url":"https://github.com/wasabeef/recyclerview-animators"},
+  {"author":"chrisjenx","descript_str":"Custom fonts in Android an OK way.Are you fed up of Custom Views to set fonts? Or traversing the ViewTree to find TextViews? Yeah me too..","name":"Calligraphy","url":"https://github.com/chrisjenx/Calligraphy"},
+  {"author":"airbnb","descript_str":"Lottie is a mobile library for Android and iOS that parses Adobe After Effects animations exported as json with Bodymovin and renders them natively on mobile!","name":"Lottie","url":"https://github.com/airbnb/lottie-android"},
+  {"author":"niorgai","descript_str":"This is a utils for status bar, And you do not need to change your style.xml file. The most feature is you can toggle ","name":"StatusBarCompat","url":"https://github.com/niorgai/StatusBarCompat"},
+  {"author":"tyrantgit","descript_str":"explosive dust effect for views ","name":"ExplosionField","url":"https://github.com/tyrantgit/ExplosionField"}
+]

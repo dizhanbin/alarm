@@ -13,27 +13,30 @@ import android.view.ViewGroup;
 import android.view.animation.OvershootInterpolator;
 import android.widget.TextView;
 
+import com.dym.alarm.ActController;
 import com.dym.alarm.Form;
 import com.dym.alarm.R;
 import com.dym.alarm.common.AlarmUtil;
 import com.dym.alarm.common.DDialog;
 import com.dym.alarm.common.Event;
 import com.dym.alarm.common.NLog;
-import com.dym.alarm.datacenter.DataRequest;
 import com.dym.alarm.model.MAlarm;
+import com.dym.alarm.views.SlideLeftRemoveGiftAnimator;
 import com.dym.alarm.views.VHAlarmItem;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator;
-import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
+import tyrantgit.explosionfield.ExplosionField;
 
 public class FormMain extends Form implements View.OnClickListener {
 
 
 
     RecyclerView mRecyclerView;
+
+    ExplosionField  mExplosionField;
 
     @Nullable
     @Override
@@ -49,8 +52,11 @@ public class FormMain extends Form implements View.OnClickListener {
 
             //SlideInUpAnimator animator = new SlideInUpAnimator(new OvershootInterpolator(5f));
 
-            SlideInLeftAnimator animator = new SlideInLeftAnimator();
+            SlideInLeftAnimator animator = new SlideLeftRemoveGiftAnimator();
             animator.setInterpolator(new OvershootInterpolator());
+
+
+
 
             mRecyclerView.setItemAnimator(animator);
             mRecyclerView.getItemAnimator().setAddDuration(500);
@@ -139,6 +145,8 @@ public class FormMain extends Form implements View.OnClickListener {
                         dialog.dismiss();
 
                         int pos = mDatas.indexOf(getRootParentTag(R.id.view_alarm_item, view));
+                        if( pos == -1 )
+                            return;
                         mDatas.remove(pos);
                         mRecyclerView.getAdapter().notifyItemRemoved(pos);
 

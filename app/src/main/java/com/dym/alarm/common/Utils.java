@@ -1,5 +1,18 @@
 package com.dym.alarm.common;
 
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+
+import com.alibaba.fastjson.JSON;
+import com.dym.alarm.ActController;
+import com.dym.alarm.model.MOpenSource;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -97,5 +110,64 @@ public class Utils {
         }
     }
 
+    public static void openUrl(String url) {
+
+
+        Intent intent = new Intent();
+        intent.setAction("android.intent.action.VIEW");
+        Uri content_url = Uri.parse(url);
+        intent.setData(content_url);
+        ActController.instance.startActivity(intent);
+
+    }
+
+    public static  List<MOpenSource>  getAssetString(Context context){
+
+       // ByteArrayInputStream bis = new ByteArrayInputStream()
+
+
+        try {
+            InputStream is = context.getResources().getAssets().open("opensource.json");
+
+            byte[] datas = new byte[1024];
+
+
+            ByteArrayOutputStream bout = new ByteArrayOutputStream();
+
+            int len;
+
+            while( (len=is.read(datas))>0 ){
+                bout.write(datas,0,len);
+            }
+
+
+            String str = new String(bout.toByteArray(),"utf-8");
+
+
+            is.close();
+            bout.close();
+            List<MOpenSource> list = JSON.parseArray(str, MOpenSource.class);
+
+            return list;
+
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        return null;
+    }
+
+    public static void sendTo(Context context){
+
+        Intent data=new Intent(Intent.ACTION_SENDTO);
+        data.setData(Uri.parse("mailto:zhanbin.di@gmail.com"));
+        data.putExtra(Intent.EXTRA_SUBJECT, "advice");
+        data.putExtra(Intent.EXTRA_TEXT, "");
+        context.startActivity(data);
+
+    }
 
 }
