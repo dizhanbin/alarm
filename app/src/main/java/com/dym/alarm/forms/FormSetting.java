@@ -49,6 +49,9 @@ public class FormSetting extends Form {
                 setFormtype(FormType.FORM_ONLY);
                 sendMessage(Event.FORM_HELP);
                 break;
+            case R.id.card_rateus:
+                Utils.openMarket();
+                break;
 
 
         }

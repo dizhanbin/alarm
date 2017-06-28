@@ -34,12 +34,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"
-            android:text="Help"
-            android:textColor="@android:color/white"
-            android:textSize="20sp"
             android:clickable="true"
             android:onClick="onClick"
-            />
+            android:text="Help"
+            android:textColor="@android:color/white"
+            android:textSize="20sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -54,6 +53,153 @@
 
     </android.support.v7.widget.Toolbar>
 
+
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="3dp"
+        app:cardPreventCornerOverlap="true"
+        app:cardUseCompatPadding="true"
+
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp"
+
+            >
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+
+                android:clickable="true"
+                android:onClick="onClick"
+                android:id="@+id/card_opensource"
+
+                >
+
+            <TextView
+
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:background="@drawable/v_click"
+                android:clickable="true"
+                android:onClick="onClick"
+                android:padding="10dp"
+                android:text="How to set alarm"
+                android:textColor="#212121"
+                android:textSize="14sp"
+
+                />
+
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="#dddddd" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/v_click"
+                android:padding="10dp"
+                android:text="How to pause"
+                android:textColor="#212121"
+                android:textSize="14sp"
+                android:clickable="true"
+                android:onClick="onClick"
+                />
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="#dddddd" />
+
+
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:clickable="true"
+                android:onClick="onClick"
+                android:id="@+id/card_help"
+
+                >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:background="@drawable/v_click"
+                    android:padding="10dp"
+                    android:text="how to update"
+                    android:textColor="#212121"
+                    android:textSize="14sp"
+
+                    />
+
+                <ImageView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/help_item_arrow_height"
+                    android:layout_gravity="center_vertical"
+
+                    android:scaleType="centerInside"
+                    android:src="@mipmap/icon_arrow" />
+
+
+            </LinearLayout>
+
+
+
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="#dddddd" />
+
+
+            <TextView
+                android:id="@+id/card_sendemail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/v_click"
+                android:clickable="true"
+                android:onClick="onClick"
+                android:padding="10dp"
+                android:text="how to how to"
+                android:textColor="#212121"
+                android:textSize="14sp"
+
+                />
+
+
+        </LinearLayout>
+
+
+    </android.support.v7.widget.CardView>
 
 
 </LinearLayout>

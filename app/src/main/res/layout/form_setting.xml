@@ -74,19 +74,40 @@
 
             >
 
-            <TextView
-                android:id="@+id/card_opensource"
+            <LinearLayout
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/v_click"
+                android:orientation="horizontal"
+
                 android:clickable="true"
                 android:onClick="onClick"
-                android:padding="10dp"
-                android:text="Open Source"
-                android:textColor="#212121"
-                android:textSize="14sp"
+                android:id="@+id/card_opensource"
+                android:background="@drawable/v_click"
+                >
 
-                />
+                <TextView
+
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="Open Source"
+                    android:textColor="#212121"
+                    android:textSize="14sp"
+
+                    />
+
+                <ImageView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/help_item_arrow_height"
+                    android:layout_gravity="center_vertical"
+                    android:scaleType="centerInside"
+                    android:src="@mipmap/icon_arrow" />
+
+
+            </LinearLayout>
 
 
             <View
@@ -117,18 +138,38 @@
                 android:background="#dddddd" />
 
 
-            <TextView
+            <LinearLayout
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/card_help"
-                android:background="@drawable/v_click"
-                android:padding="10dp"
-                android:text="Help"
-                android:textColor="#212121"
-                android:textSize="14sp"
+                android:orientation="horizontal"
                 android:clickable="true"
                 android:onClick="onClick"
-                />
+                android:id="@+id/card_help"
+                android:background="@drawable/v_click"
+                >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="Help"
+                    android:textColor="#212121"
+                    android:textSize="14sp"
+
+                    />
+
+                <ImageView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/help_item_arrow_height"
+                    android:layout_gravity="center_vertical"
+                    android:scaleType="centerInside"
+                    android:src="@mipmap/icon_arrow" />
+
+
+            </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
@@ -151,7 +192,28 @@
                 android:textSize="14sp"
 
                 />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="#dddddd" />
 
+
+            <TextView
+
+                android:id="@+id/card_rateus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/v_click"
+                android:clickable="true"
+                android:onClick="onClick"
+                android:padding="10dp"
+                android:text="Rate us"
+                android:textColor="#212121"
+                android:textSize="14sp"
+
+                />
 
         </LinearLayout>
 

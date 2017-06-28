@@ -1,5 +1,6 @@
 package com.dym.alarm.common;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -67,6 +68,16 @@ public class Utils {
      * 正则表达式：验证IP地址
      */
     public static final String REGEX_IP_ADDR = "(25[0-5]|2[0-4]\\d|[0-1]\\d{2}|[1-9]?\\d)";
+
+    public static void openMarket() {
+
+        String marketUrl = "market://details?id=" +  ActController.instance.getPackageName();
+        Uri urii = Uri.parse(marketUrl);
+        Intent itView = new Intent(Intent.ACTION_VIEW, urii);
+        itView.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        ActController.instance.startActivity(itView);
+
+    }
 
 
     public static class Strings {

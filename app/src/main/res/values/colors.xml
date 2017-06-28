@@ -13,6 +13,8 @@
 
     <color name="content">#c7c7c7</color>
 
+    <color name="content_bg">#ECE9EC</color>
+
     <color name="text_click_change">#ECE9EC</color>
     <color name="f7_bg">#F0F0EC</color>
 
@@ -22,5 +24,6 @@
     <color name="btn_def">#009688</color>
 
     <color name="transparent_half">#20000000</color>
+    <color name="black">#000000</color>
 
 </resources>
