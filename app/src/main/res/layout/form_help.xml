@@ -38,7 +38,7 @@
             android:onClick="onClick"
             android:text="Help"
             android:textColor="@android:color/white"
-            android:textSize="20sp" />
+            android:textSize="@dimen/toolbar_title_size" />
 
         <LinearLayout
             android:layout_width="match_parent"

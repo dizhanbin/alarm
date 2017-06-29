@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+
+    <com.dym.alarm.views.ViewPagerFixed
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:id="@+id/viewpager"
+        >
+
+
+
+
+
+    </com.dym.alarm.views.ViewPagerFixed>
+
+
+
+    <github.chenupt.springindicator.SpringIndicator
+
+        app:siTextSize="14sp"
+        app:siIndicatorColors="@array/indicator_colors"
+        app:siTextColor="@color/btn_def"
+        app:siSelectedTextColor="@android:color/white"
+        app:siIndicatorColor="@color/gray"
+        android:id="@+id/indicator"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        />
+
+
+</LinearLayout>

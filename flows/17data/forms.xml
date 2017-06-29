@@ -73,8 +73,8 @@
         </data>
     </form>
     <form id="20170627200312271">
-        <x>638</x>
-        <y>290</y>
+        <x>627</x>
+        <y>245</y>
         <w>60</w>
         <h>80</h>
         <data>
@@ -82,6 +82,18 @@
             <property name="android" title="androd类" type="0" args="" value="FormHelp"/>
             <property name="ios" title="ios类" type="0" args="" value="FormHelp"/>
             <property name="descript" title="描述" type="0" args="" value="帮助页"/>
+        </data>
+    </form>
+    <form id="20170629104150114">
+        <x>627</x>
+        <y>339</y>
+        <w>60</w>
+        <h>80</h>
+        <data>
+            <property name="event" title="事件" type="1" args="$event" value="20170629104128077"/>
+            <property name="android" title="androd类" type="0" args="" value="FormAbout"/>
+            <property name="ios" title="ios类" type="0" args="" value="FormAbout"/>
+            <property name="descript" title="描述" type="0" args="" value="关于"/>
         </data>
     </form>
     <Line id="20170504113938728">
@@ -122,6 +134,13 @@
     <Line id="20170627200348099">
         <from>20170613113014002</from>
         <to>20170627200312271</to>
+        <condition>
+            <property name="value" title="条件" type="0" args="" value=""/>
+        </condition>
+    </Line>
+    <Line id="20170629104155873">
+        <from>20170613113014002</from>
+        <to>20170629104150114</to>
         <condition>
             <property name="value" title="条件" type="0" args="" value=""/>
         </condition>

@@ -144,4 +144,10 @@
         <type>1</type>
         <descript>等待框</descript>
     </event>
+    <event>
+        <id>20170629104128077</id>
+        <name>FORM_ABOUT</name>
+        <type>1</type>
+        <descript>关于</descript>
+    </event>
 </events>

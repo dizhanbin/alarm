@@ -27,6 +27,7 @@
   if( [eventstr isEqual:@"REQ_TOAST"] ) return REQ_TOAST;
   if( [eventstr isEqual:@"REQ_WAITTING_HIDE"] ) return REQ_WAITTING_HIDE;
   if( [eventstr isEqual:@"REQ_WAITTING_SHOW"] ) return REQ_WAITTING_SHOW;
+  if( [eventstr isEqual:@"FORM_ABOUT"] ) return FORM_ABOUT;
   return -1;
 }
 
@@ -57,6 +58,7 @@
   case REQ_TOAST : return @"REQ_TOAST";
   case REQ_WAITTING_HIDE : return @"REQ_WAITTING_HIDE";
   case REQ_WAITTING_SHOW : return @"REQ_WAITTING_SHOW";
+  case FORM_ABOUT : return @"FORM_ABOUT";
 }
 
   return @"not define";

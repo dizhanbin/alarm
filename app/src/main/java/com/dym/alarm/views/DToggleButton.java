@@ -27,13 +27,9 @@ public class DToggleButton extends ToggleButton {
         int width  = MeasureSpec.getSize(widthMeasureSpec);
         int height = MeasureSpec.getSize(heightMeasureSpec);
 
-        if( width > height ){
-            setMeasuredDimension( height,height  );
-        }
-        else{
-
+       // if( width > height ){
             setMeasuredDimension( width,width  );
-        }
+       // }
 
     }
 

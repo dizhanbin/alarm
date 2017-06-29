@@ -127,6 +127,7 @@
                 android:textSize="14sp"
                 android:clickable="true"
                 android:onClick="onClick"
+                android:id="@+id/card_about"
                 />
 
 

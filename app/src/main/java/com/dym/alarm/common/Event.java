@@ -25,6 +25,7 @@ public enum Event{
   REQ_PUSH_TO_AND_CLEAR_ALL,//进入并清除所有界面
   REQ_TOAST,//提示信息
   REQ_WAITTING_HIDE,//隐藏等待框
-  REQ_WAITTING_SHOW;//等待框
+  REQ_WAITTING_SHOW,//等待框
+  FORM_ABOUT;//关于
 
 }

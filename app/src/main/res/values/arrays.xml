@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="indicator_colors">
+        <item>@color/btn_def</item>
+        <item>@color/btn_def</item>
+        <item>@color/btn_def</item>
+        <item>@color/btn_def</item>
+    </array>
+</resources>

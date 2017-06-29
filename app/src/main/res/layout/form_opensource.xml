@@ -34,7 +34,7 @@
             android:layout_marginLeft="50dp"
             android:text="Open source"
             android:textColor="@android:color/white"
-            android:textSize="20sp" />
+            android:textSize="@dimen/toolbar_title_size" />
 
         <LinearLayout
             android:layout_width="match_parent"

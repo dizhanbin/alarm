@@ -52,7 +52,9 @@ public class FormSetting extends Form {
             case R.id.card_rateus:
                 Utils.openMarket();
                 break;
-
+            case R.id.card_about:
+                sendMessage(Event.FORM_ABOUT);
+                break;
 
         }
     }

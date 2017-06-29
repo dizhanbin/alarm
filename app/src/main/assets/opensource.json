@@ -4,5 +4,6 @@
   {"author":"chrisjenx","descript_str":"Custom fonts in Android an OK way.Are you fed up of Custom Views to set fonts? Or traversing the ViewTree to find TextViews? Yeah me too..","name":"Calligraphy","url":"https://github.com/chrisjenx/Calligraphy"},
   {"author":"airbnb","descript_str":"Lottie is a mobile library for Android and iOS that parses Adobe After Effects animations exported as json with Bodymovin and renders them natively on mobile!","name":"Lottie","url":"https://github.com/airbnb/lottie-android"},
   {"author":"niorgai","descript_str":"This is a utils for status bar, And you do not need to change your style.xml file. The most feature is you can toggle ","name":"StatusBarCompat","url":"https://github.com/niorgai/StatusBarCompat"},
-  {"author":"tyrantgit","descript_str":"explosive dust effect for views ","name":"ExplosionField","url":"https://github.com/tyrantgit/ExplosionField"}
+  {"author":"tyrantgit","descript_str":"explosive dust effect for views ","name":"ExplosionField","url":"https://github.com/tyrantgit/ExplosionField"},
+  {"author":"chenupt","descript_str":"An indicator like Morning Routine guide.It was originally based on BezierDemo.","name":"SpringIndicator","url":"https://github.com/chenupt/SpringIndicator"}
 ]

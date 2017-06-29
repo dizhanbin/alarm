@@ -12,6 +12,7 @@
           case FORM_SOUND_SET: return @"FormSoundSet";
           case FORM_OPENSOURCE: return @"FormOpenSource";
           case FORM_HELP: return @"FormHelp";
+          case FORM_ABOUT: return @"FormAbout";
      }
      return nil;
 }
