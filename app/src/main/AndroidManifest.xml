@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.dym.alarm">
 
+
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:name=".DUMAPP"
         android:fullBackupContent="false"
@@ -34,10 +38,12 @@
 
         <activity
             android:name=".NotifyController"
+            android:launchMode="singleInstance"
             android:autoRemoveFromRecents="true"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"></activity>
+            android:theme="@android:style/Theme.Wallpaper.NoTitleBar"
+        ></activity>
         <activity
             android:name=".FullscreenActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"

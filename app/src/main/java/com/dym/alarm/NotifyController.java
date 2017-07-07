@@ -32,6 +32,13 @@ public class NotifyController extends Activity {
             // Note that some of these constants are new as of API 16 (Jelly Bean)
             // and API 19 (KitKat). It is safe to use them, as they are inlined
             // at compile-time and do nothing on earlier devices.
+
+
+
+
+
+
+
             mContentView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE
                     | View.SYSTEM_UI_FLAG_FULLSCREEN
                     | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
@@ -47,10 +54,23 @@ public class NotifyController extends Activity {
 
         setContentView(R.layout.activity_notify);
 
+
+        final Window win = getWindow();
+        win.addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
+                | WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
+        win.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
+                | WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
+
+
+
+
+
+
+
         mContentView = findViewById(R.id.notify_content);
 
 
-        mHideHandler.postDelayed(mHidePart2Runnable,100);
+       // mHideHandler.postDelayed(mHidePart2Runnable,100);
 
 
 

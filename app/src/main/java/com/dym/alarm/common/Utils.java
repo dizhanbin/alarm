@@ -1,18 +1,24 @@
 package com.dym.alarm.common;
 
 import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
+import android.provider.MediaStore;
 
 import com.alibaba.fastjson.JSON;
 import com.dym.alarm.ActController;
+import com.dym.alarm.RP;
 import com.dym.alarm.model.MOpenSource;
+import com.dym.alarm.model.MSound;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -179,6 +185,54 @@ public class Utils {
         data.putExtra(Intent.EXTRA_TEXT, "");
         context.startActivity(data);
 
+    }
+
+    public static void openGoogleDriver(){
+
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType("audio/*");
+        //intent.addCategory(Intent.CATEGORY_VOICE);
+        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+        ActController.instance.startActivityForResult(intent, RP.CK.K_GOOGLEDRIVER);
+
+
+
+    }
+
+
+    public static   List<MSound> scanAlarms() {
+
+        //notification
+        ContentResolver cr = ActController.instance.getContentResolver();
+
+        List<MSound> list = new ArrayList<>();
+
+
+        //alarm
+        Cursor cursor = cr.query(MediaStore.Audio.Media.INTERNAL_CONTENT_URI,
+                new String[] { MediaStore.Audio.Media._ID,
+                        MediaStore.Audio.Media.DATA,
+                        MediaStore.Audio.Media.TITLE }, "is_alarm != ?",
+                new String[] { "0" }, "_id asc");
+        if (cursor == null) {
+            return list;
+        }
+
+        if( cursor.moveToFirst() )
+        do  {
+            NLog.i("autio :%s %s",cursor.getString( 2 ),cursor.getString( 1 ));
+
+            MSound ms = new MSound();
+            ms.name = cursor.getString(2);
+            ms.path = cursor.getString(1);
+            list.add(ms);
+
+        }while (cursor.moveToNext());
+
+
+        cursor.close();
+
+        return list;
     }
 
 }

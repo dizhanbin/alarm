@@ -188,7 +188,7 @@
                 android:clickable="true"
                 android:onClick="onClick"
                 android:padding="10dp"
-                android:text="Give us advice"
+                android:text="Feedback"
                 android:textColor="#212121"
                 android:textSize="14sp"
 
@@ -211,6 +211,29 @@
                 android:onClick="onClick"
                 android:padding="10dp"
                 android:text="Rate us"
+                android:textColor="#212121"
+                android:textSize="14sp"
+
+                />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="#dddddd" />
+
+
+            <TextView
+
+                android:id="@+id/card_share"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/v_click"
+                android:clickable="true"
+                android:onClick="onClick"
+                android:padding="10dp"
+                android:text="Share with friends"
                 android:textColor="#212121"
                 android:textSize="14sp"
 
@@ -243,7 +266,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/v_click"
                 android:padding="10dp"
-                android:text="Similar App"
+                android:text="Similar app"
                 android:textColor="#212121"
                 android:textSize="14sp" />
 

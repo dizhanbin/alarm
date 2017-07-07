@@ -168,22 +168,7 @@ public class FormMain extends Form implements View.OnClickListener {
         }
     }
 
-    private Object getRootParentTag(int parentid,View view){
 
-
-        if( view.getId() == parentid )
-            return view.getTag();
-        View parent = (View)view.getParent();
-        while(parent != null){
-
-            if( parent.getId() == parentid )
-                return parent.getTag();
-            parent = (View) parent.getParent();
-
-        }
-        return null;
-
-    }
 
 
     private void initUI() {

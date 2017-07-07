@@ -31,6 +31,7 @@ public class RP {
         public static final int K_POP_COLOR = 0x66000000;
         public static final int K_DIALOG_COLOR = 0xFF223953;
 
+        public static final int K_GOOGLEDRIVER = 1004;
     }
 
 
