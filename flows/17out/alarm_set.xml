@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<business descript="set alarm">
+    <item id="20170605160603524" c_android="com.dym.alarm.flows.EventStart" c_ios="EventStart">
+        <data>
+            <property name="event" title="事件" value="REQ_ALARM_NEXT"/>
+            <property name="params" title="参数" value=""/>
+            <property name="static" title="常驻内存(true,false)" value=""/>
+            <property name="descript" title="描述" value="事件"/>
+        </data>
+    </item>
+</business>
