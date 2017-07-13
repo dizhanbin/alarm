@@ -8,7 +8,7 @@ public class MSound {
 
 
     public String name;
-    public int type;//0  system sound  1 user sound 2 slient
+    public int type;//0  system    sound  1 user sound 2 slient
     public String path;
     public boolean selected;
 

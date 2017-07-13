@@ -17,17 +17,10 @@ public class NLog {
 		Log.w(tag, str);
 		
 	}
-	
-	public static void i(String format,Object ...args)
-	{
-	   if( release )
-		   return;
-		/*
-		Log.w(tag,">>>>>>>"+format);
-		for(Object o:args)
-			Log.w(tag,">>>"+o);
-		*/
+	public static void i(String tag,String format,Object ...args){
 
+		if( release )
+			return;
 		if( args.length == 0 )
 			Log.w(tag,format);
 		else {
@@ -35,6 +28,14 @@ public class NLog {
 			Log.w(tag, str);
 			str = null;
 		}
+
+	}
+	
+	public static void i(String format,Object ...args)
+	{
+
+		i(tag,format,args);
+
 	}
 	public static void e(String format,Object ...args)
 	{

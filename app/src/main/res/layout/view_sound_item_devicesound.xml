@@ -14,23 +14,24 @@
         android:layout_marginRight="20dp"
         android:gravity="center_vertical"
         >
-    <TextView
-        android:id="@+id/text_title"
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"
 
-        android:drawableLeft="@android:drawable/ic_lock_silent_mode"
-        android:drawablePadding="20dp"
-        android:paddingBottom="10dp"
-        android:paddingRight="10dp"
-        android:paddingTop="10dp"
-        android:text=""
-        android:textColor="@android:color/black"
-        android:textSize="18sp"
-        android:ellipsize="middle"
+        <TextView
+            android:id="@+id/text_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
 
-        />
+            android:drawableLeft="@drawable/ic_audiotrack_light"
+            android:drawablePadding="20dp"
+            android:ellipsize="middle"
+            android:paddingBottom="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="10dp"
+            android:text=""
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+
+            />
 
 
      <ImageView
@@ -48,12 +49,11 @@
             android:id="@+id/image_select_play"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:scaleType="centerInside"
             android:background="@android:color/transparent"
-            android:src="@mipmap/icon_right"
             android:clickable="true"
             android:onClick="onClick"
-            />
+            android:scaleType="centerInside"
+            android:src="@drawable/quantum_ic_play_arrow_grey600_48" />
 
 
 

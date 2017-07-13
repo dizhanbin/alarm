@@ -15,6 +15,7 @@ import android.support.v4.provider.DocumentFile;
 import android.support.v7.widget.DrawableUtils;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,11 +23,13 @@ import android.view.animation.OvershootInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSON;
 import com.dym.alarm.ActController;
 import com.dym.alarm.Form;
 import com.dym.alarm.R;
 import com.dym.alarm.RP;
 import com.dym.alarm.common.Event;
+import com.dym.alarm.common.FileUtils;
 import com.dym.alarm.common.IBind;
 import com.dym.alarm.common.NLog;
 import com.dym.alarm.common.Utils;
@@ -39,15 +42,16 @@ import java.util.List;
 
 import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator;
 
-public class FormSoundSet extends Form implements MediaPlayer.OnPreparedListener {
+public class FormSoundSet extends Form  {
 
 
 
 
-    List<String> your_sounds = new ArrayList<>();
+    List<MSound> your_sounds = new ArrayList<>();
     List<MSound> dev_sounds;// = new ArrayList<>();
 
     RecyclerView mRecyclerView;
+    RecyclerView recyclerview_yours;
 
     @Nullable
     @Override
@@ -59,22 +63,39 @@ public class FormSoundSet extends Form implements MediaPlayer.OnPreparedListener
             setView(mView);
             mRecyclerView = (RecyclerView) ViewInject(R.id.recyclerview);
             mRecyclerView.setLayoutManager(new GridLayoutManager(getContext(),1));
+
+
+            recyclerview_yours = (RecyclerView) ViewInject(R.id.recyclerview_yours);
+            recyclerview_yours.setLayoutManager(new GridLayoutManager(getContext(),1));
+
+
         }
 
         dev_sounds = Utils.scanAlarms();
         dev_sounds.add(0,MSound.sient());
         initDeviceSound();
-
-
+        initYourSound();
 
         return mView;
 
     }
 
-    private void initDeviceSound() {
+    private void initYourSound() {
 
-        NLog.i("dd dev sound size:%d",dev_sounds.size());
-        mRecyclerView.setAdapter(new RecyclerView.Adapter() {
+
+        //RP.Lo
+        //  JSON.toJSONString(your_sounds);
+
+        String jsonstr = FileUtils.readFile(RP.Local.path_yoursournds);
+
+        if( jsonstr != null ){
+
+           your_sounds.addAll( JSON.parseArray(jsonstr,MSound.class) );
+
+
+        }
+
+        recyclerview_yours.setAdapter(new RecyclerView.Adapter() {
             @Override
             public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
@@ -82,6 +103,46 @@ public class FormSoundSet extends Form implements MediaPlayer.OnPreparedListener
                 VHDeviceSound vh = new VHDeviceSound(view);
                 return vh;
 
+            }
+
+            @Override
+            public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+
+                ((IBind)holder).onBind(your_sounds.get(position),position);
+                holder.itemView.setTag( your_sounds.get(position) );
+
+            }
+
+            @Override
+            public int getItemCount() {
+                return your_sounds.size();
+            }
+
+        });
+
+
+
+
+    }
+    private void saveYourSound(){
+
+        log("save your sournd save path:%s",RP.Local.path_yoursournds);
+        FileUtils.writeFile(RP.Local.path_yoursournds,JSON.toJSONString(your_sounds));
+
+
+        recyclerview_yours.getAdapter().notifyDataSetChanged();
+    }
+
+    private void initDeviceSound() {
+
+        log("dd dev sound size:%d",dev_sounds.size());
+        mRecyclerView.setAdapter(new RecyclerView.Adapter() {
+            @Override
+            public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
+                View view = View.inflate(getContext(),R.layout.view_sound_item_devicesound,null);
+                VHDeviceSound vh = new VHDeviceSound(view);
+                return vh;
 
             }
 
@@ -95,7 +156,6 @@ public class FormSoundSet extends Form implements MediaPlayer.OnPreparedListener
 
             @Override
             public int getItemCount() {
-                //NLog.i("dev sound size:%d",dev_sounds.size());
                 return dev_sounds.size();
             }
         });
@@ -120,13 +180,16 @@ public class FormSoundSet extends Form implements MediaPlayer.OnPreparedListener
 
                 MSound ms = (MSound) getRootParentTag(R.id.view_item_devsound,view);
 
+                log("select path:%s",ms.path);
+                if( ms.path.startsWith("content://") ){
 
-                Uri uri = Uri.fromFile(new File( ms.path ) );
-
-                NLog.i("select path:%s",ms.path);
-
-
-                startAlarm(uri);
+                    Uri uri = Uri.parse(ms.path);
+                    startAlarm(uri);
+                }
+                else {
+                    Uri uri = Uri.fromFile(new File(ms.path));
+                    startAlarm(uri);
+                }
 
             }
             break;
@@ -144,26 +207,40 @@ public class FormSoundSet extends Form implements MediaPlayer.OnPreparedListener
 
             if (resultCode == Activity.RESULT_OK) {
 
-
-
                 ClipData cdata = data.getClipData();
                 if( cdata != null ) {
                     for (int i = 0; i < cdata.getItemCount(); i++) {
                         Uri uri = cdata.getItemAt(i).getUri();
-                        DocumentFile file = DocumentFile.fromSingleUri(getContext(), uri);
 
-                        NLog.i("select from google");
-                        startAlarm( uri );
+                        DocumentFile file = DocumentFile.fromSingleUri(getContext(), uri);
+                        log("select from google");
+                        MSound ms = new MSound();
+                        ms.path = RP.Local.path_yoursournds_dir+"/"+file.getName();
+                        ms.name = file.getName();
+                        ms.type = 1;
+                        your_sounds.add(ms);
+                        if( FileUtils.copy(getContext(),uri,ms.path) )
+                        {
+                            log("copy file ok");
+                        }
+                        else
+                            log("copy file error");
                     }
+                    saveYourSound();
                 }
                 else
                 {
                     Uri uri = data.getData();
                     if (uri != null) {
-
-                        startAlarm( uri );
-
-
+                       // startAlarm( uri );
+                        DocumentFile file = DocumentFile.fromSingleUri(getContext(), uri);
+                        MSound ms = new MSound();
+                        ms.path = uri.toString();
+                        ms.name = file.getName();
+                        ms.type = 1;
+                        your_sounds.add(ms);
+                        FileUtils.copy(getContext(),uri,RP.Local.path_yoursournds_dir);
+                        saveYourSound();
                     }
                 }
 
@@ -177,26 +254,12 @@ public class FormSoundSet extends Form implements MediaPlayer.OnPreparedListener
     private void startAlarm(Uri uri) {
 
         mMediaPlayer = MediaPlayer.create(getContext(), uri);
-       // mMediaPlayer.setOnPreparedListener(this);
         mMediaPlayer.setLooping(true);
-//        try {
-//            //mMediaPlayer.prepare();
-//        } catch (IllegalStateException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
         mMediaPlayer.start();
-    }
-
-
-    @Override
-    public void onPrepared(MediaPlayer mp) {
-
-
-        mp.start();
 
     }
+
+
 }
 
 class VHDeviceSound extends RecyclerView.ViewHolder implements IBind{
@@ -234,6 +297,13 @@ class VHDeviceSound extends RecyclerView.ViewHolder implements IBind{
                 title.setCompoundDrawables(drawable, null, null, null);
             }
                 break;
+            case 1: {
+
+                Drawable drawable = ActController.instance.getResources().getDrawable(android.R.drawable.presence_audio_online);
+                drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+                title.setCompoundDrawables(drawable, null, null, null);
+            }
+            break;
 
         }
 

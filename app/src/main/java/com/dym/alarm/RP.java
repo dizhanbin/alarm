@@ -7,6 +7,7 @@ import android.net.NetworkInfo;
 
 import com.dym.alarm.common.NLog;
 
+import java.io.File;
 import java.util.Calendar;
 
 import qiu.niorgai.StatusBarCompat;
@@ -21,6 +22,10 @@ public class RP {
 
         Calendar calendar = Calendar.getInstance();
         today = calendar.get(Calendar.DAY_OF_WEEK);
+
+
+        File file_yoursound_dir = new File(Local.path_yoursournds_dir);
+        file_yoursound_dir.mkdirs();
 
     }
 
@@ -182,6 +187,14 @@ public class RP {
         }
 
 
+
+    }
+
+    public static class Local{
+
+        public static String path_yoursournds = DUMAPP.getInstance().getFilesDir().getAbsolutePath()+"/yoursounds.dat";
+
+        public static String path_yoursournds_dir = DUMAPP.getInstance().getFilesDir().getAbsolutePath()+"/yoursounds";
 
     }
 
