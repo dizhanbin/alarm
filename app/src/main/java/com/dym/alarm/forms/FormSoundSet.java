@@ -253,8 +253,19 @@ public class FormSoundSet extends Form  {
     MediaPlayer mMediaPlayer;
     private void startAlarm(Uri uri) {
 
+        if( mMediaPlayer != null ){
+            try {
+                if (mMediaPlayer.isPlaying()) {
+                    mMediaPlayer.stop();
+                }
+                mMediaPlayer.release();
+                mMediaPlayer = null;
+            }catch (Exception e){
+                NLog.e(e);
+            }
+        }
         mMediaPlayer = MediaPlayer.create(getContext(), uri);
-        mMediaPlayer.setLooping(true);
+        mMediaPlayer.setLooping(false);
         mMediaPlayer.start();
 
     }
@@ -267,12 +278,17 @@ class VHDeviceSound extends RecyclerView.ViewHolder implements IBind{
 
     TextView title;
     ImageView image_select;
+    ImageView image_play;
+
 
     public VHDeviceSound(View itemView) {
-        super(itemView);
 
+        super(itemView);
         title = (TextView) itemView.findViewById(R.id.text_title);
         image_select = (ImageView) itemView.findViewById(R.id.image_select);
+        image_play = (ImageView) itemView.findViewById(R.id.image_select_play);
+
+
     }
 
 
@@ -299,7 +315,7 @@ class VHDeviceSound extends RecyclerView.ViewHolder implements IBind{
                 break;
             case 1: {
 
-                Drawable drawable = ActController.instance.getResources().getDrawable(android.R.drawable.presence_audio_online);
+                Drawable drawable = ActController.instance.getResources().getDrawable(android.R.drawable.ic_btn_speak_now);
                 drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
                 title.setCompoundDrawables(drawable, null, null, null);
             }
@@ -307,7 +323,8 @@ class VHDeviceSound extends RecyclerView.ViewHolder implements IBind{
 
         }
 
-         //image_select.setVisibility( ms.selected ? View.VISIBLE : View.INVISIBLE);
+        image_select.setVisibility( ms.selected ? View.VISIBLE : View.INVISIBLE);
+        image_play.setVisibility( ms.selected ? View.VISIBLE : View.INVISIBLE);
 
 
 

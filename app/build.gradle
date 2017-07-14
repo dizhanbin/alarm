@@ -149,3 +149,14 @@ dependencies {
 
 }
 apply plugin: 'com.google.gms.google-services'
+
+afterEvaluate {
+    tasks.matching {
+        it.name.startsWith('dex')
+    }.each { dx ->
+        if (dx.additionalParameters == null) {
+            dx.additionalParameters = []
+        }
+        dx.additionalParameters += "--set-max-idx-number=50000" // default 60000
+    }
+}
