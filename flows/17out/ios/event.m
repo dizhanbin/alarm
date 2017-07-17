@@ -3,6 +3,7 @@
 @implementation EventUtil
 
 +(Event) event_by_str:(NSString *)eventstr{
+  if( [eventstr isEqual:@"FORM_ABOUT"] ) return FORM_ABOUT;
   if( [eventstr isEqual:@"FORM_EDIT"] ) return FORM_EDIT;
   if( [eventstr isEqual:@"FORM_FLASH"] ) return FORM_FLASH;
   if( [eventstr isEqual:@"FORM_HELP"] ) return FORM_HELP;
@@ -27,13 +28,14 @@
   if( [eventstr isEqual:@"REQ_TOAST"] ) return REQ_TOAST;
   if( [eventstr isEqual:@"REQ_WAITTING_HIDE"] ) return REQ_WAITTING_HIDE;
   if( [eventstr isEqual:@"REQ_WAITTING_SHOW"] ) return REQ_WAITTING_SHOW;
-  if( [eventstr isEqual:@"FORM_ABOUT"] ) return FORM_ABOUT;
+  if( [eventstr isEqual:@"REQ_SOUND_TEST_STOP"] ) return REQ_SOUND_TEST_STOP;
   return -1;
 }
 
 +(NSString*)str_by_event:(Event)event{
   switch(event){
 
+  case FORM_ABOUT : return @"FORM_ABOUT";
   case FORM_EDIT : return @"FORM_EDIT";
   case FORM_FLASH : return @"FORM_FLASH";
   case FORM_HELP : return @"FORM_HELP";
@@ -58,7 +60,7 @@
   case REQ_TOAST : return @"REQ_TOAST";
   case REQ_WAITTING_HIDE : return @"REQ_WAITTING_HIDE";
   case REQ_WAITTING_SHOW : return @"REQ_WAITTING_SHOW";
-  case FORM_ABOUT : return @"FORM_ABOUT";
+  case REQ_SOUND_TEST_STOP : return @"REQ_SOUND_TEST_STOP";
 }
 
   return @"not define";

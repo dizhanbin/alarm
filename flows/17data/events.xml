@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <events>
     <event>
+        <id>20170629104128077</id>
+        <name>FORM_ABOUT</name>
+        <type>1</type>
+        <descript>关于</descript>
+    </event>
+    <event>
         <id>20170510105917597</id>
         <name>FORM_EDIT</name>
         <type>1</type>
@@ -145,9 +151,9 @@
         <descript>等待框</descript>
     </event>
     <event>
-        <id>20170629104128077</id>
-        <name>FORM_ABOUT</name>
+        <id>20170717185848568</id>
+        <name>REQ_SOUND_TEST_STOP</name>
         <type>1</type>
-        <descript>关于</descript>
+        <descript>测试音频停止</descript>
     </event>
 </events>

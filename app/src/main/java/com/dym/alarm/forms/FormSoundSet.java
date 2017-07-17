@@ -31,6 +31,7 @@ import com.dym.alarm.RP;
 import com.dym.alarm.common.Event;
 import com.dym.alarm.common.FileUtils;
 import com.dym.alarm.common.IBind;
+import com.dym.alarm.common.MessageCenter;
 import com.dym.alarm.common.NLog;
 import com.dym.alarm.common.Utils;
 import com.dym.alarm.model.MSound;
@@ -42,7 +43,7 @@ import java.util.List;
 
 import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator;
 
-public class FormSoundSet extends Form  {
+public class FormSoundSet extends Form implements MediaPlayer.OnCompletionListener {
 
 
 
@@ -52,6 +53,8 @@ public class FormSoundSet extends Form  {
 
     RecyclerView mRecyclerView;
     RecyclerView recyclerview_yours;
+
+    MSound mSelectItem;
 
     @Nullable
     @Override
@@ -178,7 +181,7 @@ public class FormSoundSet extends Form  {
             case R.id.image_select_play:
             {
 
-                MSound ms = (MSound) getRootParentTag(R.id.view_item_devsound,view);
+                MSound ms = (MSound) getRootParentTag(R.id.view_item_sound,view);
 
                 log("select path:%s",ms.path);
                 if( ms.path.startsWith("content://") ){
@@ -190,6 +193,26 @@ public class FormSoundSet extends Form  {
                     Uri uri = Uri.fromFile(new File(ms.path));
                     startAlarm(uri);
                 }
+
+
+                ImageView image_play = (ImageView) view;
+
+
+
+
+
+            }
+            break;
+            case R.id.view_item_sound:
+            {
+
+                if( mSelectItem != null )
+                    mSelectItem.selected = false;
+                mSelectItem = (MSound) view.getTag();
+                mSelectItem.selected = true;
+                recyclerview_yours.getAdapter().notifyDataSetChanged();
+                mRecyclerView.getAdapter().notifyDataSetChanged();
+                log("click item :%s",view.getTag());
 
             }
             break;
@@ -265,12 +288,64 @@ public class FormSoundSet extends Form  {
             }
         }
         mMediaPlayer = MediaPlayer.create(getContext(), uri);
+        mMediaPlayer.setOnCompletionListener(this);
         mMediaPlayer.setLooping(false);
         mMediaPlayer.start();
+        log("media length:%d",mMediaPlayer.getDuration());
+
+        MessageCenter.sendMessage(Event.REQ_SOUND_TEST_STOP,null,mMediaPlayer.getDuration()-200);
 
     }
 
 
+    @Override
+    public void onCompletion(MediaPlayer mp) {
+
+        log("mediaplay complete");
+        try {
+            mp.stop();
+            mp.release();
+            mMediaPlayer = null;
+        }catch (Exception e){
+            e.printStackTrace();
+
+        }
+
+    }
+
+    @Override
+    public boolean onMessage(Event event, Object value) {
+        switch (event){
+
+            case REQ_SOUND_TEST_STOP:
+                do_stop_medaiplayer();
+
+
+        }
+        return false;
+    }
+
+    @Override
+    public void onStop() {
+        log("onstop");
+        do_stop_medaiplayer();
+        super.onStop();
+    }
+
+    private void do_stop_medaiplayer() {
+
+        try {
+            if (mMediaPlayer != null && mMediaPlayer.isPlaying()) {
+                mMediaPlayer.stop();
+            }
+            if( mMediaPlayer != null )
+                mMediaPlayer.release();
+        }catch (Exception e){
+            NLog.e(e);
+        }
+        mMediaPlayer = null;
+
+    }
 }
 
 class VHDeviceSound extends RecyclerView.ViewHolder implements IBind{
@@ -324,7 +399,14 @@ class VHDeviceSound extends RecyclerView.ViewHolder implements IBind{
         }
 
         image_select.setVisibility( ms.selected ? View.VISIBLE : View.INVISIBLE);
-        image_play.setVisibility( ms.selected ? View.VISIBLE : View.INVISIBLE);
+        image_play.setVisibility( ms.selected && ms.type != 2 ? View.VISIBLE : View.INVISIBLE);
+
+
+        //quantum_ic_play_arrow_grey600_48
+
+        //quantum_ic_pause_grey600_48
+
+
 
 
 

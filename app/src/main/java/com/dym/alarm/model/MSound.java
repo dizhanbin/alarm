@@ -21,4 +21,10 @@ public class MSound {
         return ms;
 
     }
+
+    public String toString(){
+
+        return String.format("type:%d name:%s selected:%b",type,name,selected);
+
+    }
 }

@@ -2,6 +2,7 @@
 #import <Foundation/Foundation.h>
 typedef enum{
 
+  FORM_ABOUT,//关于
   FORM_EDIT,//闹钟编辑页
   FORM_FLASH,//启动页
   FORM_HELP,//帮助页
@@ -26,7 +27,7 @@ typedef enum{
   REQ_TOAST,//提示信息
   REQ_WAITTING_HIDE,//隐藏等待框
   REQ_WAITTING_SHOW,//等待框
-  FORM_ABOUT//关于
+  REQ_SOUND_TEST_STOP//测试音频停止
 } Event;
 
 @interface EventUtil : NSObject

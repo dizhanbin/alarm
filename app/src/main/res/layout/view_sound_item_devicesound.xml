@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/view_item_devsound"
+    android:id="@+id/view_item_sound"
     android:clickable="true"
     android:onClick="onClick"
     >
@@ -55,7 +55,7 @@
             android:clickable="true"
             android:onClick="onClick"
             android:scaleType="centerInside"
-            android:src="@drawable/quantum_ic_play_arrow_grey600_48" />
+            android:src="@drawable/quantum_ic_pause_grey600_48" />
 
 
 

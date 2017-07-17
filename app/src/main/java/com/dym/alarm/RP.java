@@ -73,6 +73,17 @@ public class RP {
         }
 
 
+        public static String getSoundPath(){
+
+            String path = getPreferences().getString(Key.key_alarmsound,null);
+            return path;
+
+        }
+        public static void setSoundPath(String path){
+
+            getPreferences().edit().putString(Key.key_alarmsound,path).commit();
+
+        }
 
 
     }
@@ -111,6 +122,7 @@ public class RP {
     public class Key{
 
         public final static String key_starttimes = "StartTimes";
+        public final static String key_alarmsound = "alarmsound";
 
 
     }
@@ -197,5 +209,7 @@ public class RP {
         public static String path_yoursournds_dir = DUMAPP.getInstance().getFilesDir().getAbsolutePath()+"/yoursounds";
 
     }
+
+
 
 }
