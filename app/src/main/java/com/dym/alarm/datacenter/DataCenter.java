@@ -3,6 +3,7 @@ package com.dym.alarm.datacenter;
 import com.alibaba.fastjson.JSON;
 import com.dym.alarm.DUMAPP;
 import com.dym.alarm.common.FileUtils;
+import com.dym.alarm.common.NLog;
 import com.dym.alarm.model.MAlarm;
 
 import java.io.ByteArrayOutputStream;
@@ -95,6 +96,7 @@ public class DataCenter {
 
 
         if( !datas.contains(alarm) ){
+            NLog.i("not contain alarm add");
             datas.add(alarm);
         }
         saveAlarms();

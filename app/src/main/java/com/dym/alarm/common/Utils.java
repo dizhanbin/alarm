@@ -220,7 +220,7 @@ public class Utils {
 
         if( cursor.moveToFirst() )
         do  {
-            NLog.i("autio :%s %s",cursor.getString( 2 ),cursor.getString( 1 ));
+            // NLog.i("autio :%s %s",cursor.getString( 2 ),cursor.getString( 1 ));
 
             MSound ms = new MSound();
             ms.name = cursor.getString(2);

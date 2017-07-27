@@ -14,5 +14,6 @@
     <dimen name="help_item_arrow_height">20dp</dimen>
     <dimen name="help_item_line_margn">30dp</dimen>
     <dimen name="toolbar_title_size">20sp</dimen>
+    <dimen name="about_title_size">26sp</dimen>
 
 </resources>

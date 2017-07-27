@@ -7,6 +7,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.Settings;
 import android.support.annotation.AnimRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -81,13 +82,16 @@ public class ActController extends AppCompatActivity implements IToDo, IControll
         NLog.i("Main thread id:%d", thread_main);
 
         form_manager = new FormManager(this);
-        MessageCenter.sendMessage(Event.FORM_FLASH);
+        MessageCenter.sendMessage(Event.FORM_MAIN);
 
 
 
         instance = this;
 
-        //Thread.currentThread().setPriority(10);
+
+
+
+
     }
 
 
@@ -171,6 +175,9 @@ public class ActController extends AppCompatActivity implements IToDo, IControll
          }
 
         NLog.i("Act-> event:%s  is_form_changing:%b", event.toString(),is_form_changing);
+
+        SEvent.log("event",event.toString(),"e");
+
 
          if(EventBusiness.request(event,value))
              return;

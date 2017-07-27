@@ -29,11 +29,13 @@ import com.dym.alarm.Form;
 import com.dym.alarm.R;
 import com.dym.alarm.RP;
 import com.dym.alarm.common.Event;
+import com.dym.alarm.common.FHandler;
 import com.dym.alarm.common.FileUtils;
 import com.dym.alarm.common.IBind;
 import com.dym.alarm.common.MessageCenter;
 import com.dym.alarm.common.NLog;
 import com.dym.alarm.common.Utils;
+import com.dym.alarm.model.MAlarm;
 import com.dym.alarm.model.MSound;
 
 import java.io.File;
@@ -48,13 +50,31 @@ public class FormSoundSet extends Form implements MediaPlayer.OnCompletionListen
 
 
 
-    List<MSound> your_sounds = new ArrayList<>();
+
     List<MSound> dev_sounds;// = new ArrayList<>();
 
     RecyclerView mRecyclerView;
     RecyclerView recyclerview_yours;
 
     MSound mSelectItem;
+    MAlarm model;
+
+
+    FHandler fhandler = new FHandler() {
+        @Override
+        public void handle(PVD pvd) {
+
+            switch (pvd.event){
+
+                case REQ_SOUND_TEST_STOP:
+                    do_stop_medaiplayer();
+                    break;
+
+            }
+
+        }
+    };
+
 
     @Nullable
     @Override
@@ -89,14 +109,19 @@ public class FormSoundSet extends Form implements MediaPlayer.OnCompletionListen
         //RP.Lo
         //  JSON.toJSONString(your_sounds);
 
-        String jsonstr = FileUtils.readFile(RP.Local.path_yoursournds);
+        //String jsonstr = FileUtils.readFile(RP.Local.path_yoursournds);
 
-        if( jsonstr != null ){
+        log("model.your_sounds.size:%d",model.your_sounds.size());
 
-           your_sounds.addAll( JSON.parseArray(jsonstr,MSound.class) );
+        for(MSound ms : model.your_sounds){
 
-
+            if( ms.path != null && ms.path.equals(model.sound) ) {
+                ms.selected = true;
+                mSelectItem = ms;
+            }
         }
+
+
 
         recyclerview_yours.setAdapter(new RecyclerView.Adapter() {
             @Override
@@ -111,14 +136,16 @@ public class FormSoundSet extends Form implements MediaPlayer.OnCompletionListen
             @Override
             public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
-                ((IBind)holder).onBind(your_sounds.get(position),position);
-                holder.itemView.setTag( your_sounds.get(position) );
+                MSound ms = model.your_sounds.get(position);
+                ms.selected = mSelectItem == ms;
+                ((IBind)holder).onBind(ms,position);
+                holder.itemView.setTag( model.your_sounds.get(position) );
 
             }
 
             @Override
             public int getItemCount() {
-                return your_sounds.size();
+                return model.your_sounds.size();
             }
 
         });
@@ -130,13 +157,24 @@ public class FormSoundSet extends Form implements MediaPlayer.OnCompletionListen
     private void saveYourSound(){
 
         log("save your sournd save path:%s",RP.Local.path_yoursournds);
-        FileUtils.writeFile(RP.Local.path_yoursournds,JSON.toJSONString(your_sounds));
+       // FileUtils.writeFile(RP.Local.path_yoursournds,JSON.toJSONString(your_sounds));
+        sendMessage(Event.REQ_ALARM_SAVE,model);
 
 
         recyclerview_yours.getAdapter().notifyDataSetChanged();
     }
 
     private void initDeviceSound() {
+
+        for(MSound ms : dev_sounds){
+
+            if( ms.path != null && ms.path.equals(model.sound) ) {
+                ms.selected = true;
+                mSelectItem = ms;
+            }
+        }
+
+
 
         log("dd dev sound size:%d",dev_sounds.size());
         mRecyclerView.setAdapter(new RecyclerView.Adapter() {
@@ -152,7 +190,9 @@ public class FormSoundSet extends Form implements MediaPlayer.OnCompletionListen
             @Override
             public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
-                ((IBind)holder).onBind(dev_sounds.get(position),position);
+                MSound ms = dev_sounds.get(position);
+                ms.selected = mSelectItem == ms;
+                ((IBind)holder).onBind(ms,position);
                 holder.itemView.setTag( dev_sounds.get(position) );
 
             }
@@ -178,41 +218,30 @@ public class FormSoundSet extends Form implements MediaPlayer.OnCompletionListen
 
                 Utils.openGoogleDriver();
                 break;
-            case R.id.image_select_play:
-            {
 
-                MSound ms = (MSound) getRootParentTag(R.id.view_item_sound,view);
-
-                log("select path:%s",ms.path);
-                if( ms.path.startsWith("content://") ){
-
-                    Uri uri = Uri.parse(ms.path);
-                    startAlarm(uri);
-                }
-                else {
-                    Uri uri = Uri.fromFile(new File(ms.path));
-                    startAlarm(uri);
-                }
-
-
-                ImageView image_play = (ImageView) view;
-
-
-
-
-
-            }
-            break;
             case R.id.view_item_sound:
             {
 
                 if( mSelectItem != null )
                     mSelectItem.selected = false;
                 mSelectItem = (MSound) view.getTag();
+                log("click item :%s",view.getTag());
+
                 mSelectItem.selected = true;
                 recyclerview_yours.getAdapter().notifyDataSetChanged();
                 mRecyclerView.getAdapter().notifyDataSetChanged();
-                log("click item :%s",view.getTag());
+                do_stop_medaiplayer();
+                if( mSelectItem.type != 2 ) {
+
+                    Uri uri = Uri.fromFile(new File(mSelectItem.path));
+                    startAlarm(uri);
+                    model.sound = mSelectItem.path;
+
+                }
+                else
+                    model.sound = null;
+                sendMessage(Event.REQ_ALARM_SAVE,model);
+                sendMessage(Event.REQ_SOUND_CHANGED,mSelectItem);
 
             }
             break;
@@ -241,7 +270,7 @@ public class FormSoundSet extends Form implements MediaPlayer.OnCompletionListen
                         ms.path = RP.Local.path_yoursournds_dir+"/"+file.getName();
                         ms.name = file.getName();
                         ms.type = 1;
-                        your_sounds.add(ms);
+                        model.your_sounds.add(ms);
                         if( FileUtils.copy(getContext(),uri,ms.path) )
                         {
                             log("copy file ok");
@@ -258,11 +287,11 @@ public class FormSoundSet extends Form implements MediaPlayer.OnCompletionListen
                        // startAlarm( uri );
                         DocumentFile file = DocumentFile.fromSingleUri(getContext(), uri);
                         MSound ms = new MSound();
-                        ms.path = uri.toString();
+                        ms.path = RP.Local.path_yoursournds_dir+"/"+file.getName();
                         ms.name = file.getName();
                         ms.type = 1;
-                        your_sounds.add(ms);
-                        FileUtils.copy(getContext(),uri,RP.Local.path_yoursournds_dir);
+                        model.your_sounds.add(ms);
+                        FileUtils.copy(getContext(),uri,ms.path);
                         saveYourSound();
                     }
                 }
@@ -277,15 +306,7 @@ public class FormSoundSet extends Form implements MediaPlayer.OnCompletionListen
     private void startAlarm(Uri uri) {
 
         if( mMediaPlayer != null ){
-            try {
-                if (mMediaPlayer.isPlaying()) {
-                    mMediaPlayer.stop();
-                }
-                mMediaPlayer.release();
-                mMediaPlayer = null;
-            }catch (Exception e){
-                NLog.e(e);
-            }
+           do_stop_medaiplayer();
         }
         mMediaPlayer = MediaPlayer.create(getContext(), uri);
         mMediaPlayer.setOnCompletionListener(this);
@@ -293,9 +314,12 @@ public class FormSoundSet extends Form implements MediaPlayer.OnCompletionListen
         mMediaPlayer.start();
         log("media length:%d",mMediaPlayer.getDuration());
 
-        MessageCenter.sendMessage(Event.REQ_SOUND_TEST_STOP,null,mMediaPlayer.getDuration()-200);
+       // MessageCenter.sendMessage(Event.REQ_SOUND_TEST_STOP,null,mMediaPlayer.getDuration()-200);
 
+        fhandler.post(Event.REQ_SOUND_TEST_STOP,null,mMediaPlayer.getDuration()-200);
     }
+
+
 
 
     @Override
@@ -319,7 +343,9 @@ public class FormSoundSet extends Form implements MediaPlayer.OnCompletionListen
 
             case REQ_SOUND_TEST_STOP:
                 do_stop_medaiplayer();
-
+                return true;
+            case REP_ALARM_SAVE_SUCCESS:
+                return true;
 
         }
         return false;
@@ -346,6 +372,15 @@ public class FormSoundSet extends Form implements MediaPlayer.OnCompletionListen
         mMediaPlayer = null;
 
     }
+
+
+    @Override
+    public void onValue(Object value) {
+
+
+        model = (MAlarm) value;
+
+    }
 }
 
 class VHDeviceSound extends RecyclerView.ViewHolder implements IBind{
@@ -353,7 +388,6 @@ class VHDeviceSound extends RecyclerView.ViewHolder implements IBind{
 
     TextView title;
     ImageView image_select;
-    ImageView image_play;
 
 
     public VHDeviceSound(View itemView) {
@@ -361,7 +395,6 @@ class VHDeviceSound extends RecyclerView.ViewHolder implements IBind{
         super(itemView);
         title = (TextView) itemView.findViewById(R.id.text_title);
         image_select = (ImageView) itemView.findViewById(R.id.image_select);
-        image_play = (ImageView) itemView.findViewById(R.id.image_select_play);
 
 
     }
@@ -399,7 +432,6 @@ class VHDeviceSound extends RecyclerView.ViewHolder implements IBind{
         }
 
         image_select.setVisibility( ms.selected ? View.VISIBLE : View.INVISIBLE);
-        image_play.setVisibility( ms.selected && ms.type != 2 ? View.VISIBLE : View.INVISIBLE);
 
 
         //quantum_ic_play_arrow_grey600_48

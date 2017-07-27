@@ -2,10 +2,13 @@
 package com.dym.alarm.forms;
 
 import android.content.DialogInterface;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.media.RingtoneManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatCheckBox;
+import android.support.v7.widget.DrawableUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,14 +19,21 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.ToggleButton;
 
+import com.dym.alarm.ActController;
 import com.dym.alarm.Form;
 import com.dym.alarm.common.AlarmUtil;
 import com.dym.alarm.common.AnalyseUtil;
 import com.dym.alarm.common.DDialog;
+import com.dym.alarm.common.FileUtils;
 import com.dym.alarm.model.MAlarm;
 import com.dym.alarm.R;
 import com.dym.alarm.common.Event;
 import com.dym.alarm.common.NLog;
+import com.dym.alarm.model.MSound;
+
+import java.io.File;
+
+import tyrantgit.explosionfield.ExplosionField;
 
 public class FormEdit extends Form {
 
@@ -52,8 +62,11 @@ public class FormEdit extends Form {
 
     TextView text_alarm_descript;
 
+    TextView text_sound;
 
     CheckBox checkbox_vibrate;
+
+    //
 
 
     int[] repeat_week_ids = new int[]{
@@ -102,6 +115,8 @@ public class FormEdit extends Form {
 
             text_alarm_descript = (TextView) ViewInject(R.id.text_alarm_descript);
 
+            text_sound = (TextView) ViewInject(R.id.text_sound);
+
             initUI();
 
         }
@@ -146,7 +161,35 @@ public class FormEdit extends Form {
         text_alarm_descript.setText(model.getDescript());
 
 
+
+        updateSoundView();
+
     }
+
+    private void updateSoundView(){
+
+
+        if( model.sound == null ){
+
+
+            Drawable drawable_left = getContext().getResources().getDrawable(R.drawable.quantum_ic_volume_off_grey600_36);
+            drawable_left.setBounds(0, 0, drawable_left.getMinimumWidth(), drawable_left.getMinimumHeight());
+            text_sound.setCompoundDrawablesRelative(drawable_left,null,null,null);
+            text_sound.setText("Slient");
+
+
+        }
+        else{
+
+            Drawable drawable = ActController.instance.getResources().getDrawable(android.R.drawable.ic_btn_speak_now);
+            drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+            text_sound.setCompoundDrawables(drawable, null, null, null);
+            text_sound.setText(FileUtils.getFileNameNoExt( model.sound ) );
+        }
+
+    }
+
+
 
     @Override
     public void onClick(View view) {
@@ -176,7 +219,7 @@ public class FormEdit extends Form {
 
             case R.id.btn_save:
 
-                AnalyseUtil.addEvent("编辑页面","操作","点击保存");
+                AnalyseUtil.addEvent("formedit","operator","click_save");
                 saveAlarm();
 
                 if( model.on )
@@ -266,7 +309,7 @@ public class FormEdit extends Form {
             case R.id.text_sound:
 
                 setFormtype(FormType.FORM_ONLY);
-                sendMessage(Event.FORM_SOUND_SET);
+                sendMessage(Event.FORM_SOUND_SET,model);
                 break;
             case R.id.btn_del:
 
@@ -296,7 +339,18 @@ public class FormEdit extends Form {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
+                        sendMessage(Event.REQ_ALARM_REMOVE,model);
                         dialog.dismiss();
+
+                        ExplosionField explosionField = ExplosionField.attach2Window(ActController.instance);
+
+                        explosionField.explode(FormEdit.this.mView);
+
+
+
+                        sendMessage(Event.REQ_FORM_BACK);
+
+
 
                     }
                 }).addButtonListener(R.id.btn_cancel, new DialogInterface.OnClickListener() {
@@ -312,6 +366,7 @@ public class FormEdit extends Form {
 
 
                 break;
+
 
 
         }
@@ -461,8 +516,11 @@ public class FormEdit extends Form {
     @Override
     public void onValue(Object value) {
 
-        if (value == null)
-            model = new MAlarm();
+
+        if ( value == null) {
+            if( model == null )
+                model = new MAlarm();
+        }
         else
             model = (MAlarm) value;
 
@@ -475,6 +533,9 @@ public class FormEdit extends Form {
             case REP_ALARM_SAVE_SUCCESS:
                 sendMessage(Event.REQ_FORM_BACK);
                 return true;
+            case REQ_SOUND_CHANGED:
+                updateSoundView();
+                return  true;
 
         }
         return false;

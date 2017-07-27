@@ -25,10 +25,13 @@
   if( [eventstr isEqual:@"REQ_NONE"] ) return REQ_NONE;
   if( [eventstr isEqual:@"REQ_OPENSOURCE_LIST"] ) return REQ_OPENSOURCE_LIST;
   if( [eventstr isEqual:@"REQ_PUSH_TO_AND_CLEAR_ALL"] ) return REQ_PUSH_TO_AND_CLEAR_ALL;
+  if( [eventstr isEqual:@"REQ_SOUND_CHANGED"] ) return REQ_SOUND_CHANGED;
+  if( [eventstr isEqual:@"REQ_SOUND_TEST_STOP"] ) return REQ_SOUND_TEST_STOP;
   if( [eventstr isEqual:@"REQ_TOAST"] ) return REQ_TOAST;
   if( [eventstr isEqual:@"REQ_WAITTING_HIDE"] ) return REQ_WAITTING_HIDE;
   if( [eventstr isEqual:@"REQ_WAITTING_SHOW"] ) return REQ_WAITTING_SHOW;
-  if( [eventstr isEqual:@"REQ_SOUND_TEST_STOP"] ) return REQ_SOUND_TEST_STOP;
+  if( [eventstr isEqual:@"REQ_ALARM_REMOVE"] ) return REQ_ALARM_REMOVE;
+  if( [eventstr isEqual:@"REP_ALARM_REMOVE_SUCCESS"] ) return REP_ALARM_REMOVE_SUCCESS;
   return -1;
 }
 
@@ -57,10 +60,13 @@
   case REQ_NONE : return @"REQ_NONE";
   case REQ_OPENSOURCE_LIST : return @"REQ_OPENSOURCE_LIST";
   case REQ_PUSH_TO_AND_CLEAR_ALL : return @"REQ_PUSH_TO_AND_CLEAR_ALL";
+  case REQ_SOUND_CHANGED : return @"REQ_SOUND_CHANGED";
+  case REQ_SOUND_TEST_STOP : return @"REQ_SOUND_TEST_STOP";
   case REQ_TOAST : return @"REQ_TOAST";
   case REQ_WAITTING_HIDE : return @"REQ_WAITTING_HIDE";
   case REQ_WAITTING_SHOW : return @"REQ_WAITTING_SHOW";
-  case REQ_SOUND_TEST_STOP : return @"REQ_SOUND_TEST_STOP";
+  case REQ_ALARM_REMOVE : return @"REQ_ALARM_REMOVE";
+  case REP_ALARM_REMOVE_SUCCESS : return @"REP_ALARM_REMOVE_SUCCESS";
 }
 
   return @"not define";

@@ -148,6 +148,7 @@
                 android:onClick="onClick"
                 android:id="@+id/card_help"
                 android:background="@drawable/v_click"
+                android:visibility="gone"
                 >
 
                 <TextView
@@ -177,7 +178,9 @@
                 android:layout_height="1dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:background="#dddddd" />
+                android:background="#dddddd"
+                android:visibility="gone"
+                />
 
 
             <TextView

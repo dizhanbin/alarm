@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.dym.alarm.Form;
 import com.dym.alarm.R;
@@ -32,7 +33,12 @@ public class FormAbout extends Form {
             setView(mView);
 
 
-            final int[] images = new int[]{R.mipmap.form_edit,R.mipmap.form_edit,R.mipmap.form_edit,R.mipmap.form_edit,R.mipmap.form_edit};
+            final int[] images = new int[]{R.mipmap.form_edit,R.mipmap.form_edit_time_select,R.mipmap.form_sound_set,R.mipmap.form_sound_sel,R.mipmap.form_open_source};
+
+            final String[] titles = getContext().getResources().getStringArray(R.array.about_titles);
+            final String[] descripts = getContext().getResources().getStringArray(R.array.about_descripts);
+
+
 
             viewPager = (ViewPager) ViewInject(R.id.viewpager);
             indicator = (SpringIndicator) ViewInject(R.id.indicator);
@@ -62,6 +68,13 @@ public class FormAbout extends Form {
 
                     ImageView image = (ImageView) view.findViewById(R.id.image);
                     image.setImageResource(images[position]);
+
+                    TextView text_title = (TextView) view.findViewById(R.id.text_title);
+                    TextView text_descript = (TextView) view.findViewById(R.id.text_descript);
+
+
+                    text_title.setText(titles[position]);
+                    text_descript.setText(descripts[position]);
 
 
                     container.addView(view);

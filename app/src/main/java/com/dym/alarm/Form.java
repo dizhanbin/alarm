@@ -326,7 +326,7 @@ public class Form extends Fragment {
     }
     public void log(String format,Object ...args){
 
-        NLog.i(getClass().getSimpleName(),format,args);
+        NLog.log(getClass().getSimpleName(),format,args);
     }
 
 }

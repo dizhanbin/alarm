@@ -35,6 +35,9 @@ public class MAlarm {
     public String createtime;//yyyy-mm-dd hh:mm:ss
 
 
+    public List<MSound> your_sounds = new ArrayList<>();
+
+
     public MAlarm(){
 
         on = true;
@@ -50,6 +53,17 @@ public class MAlarm {
     public int getId(){
         return createtime.hashCode();
     }
+
+    @Override
+    public int hashCode() {
+        return getId();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj != null && getId() == obj.hashCode();
+    }
+
     public String getDayRepeatUnitStr(){
 
         return  repeat_day_unit == 0 ? "M" : "H";
@@ -83,6 +97,14 @@ public class MAlarm {
         }
 
 
+        if( on ) {
+            long nexttime = getNextTime();
+            if (nexttime > 0) {
+
+                Date date_next = new Date(nexttime);
+                sb.append("\n").append("next alarm time:").append(date_next.toString());
+            }
+        }
 
         return sb.toString();
 

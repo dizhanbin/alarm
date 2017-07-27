@@ -3,6 +3,7 @@ package com.dym.alarm.common;
 import android.util.Log;
 
 import com.dym.alarm.BuildConfig;
+import com.dym.alarm.Form;
 
 
 public class NLog {
@@ -17,7 +18,7 @@ public class NLog {
 		Log.w(tag, str);
 		
 	}
-	public static void i(String tag,String format,Object ...args){
+	public static void log(String tag,String format,Object ...args){
 
 		if( release )
 			return;
@@ -34,7 +35,8 @@ public class NLog {
 	public static void i(String format,Object ...args)
 	{
 
-		i(tag,format,args);
+
+		log(tag,format,args);
 
 	}
 	public static void e(String format,Object ...args)

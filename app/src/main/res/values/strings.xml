@@ -7,4 +7,27 @@
     <string name="dummy_content">DUMMY\nCONTENT</string>
 
     <string name="title_activity_fullscreen">FullscreenActivity</string>
+
+    <array name="about_titles">
+
+        <item>循环闹钟</item>
+        <item>时间限制</item>
+        <item>设置闹钟铃声</item>
+        <item>设置手机音乐铃声</item>
+        <item>感谢开源社区</item>
+
+
+    </array>
+
+    <array name="about_descripts">
+
+        <item>简单几步添加当天间隔闹钟</item>
+        <item>设置当天开始时间、结束时间、间隔时间</item>
+        <item>可以选择系统铃声或静音</item>
+        <item>通过系统选择手机音乐作为铃声</item>
+        <item>查看本软件引入的开源代码</item>
+
+    </array>
+
+
 </resources>

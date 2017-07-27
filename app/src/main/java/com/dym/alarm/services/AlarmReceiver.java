@@ -21,17 +21,15 @@ public class AlarmReceiver  extends BroadcastReceiver{
 
        // NLog.i("AlarmReceiver :%s %s",);
 
-
+        String json = intent.getStringExtra("json");
 
         Intent notify_intent = new Intent(context, NotifyController.class);
         notify_intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        notify_intent.putExtra("json",json);
         context.startActivity(notify_intent);
 
-        String json = intent.getStringExtra("json");
 
         MAlarm alarm = MAlarm.fromJson(json);
-
-
 
         NLog.i("%d AlarmReceiver ",alarm.getId() );
         AlarmUtil.addAlarm(context,alarm);

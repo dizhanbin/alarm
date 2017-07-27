@@ -24,7 +24,7 @@ public class MSound {
 
     public String toString(){
 
-        return String.format("type:%d name:%s selected:%b",type,name,selected);
+        return String.format("type:%d name:%s selected:%b path:%s",type,name,selected,path);
 
     }
 }

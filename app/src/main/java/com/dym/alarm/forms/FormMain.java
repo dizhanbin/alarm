@@ -8,6 +8,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.OvershootInterpolator;
@@ -20,6 +21,7 @@ import com.dym.alarm.common.AlarmUtil;
 import com.dym.alarm.common.DDialog;
 import com.dym.alarm.common.Event;
 import com.dym.alarm.common.NLog;
+import com.dym.alarm.common.ViewMoveTouchListener;
 import com.dym.alarm.model.MAlarm;
 import com.dym.alarm.views.SlideLeftRemoveGiftAnimator;
 import com.dym.alarm.views.VHAlarmItem;
@@ -38,6 +40,8 @@ public class FormMain extends Form implements View.OnClickListener {
 
     ExplosionField  mExplosionField;
 
+    View btn_add;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -48,7 +52,11 @@ public class FormMain extends Form implements View.OnClickListener {
             setView(mView);
             setFormtype(FormType.FORM_ONLY);
 
+
+            btn_add = ViewInject(R.id.btn_add);
+
             mRecyclerView = (RecyclerView) ViewInject(R.id.recyclerview);
+
 
             //SlideInUpAnimator animator = new SlideInUpAnimator(new OvershootInterpolator(5f));
 
@@ -67,9 +75,16 @@ public class FormMain extends Form implements View.OnClickListener {
 
 
         }
-        sendMessage(Event.REQ_ALARM_LIST);
+
 
         return mView;
+    }
+
+    @Override
+    public void onPush(boolean fromback) {
+        super.onPush(fromback);
+       // if( !fromback )
+            sendMessage(Event.REQ_ALARM_LIST);
     }
 
     @Override
@@ -147,6 +162,7 @@ public class FormMain extends Form implements View.OnClickListener {
                         int pos = mDatas.indexOf(getRootParentTag(R.id.view_alarm_item, view));
                         if( pos == -1 )
                             return;
+                        sendMessage(Event.REQ_ALARM_REMOVE,mDatas.get(pos));
                         mDatas.remove(pos);
                         mRecyclerView.getAdapter().notifyItemRemoved(pos);
 
@@ -173,7 +189,7 @@ public class FormMain extends Form implements View.OnClickListener {
 
     private void initUI() {
 
-
+        btn_add.setOnTouchListener(new ViewMoveTouchListener());
 
     }
 

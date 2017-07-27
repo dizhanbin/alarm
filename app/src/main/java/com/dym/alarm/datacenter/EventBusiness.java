@@ -37,6 +37,11 @@ public class EventBusiness {
                 }.start();
 
                 return true;
+            case REQ_ALARM_REMOVE:
+
+                DataCenter.getDatas().remove(value);
+                DataCenter.saveAlarms();
+                return true;
 
         }
         return false;

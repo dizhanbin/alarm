@@ -24,9 +24,12 @@ public enum Event{
   REQ_NONE,//空事件
   REQ_OPENSOURCE_LIST,//请求开源库列表
   REQ_PUSH_TO_AND_CLEAR_ALL,//进入并清除所有界面
+  REQ_SOUND_CHANGED,//铃声调整
+  REQ_SOUND_TEST_STOP,//测试音频停止
   REQ_TOAST,//提示信息
   REQ_WAITTING_HIDE,//隐藏等待框
   REQ_WAITTING_SHOW,//等待框
-  REQ_SOUND_TEST_STOP;//测试音频停止
+  REQ_ALARM_REMOVE,//删除指定闹钟
+  REP_ALARM_REMOVE_SUCCESS;//删除成功
 
 }

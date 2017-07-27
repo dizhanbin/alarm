@@ -133,4 +133,20 @@ public class FileUtils {
         return false;
     }
 
+    public static String getFileNameNoExt(String  path){
+
+        String filename;
+        int p_index = path.lastIndexOf('/');
+        if( p_index > -1 ){
+            filename = path.substring(p_index+1);
+        }else
+            filename = path;
+        int d_index = filename.lastIndexOf('.');
+        if( d_index > -1 ){
+            return filename.substring(0,d_index);
+        }else
+            return filename;
+
+    }
+
 }

@@ -2,27 +2,44 @@ package com.dym.alarm;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.media.MediaPlayer;
+import android.media.TimedMetaData;
+import android.media.TimedText;
+import android.net.Uri;
 import android.os.Handler;
+import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.dym.alarm.common.DDialog;
+import com.dym.alarm.common.NLog;
+import com.dym.alarm.model.MAlarm;
+
+import java.io.File;
+import java.util.Date;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
  */
-public class NotifyController extends Activity {
+public class NotifyController extends Activity implements MediaPlayer.OnErrorListener, MediaPlayer.OnCompletionListener {
 
 
 
-    private final Handler mHideHandler = new Handler();
     private View mContentView;
+
+
+    MediaPlayer mMediaPlayer;
+    Vibrator vibrator;
+
     private final Runnable mHidePart2Runnable = new Runnable() {
         @SuppressLint("InlinedApi")
         @Override
@@ -70,11 +87,19 @@ public class NotifyController extends Activity {
         mContentView = findViewById(R.id.notify_content);
 
 
-       // mHideHandler.postDelayed(mHidePart2Runnable,100);
+       // mHideHandler.postDelayed(mHidePart2Runnable,1000);
 
 
+        Intent intent = getIntent();
+
+        String json = intent.getStringExtra("json");
+
+        final MAlarm alarm = MAlarm.fromJson(json);
 
 
+        NLog.i("sound json:%s  ",json);
+
+        NLog.i("alarm  Object:%s  ",alarm);
 
 
         new DDialog.Builder(this)
@@ -83,6 +108,11 @@ public class NotifyController extends Activity {
                 .setInitListener(new DDialog.ViewInitListener() {
                     @Override
                     public void ViewInit(View view) {
+
+                        TextView text_name = (TextView) view.findViewById(R.id.text_name);
+
+                        text_name.setText(alarm.label);
+
 
 
                     }
@@ -105,8 +135,71 @@ public class NotifyController extends Activity {
                 })
                 .create().show();
 
+
+
+        if( alarm != null && alarm.sound != null ) {
+
+            Uri uri = Uri.fromFile(new File(alarm.sound));
+            mMediaPlayer = MediaPlayer.create(this,uri);
+            mMediaPlayer.setLooping(true);
+            mMediaPlayer.setOnErrorListener(this);
+            mMediaPlayer.setOnCompletionListener(this);
+            mMediaPlayer.start();
+            NLog.i("sound path:%s",alarm.sound);
+        }
+
+        if( alarm.vibrate ){
+
+            vibrator = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
+            long [] pattern = {1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000};
+            vibrator.vibrate(pattern,10);
+
+        }
+
+
     }
 
+    @Override
+    protected void onStop() {
+        if( vibrator != null )
+            vibrator.cancel();
+        do_stop_medaiplayer();
+        super.onStop();
+    }
+
+    private void do_stop_medaiplayer() {
+
+        try {
+            if (mMediaPlayer != null && mMediaPlayer.isPlaying()) {
+                mMediaPlayer.stop();
+            }
+            if( mMediaPlayer != null ) {
+                mMediaPlayer.reset();
+                mMediaPlayer.release();
+            }
+        }catch (Exception e){
+            NLog.e(e);
+        }
+        mMediaPlayer = null;
+
+    }
+
+
+    @Override
+    public boolean onError(MediaPlayer mp, int what, int extra) {
+
+
+        NLog.i("onError what :%d extra:%d",what,extra);
+
+        return true;
+    }
+
+    @Override
+    public void onCompletion(MediaPlayer mp) {
+
+        NLog.i("onCompletion complete");
+
+    }
 
 
 

@@ -3,8 +3,10 @@
     package="com.dym.alarm">
 
 
-
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
         android:name=".DUMAPP"
@@ -36,19 +38,32 @@
             </intent-filter>
         </receiver>
 
+        <receiver android:name=".services.BootReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
         <activity
             android:name=".NotifyController"
-            android:launchMode="singleInstance"
             android:autoRemoveFromRecents="true"
             android:configChanges="orientation|keyboardHidden|screenSize"
+            android:launchMode="singleInstance"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Wallpaper.NoTitleBar"
-        ></activity>
+            android:theme="@android:style/Theme.Wallpaper.NoTitleBar">
+
+        </activity>
         <activity
             android:name=".FullscreenActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_fullscreen"
             android:theme="@style/FullscreenTheme"></activity>
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="6ca46a1cd631ed7eee7cacbcf27dbe2372addfde" />
+
     </application>
+
 
 </manifest>
