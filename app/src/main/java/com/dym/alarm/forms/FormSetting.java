@@ -14,6 +14,11 @@ import com.dym.alarm.R;
 import com.dym.alarm.RP;
 import com.dym.alarm.common.Event;
 import com.dym.alarm.common.Utils;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.NativeExpressAdView;
+import com.google.android.gms.ads.VideoController;
+import com.google.android.gms.ads.VideoOptions;
 
 public class FormSetting extends Form {
 
@@ -26,7 +31,46 @@ public class FormSetting extends Form {
         if( mView == null ) {
             mView = inflater.inflate(R.layout.form_setting, null);
             setView(mView);
+
+            NativeExpressAdView mAdView = (NativeExpressAdView) mView.findViewById(R.id.adView);
+
+            // Set its video options.
+            mAdView.setVideoOptions(new VideoOptions.Builder()
+                    .setStartMuted(true)
+                    .build());
+
+            // The VideoController can be used to get lifecycle events and info about an ad's video
+            // asset. One will always be returned by getVideoController, even if the ad has no video
+            // asset.
+            final VideoController mVideoController = mAdView.getVideoController();
+            mVideoController.setVideoLifecycleCallbacks(new VideoController.VideoLifecycleCallbacks() {
+                @Override
+                public void onVideoEnd() {
+                    // Log.d(LOG_TAG, "Video playback is finished.");
+                    super.onVideoEnd();
+                }
+            });
+
+            // Set an AdListener for the AdView, so the Activity can take action when an ad has finished
+            // loading.
+            mAdView.setAdListener(new AdListener() {
+                @Override
+                public void onAdLoaded() {
+                    if (mVideoController.hasVideoContent()) {
+                        //Log.d(LOG_TAG, "Received an ad that contains a video asset.");
+                    } else {
+
+                    }
+                }
+            });
+
+            mAdView.loadAd(new AdRequest.Builder().build());
+
+
         }
+
+
+
 
         return mView;
 

@@ -9,6 +9,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.support.v7.widget.SwitchCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -28,9 +29,12 @@ import com.dym.alarm.common.ViewMoveTouchListener;
 import com.dym.alarm.model.MAlarm;
 import com.dym.alarm.views.SlideLeftRemoveGiftAnimator;
 import com.dym.alarm.views.VHAlarmItem;
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.NativeExpressAdView;
+import com.google.android.gms.ads.VideoController;
+import com.google.android.gms.ads.VideoOptions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -261,7 +265,7 @@ public class FormMain extends Form implements View.OnClickListener {
                     vh.itemView.setTag(mDatas.get(position));
                     vh.bind(mDatas.get(position));
                 }else{
-                    //com.google.android.gms.ads.NativeExpressAdView
+                    /*
                     NativeExpressAdView adView = (NativeExpressAdView)holder.itemView.findViewById(R.id.adView);
                     adView.setAdUnitId("ca-app-pub-2800914329604494/7372252828");
                     adView.setAdSize(new AdSize(AdSize.FULL_WIDTH, UIUtil.dip2px(getContext(),200)));
@@ -275,6 +279,44 @@ public class FormMain extends Form implements View.OnClickListener {
 
 
                     adView.loadAd(request);
+
+                    */
+
+                    NativeExpressAdView  mAdView = (NativeExpressAdView) holder.itemView.findViewById(R.id.adView);
+
+                    // Set its video options.
+                    mAdView.setVideoOptions(new VideoOptions.Builder()
+                            .setStartMuted(true)
+                            .build());
+
+                    // The VideoController can be used to get lifecycle events and info about an ad's video
+                    // asset. One will always be returned by getVideoController, even if the ad has no video
+                    // asset.
+                    final VideoController mVideoController = mAdView.getVideoController();
+                    mVideoController.setVideoLifecycleCallbacks(new VideoController.VideoLifecycleCallbacks() {
+                        @Override
+                        public void onVideoEnd() {
+                           // Log.d(LOG_TAG, "Video playback is finished.");
+                            super.onVideoEnd();
+                        }
+                    });
+
+                    // Set an AdListener for the AdView, so the Activity can take action when an ad has finished
+                    // loading.
+                    mAdView.setAdListener(new AdListener() {
+                        @Override
+                        public void onAdLoaded() {
+                            if (mVideoController.hasVideoContent()) {
+                                //Log.d(LOG_TAG, "Received an ad that contains a video asset.");
+                            } else {
+
+                            }
+                        }
+                    });
+
+                    mAdView.loadAd(new AdRequest.Builder().build());
+
+
 
 
                 }
