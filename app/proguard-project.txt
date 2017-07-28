@@ -1,0 +1,104 @@
+-verbose
+-dontpreverify
+-repackageclasses
+-optimizationpasses 5
+-allowaccessmodification
+-dontusemixedcaseclassnames
+-dontskipnonpubliclibraryclasses
+-dontskipnonpubliclibraryclassmembers
+-optimizations !code/simplification/arithmetic,!field/*,!class/merging/*
+
+-keep class com.dym.alarm.** {*;}
+-keep class com.dym.alarm.common.** {*;}
+-keep class com.dym.alarm.flows.** {*;}
+-keep class com.dym.alarm.forms.** {*;}
+-keep class com.dym.alarm.model.** {*;}
+-keep class com.dym.alarm.service.** {*;}
+
+
+
+-ignorewarnings
+
+
+
+#flurry
+#-keep class com.flurry.** { *; }
+#-dontwarn com.flurry.**
+
+#crashlytics
+
+-keepattributes *Annotation*,SourceFile,LineNumberTable
+-dontwarn com.crashlytics.**
+-keep class com.crashlytics.android.** {*;}
+-dontwarn io.fabric.sdk.android.**
+-keep class io.fabric.sdk.android.** {*;}
+
+#android
+#-keep class android.support.** { *; }
+#-keep interface android.support.** { *; }
+#-keep public class * extends android.support.v4.**
+#-keep public class * extends android.support.v7.**
+#-keep public class * extends android.app.Fragment
+#
+#-keep class android.support.v4.** { *; }
+#-keep class android.support.v7.** { *; }
+#-keep class android.app.**{*;}
+#-dontwarn  android.app.**
+#-dontwarn android.support.v4.**
+#-dontwarn android.support.v7.**
+#
+#-keep public class * extends android.app.Service
+#-keep public class * extends android.app.Activity
+#-keep public class * extends android.app.FragmentActivity
+#-keep public class * extends android.app.Application
+#-keep public class * extends android.preference.Preference
+#-keep public class * extends android.content.BroadcastReceiver
+-keep public class com.android.vending.licensing.ILicensingService
+#
+#-keep public class * extends android.app.FrameLayout
+#-keep public class * extends android.app.Fragment
+#-keep class android.app.** {*;}
+
+#firebase
+#-dontwarn com.google.firebase.**
+#-keep class com.google.firebase.** {*;}
+
+#数据适配器adapter不要混淆
+#-keep public class * extends android.widget.Adapter { *; }
+
+#自定义控件不要混淆
+#-keep public class * extends android.view.View {*;}
+
+
+#数据模型不要混淆
+#比如我们要向activity传递对象使用了Serializable接口的时候，这时候这个类及类里面#的所有内容都不能混淆
+#-keepnames class * implements java.io.Serializable
+#-keepclassmembers class * implements java.io.Serializable { *; }
+
+-keepclassmembers enum * {
+    public static **[] values();
+    public static ** valueOf(java.lang.String);
+}
+
+
+#广告sdk
+-dontwarn com.salmon.sdk.**
+-keep class com.salmon.sdk.**{*;}
+-keep class com.test.optimize.** {*;}
+-keep class com.jaredrummler.android.processes.** {*;}
+#baidu DUAD
+-dontwarn com.duapps.**
+-keepclassmembers class com.duapps.** { *; }
+-keepclassmembernames class com.duapps.** { *; }
+-keep class com.duapps.ad** {*;}
+-keep class com.dianxinos.DXStatService.stat.TokenManager {
+    public static java.lang.String getToken(android.content.Context);
+}
+
+#keep interface
+#-keep public interface jp.co.cyberagent.android.gpuimage.camera.CameraGLSurfaceView$ICameraCaptureCallback {*;}
+
+-dontwarn com.google.android.gms.ads.**
+-keep class com.google.android.gms.ads.** {*;}
+-dontwarn com.google.android.gms.internal.**
+-keep class com.google.android.gms.internal.** {*;}

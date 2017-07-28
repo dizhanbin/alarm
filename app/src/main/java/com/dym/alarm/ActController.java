@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import com.dym.alarm.common.*;
 import com.dym.alarm.datacenter.EventBusiness;
+import com.google.android.gms.ads.MobileAds;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,6 +58,9 @@ public class ActController extends AppCompatActivity implements IToDo, IControll
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
+
+
         WindowManager.LayoutParams params = getWindow().getAttributes();
         params.flags |= WindowManager.LayoutParams.FLAG_FULLSCREEN;
         getWindow().setAttributes(params);
@@ -89,6 +93,8 @@ public class ActController extends AppCompatActivity implements IToDo, IControll
         instance = this;
 
 
+
+        MobileAds.initialize(this, "ca-app-pub-2800914329604494~1692373124content_copy");
 
 
 

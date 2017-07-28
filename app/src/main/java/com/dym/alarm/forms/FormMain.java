@@ -3,9 +3,11 @@ package com.dym.alarm.forms;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -21,10 +23,14 @@ import com.dym.alarm.common.AlarmUtil;
 import com.dym.alarm.common.DDialog;
 import com.dym.alarm.common.Event;
 import com.dym.alarm.common.NLog;
+import com.dym.alarm.common.UIUtil;
 import com.dym.alarm.common.ViewMoveTouchListener;
 import com.dym.alarm.model.MAlarm;
 import com.dym.alarm.views.SlideLeftRemoveGiftAnimator;
 import com.dym.alarm.views.VHAlarmItem;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.NativeExpressAdView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -159,6 +165,8 @@ public class FormMain extends Form implements View.OnClickListener {
 
                         dialog.dismiss();
 
+
+
                         int pos = mDatas.indexOf(getRootParentTag(R.id.view_alarm_item, view));
                         if( pos == -1 )
                             return;
@@ -217,34 +225,66 @@ public class FormMain extends Form implements View.OnClickListener {
 
         mRecyclerView.setAdapter(new RecyclerView.Adapter() {
             @Override
-            public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-                View view = View.inflate(parent.getContext(),R.layout.view_alarm_item,null);
-                VHAlarmItem vh = new VHAlarmItem( view );
 
-                return vh;
+                switch (viewType) {
+                    case 0 :
+                        View view = View.inflate(parent.getContext(), R.layout.view_alarm_item, null);
+                        VHAlarmItem vh = new VHAlarmItem(view);
+                        return vh;
+                    case 1 :
+                        View adview = View.inflate(parent.getContext(), R.layout.ad_alarm_item, null);
+                        ViewHolder advh = new ViewHolder(adview) {
+                        };
+                        return advh;
+                }
+
+                return null;
 
             }
 
 
+            @Override
+            public int getItemViewType(int position) {
+
+                return getItemCount() -1 == position ? 1 : 0;
+            }
 
             @Override
-            public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+            public void onBindViewHolder(ViewHolder holder, int position) {
 
                 NLog.i("onBindViewHolder %d",position);
 
-                VHAlarmItem vh = (VHAlarmItem) holder;
-                vh.itemView.setTag( mDatas.get(position) );
-               // vh.switch_on.setTag( position );
-               // vh.btn_del.setTag(position);
-                vh.bind( mDatas.get(position) );
+                if( holder instanceof  VHAlarmItem ) {
+                    VHAlarmItem vh = (VHAlarmItem) holder;
+                    vh.itemView.setTag(mDatas.get(position));
+                    vh.bind(mDatas.get(position));
+                }else{
+                    //com.google.android.gms.ads.NativeExpressAdView
+                    NativeExpressAdView adView = (NativeExpressAdView)holder.itemView.findViewById(R.id.adView);
+                    adView.setAdUnitId("ca-app-pub-2800914329604494/7372252828");
+                    adView.setAdSize(new AdSize(AdSize.FULL_WIDTH, UIUtil.dip2px(getContext(),200)));
+                    AdRequest request = new AdRequest.Builder()
+
+                            .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+
+                           // .addTestDevice("d8aedad4c0e4c421")
+                            .build();
+                    //request.addTestDevice(AdRequest.DEVICE_ID_EMULATOR);
+
+
+                    adView.loadAd(request);
+
+
+                }
 
             }
 
             @Override
             public int getItemCount() {
 
-                return mDatas.size();
+                return mDatas.size()+1;
             }
         });
 

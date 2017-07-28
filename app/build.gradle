@@ -135,7 +135,7 @@ dependencies {
     })
 
     //firebase
-
+    /*
     compile 'com.google.firebase:firebase-core:10.2.1'
     compile 'com.google.firebase:firebase-auth:10.2.1'
     compile 'com.google.firebase:firebase-storage:10.2.1'
@@ -143,10 +143,12 @@ dependencies {
     compile 'com.google.android.gms:play-services-auth:10.2.1'
     compile 'com.google.android.gms:play-services:10.2.1'
     compile 'com.google.firebase:firebase-config:10.2.1'
+    */
 
-
+    compile 'com.google.android.gms:play-services-ads:11.0.0'
+    compile 'com.google.android.gms:play-services:11.0.0'
     compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha7'
+    //compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha7'
     compile 'com.android.support:design:25.3.1'
     compile 'com.android.support:multidex:1.0.1'
 

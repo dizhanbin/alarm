@@ -1,0 +1,5 @@
+
+ 1.屏幕旋转
+        int flag = Settings.System.getInt(getContentResolver(),Settings.System.ACCELEROMETER_ROTATION, 0);
+
+        NLog.i("auto-rotate :%d",flag);
