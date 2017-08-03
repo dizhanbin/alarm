@@ -9,9 +9,7 @@ import android.github.inapp.Purchase;
 import com.crashlytics.android.Crashlytics;
 import com.dym.alarm.ActController;
 import com.dym.alarm.DUMAPP;
-import com.dym.alarm.RP;
 import com.dym.alarm.RT;
-
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -304,7 +302,11 @@ public class PayHelper {
 
                     } else {
 
-                        SEvent.log("buy", "buyfail", "");
+
+                        NLog.log("buy", "buyfail %s", result.getMessage());
+
+
+                        SEvent.log("buy", "buyfail", result.getMessage());
                         listener.pay_do(PayListener.PR.BUY_FAIL,null);
 
                     }

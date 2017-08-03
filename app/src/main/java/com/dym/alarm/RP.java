@@ -27,6 +27,9 @@ public class RP {
         File file_yoursound_dir = new File(Local.path_yoursournds_dir);
         file_yoursound_dir.mkdirs();
 
+
+        Data.loadVipData();
+
     }
 
     public static class CK{
@@ -64,7 +67,7 @@ public class RP {
     public static class Data {
 
 
-
+        static boolean isVip;
         public static int getStartTimes() {
 
             SharedPreferences sp = getPreferences();
@@ -72,7 +75,20 @@ public class RP {
 
         }
 
+        public static boolean isVip(){
+            return isVip;
+        }
+        public static void setIsVip(boolean vip){
+            isVip = vip;
+            if( isVip ){
+                getPreferences().edit().putBoolean("vip",true);
+            }
+        }
 
+
+        public static void loadVipData() {
+            isVip = getPreferences().getBoolean("vip",false);
+        }
     }
 
 

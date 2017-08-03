@@ -110,9 +110,97 @@ public class NotifyController extends Activity implements MediaPlayer.OnErrorLis
 
 
         NLog.i("sound json:%s  ",json);
-
         NLog.i("alarm  Object:%s  ",alarm);
-        //ca-app-pub-2800914329604494/8726207841
+
+
+
+        if( RP.Data.isVip() )
+            showDialogWidthAD(alarm);
+        else
+            showDialogNoAD(alarm);
+
+
+        if( alarm != null && alarm.sound != null ) {
+
+            Uri uri = Uri.fromFile(new File(alarm.sound));
+            mMediaPlayer = MediaPlayer.create(this,uri);
+            mMediaPlayer.setLooping(true);
+            mMediaPlayer.setOnErrorListener(this);
+            mMediaPlayer.setOnCompletionListener(this);
+            mMediaPlayer.start();
+            NLog.i("sound path:%s",alarm.sound);
+        }
+
+        if( alarm.vibrate ){
+
+            vibrator = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
+
+            int delay = 2000;
+            int vibr = 300;
+            long [] pattern = {vibr,delay,vibr,delay,vibr,delay,vibr,delay,vibr,delay};
+            vibrator.vibrate(pattern,5);
+
+        }
+
+
+    }
+
+    private void showDialogNoAD(final  MAlarm alarm) {
+
+
+        new DDialog.Builder(this)
+                .setStyle(R.style.BDialog)
+                .setContentView(R.layout.dialog_notify_noad).setCancelable(true)
+                .setInitListener(new DDialog.ViewInitListener() {
+                    @Override
+                    public void ViewInit(View view) {
+
+                        TextView text_name = (TextView) view.findViewById(R.id.text_name);
+
+                        text_name.setText(alarm.label);
+
+                        dialog_container = view;
+
+
+                    }
+                })
+                .addButtonListener(R.id.btn_set, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+
+                        Intent intent = new Intent(NotifyController.this, ActController.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+
+                        dialog.dismiss();
+                    }
+                })
+                .addButtonListener(R.id.btn_ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+
+                        dialog.dismiss();
+
+                    }
+                })
+
+                .setOnDimissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialog) {
+
+                        finish();
+                    }
+                })
+                .setCancelable(false)
+                .create().show();
+
+
+    }
+
+    private void showDialogWidthAD(final  MAlarm alarm) {
+
 
         new DDialog.Builder(this)
                 .setStyle(R.style.BDialog)
@@ -141,7 +229,7 @@ public class NotifyController extends Activity implements MediaPlayer.OnErrorLis
                         mVideoController.setVideoLifecycleCallbacks(new VideoController.VideoLifecycleCallbacks() {
                             @Override
                             public void onVideoEnd() {
-                                 Log.d(LOG_TAG, "Video playback is finished.");
+                                Log.d(LOG_TAG, "Video playback is finished.");
                                 super.onVideoEnd();
                             }
                         });
@@ -207,7 +295,7 @@ public class NotifyController extends Activity implements MediaPlayer.OnErrorLis
 
                         dialog.dismiss();
                         //text_begin_time.setText(  );
-                       // finish();
+                        // finish();
                     }
                 })
 
@@ -220,30 +308,6 @@ public class NotifyController extends Activity implements MediaPlayer.OnErrorLis
                 })
                 .setCancelable(false)
                 .create().show();
-
-
-
-        if( alarm != null && alarm.sound != null ) {
-
-            Uri uri = Uri.fromFile(new File(alarm.sound));
-            mMediaPlayer = MediaPlayer.create(this,uri);
-            mMediaPlayer.setLooping(true);
-            mMediaPlayer.setOnErrorListener(this);
-            mMediaPlayer.setOnCompletionListener(this);
-            mMediaPlayer.start();
-            NLog.i("sound path:%s",alarm.sound);
-        }
-
-        if( alarm.vibrate ){
-
-            vibrator = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
-
-            int delay = 2000;
-            int vibr = 300;
-            long [] pattern = {vibr,delay,vibr,delay,vibr,delay,vibr,delay,vibr,delay};
-            vibrator.vibrate(pattern,5);
-
-        }
 
 
     }

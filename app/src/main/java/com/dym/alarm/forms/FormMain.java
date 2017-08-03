@@ -1,6 +1,10 @@
 /* create my 17 */
 package com.dym.alarm.forms;
 
+import android.animation.Animator;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -20,6 +24,7 @@ import android.widget.TextView;
 import com.dym.alarm.ActController;
 import com.dym.alarm.Form;
 import com.dym.alarm.R;
+import com.dym.alarm.RP;
 import com.dym.alarm.common.AlarmUtil;
 import com.dym.alarm.common.DDialog;
 import com.dym.alarm.common.Event;
@@ -27,6 +32,7 @@ import com.dym.alarm.common.NLog;
 import com.dym.alarm.common.UIUtil;
 import com.dym.alarm.common.ViewMoveTouchListener;
 import com.dym.alarm.model.MAlarm;
+import com.dym.alarm.views.DGridLayoutManager;
 import com.dym.alarm.views.SlideLeftRemoveGiftAnimator;
 import com.dym.alarm.views.VHAlarmItem;
 import com.google.android.gms.ads.AdListener;
@@ -51,6 +57,9 @@ public class FormMain extends Form implements View.OnClickListener {
     ExplosionField  mExplosionField;
 
     View btn_add;
+
+    boolean need_reload_list;
+
 
     @Nullable
     @Override
@@ -92,6 +101,8 @@ public class FormMain extends Form implements View.OnClickListener {
 
     @Override
     public void onPush(boolean fromback) {
+
+        btn_add.setScaleX(1);
         super.onPush(fromback);
         if( !fromback )
             sendMessage(Event.REQ_ALARM_LIST);
@@ -106,12 +117,13 @@ public class FormMain extends Form implements View.OnClickListener {
         switch (view.getId()){
 
             case R.id.btn_add:
+                need_reload_list = true;
                 sendMessage(Event.FORM_EDIT);
                 break;
             case R.id.view_alarm_item: {
 
                 int pos = mDatas.indexOf(getRootParentTag(R.id.view_alarm_item, view));
-
+                need_reload_list = true;
                 sendMessage(Event.FORM_EDIT, mDatas.get(pos));
             }
                 break;
@@ -119,11 +131,15 @@ public class FormMain extends Form implements View.OnClickListener {
             {
 
                 if( view instanceof  SwitchCompat ) {
+
+                    need_reload_list = false;
+
                     SwitchCompat sw = (SwitchCompat) view;
 
                     int pos = mDatas.indexOf(getRootParentTag(R.id.view_alarm_item, view));
 
                     mDatas.get(pos).on = sw.isChecked();
+
 
                     sendMessage(Event.REQ_ALARM_SAVE, mDatas.get(pos));
 
@@ -137,10 +153,13 @@ public class FormMain extends Form implements View.OnClickListener {
             break;
             case R.id.btn_setting:
 
+                need_reload_list = false;
+
                 sendMessage(Event.FORM_SETTING);
                 break;
             case R.id.btn_del: {
 
+                need_reload_list = false;
 
                 new DDialog.Builder(getContext()).setContentView(R.layout.dialog_confirm).setInitListener(new DDialog.ViewInitListener() {
                     @Override
@@ -212,7 +231,11 @@ public class FormMain extends Form implements View.OnClickListener {
                 initRecyclerView((List<MAlarm>)value);
                 return true;
             case REP_ALARM_SAVE_SUCCESS:
-                sendMessage(Event.REQ_ALARM_LIST);
+                if( need_reload_list )
+                    sendMessage(Event.REQ_ALARM_LIST);
+                return true;
+            case REP_BUY_SUCCESS:
+                mRecyclerView.getAdapter().notifyDataSetChanged();
                 return true;
         }
         return false;
@@ -224,12 +247,7 @@ public class FormMain extends Form implements View.OnClickListener {
     private void initRecyclerView(List<MAlarm> value) {
 
         mDatas.clear();
-
-
-
-
-        mRecyclerView.setLayoutManager(new GridLayoutManager(getContext(),1));
-
+        mRecyclerView.setLayoutManager(new DGridLayoutManager(getContext(),1));
         mRecyclerView.setAdapter(new RecyclerView.Adapter() {
             @Override
             public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -255,6 +273,8 @@ public class FormMain extends Form implements View.OnClickListener {
             @Override
             public int getItemViewType(int position) {
 
+                if( RP.Data.isVip() )
+                    return 0;
                 return getItemCount() -1 == position ? 1 : 0;
             }
 
@@ -313,7 +333,16 @@ public class FormMain extends Form implements View.OnClickListener {
             @Override
             public int getItemCount() {
 
-                return mDatas.size()+1;
+                int item_count = RP.Data.isVip() ? mDatas.size() :  (mDatas.size()>0? mDatas.size()+1 : 0 );
+
+                if( item_count ==0 ){
+                    rotateAddButton();
+                }
+                else{
+
+                    rotateAddButtonCancel();
+                }
+                return item_count;
             }
         });
 
@@ -337,15 +366,36 @@ public class FormMain extends Form implements View.OnClickListener {
 
 
 
-/*
-        for(MAlarm mAlarm : mDatas){
-            if( mAlarm.on )
-                AlarmUtil.addAlarm(getContext(),mAlarm);
-            else
-                AlarmUtil.cancel(getContext(),mAlarm);
-
-        }
-*/
 
     }
+
+
+
+
+    ObjectAnimator btn_add_scale;
+    private void rotateAddButton(){
+
+        if( btn_add_scale == null ) {
+            log("run rotate");
+
+            int time = 2000;
+            btn_add_scale = ObjectAnimator.ofFloat(btn_add, "scaleX", 1, 1.5f,1);
+            btn_add_scale.setRepeatCount(ObjectAnimator.INFINITE);
+            btn_add_scale.setDuration(time);
+            btn_add_scale.start();
+
+        }
+
+    }
+
+    private void rotateAddButtonCancel(){
+
+        if( btn_add_scale != null ) {
+            btn_add_scale.cancel();
+            btn_add_scale = null;
+        }
+        btn_add.setScaleX(1);
+
+    }
+
 }
