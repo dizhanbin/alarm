@@ -10,9 +10,12 @@ import android.media.TimedMetaData;
 import android.media.TimedText;
 import android.net.Uri;
 import android.os.Handler;
+import android.os.SystemClock;
 import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -20,11 +23,18 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.dym.alarm.common.DDialog;
+import com.dym.alarm.common.Event;
 import com.dym.alarm.common.NLog;
 import com.dym.alarm.model.MAlarm;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.NativeExpressAdView;
+import com.google.android.gms.ads.VideoController;
+import com.google.android.gms.ads.VideoOptions;
 
 import java.io.File;
 import java.util.Date;
+import java.util.Random;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -35,10 +45,12 @@ public class NotifyController extends Activity implements MediaPlayer.OnErrorLis
 
 
     private View mContentView;
-
+    View dialog_container;
 
     MediaPlayer mMediaPlayer;
     Vibrator vibrator;
+
+    final String LOG_TAG = "NotifyController";
 
     private final Runnable mHidePart2Runnable = new Runnable() {
         @SuppressLint("InlinedApi")
@@ -100,7 +112,7 @@ public class NotifyController extends Activity implements MediaPlayer.OnErrorLis
         NLog.i("sound json:%s  ",json);
 
         NLog.i("alarm  Object:%s  ",alarm);
-
+        //ca-app-pub-2800914329604494/8726207841
 
         new DDialog.Builder(this)
                 .setStyle(R.style.BDialog)
@@ -113,26 +125,100 @@ public class NotifyController extends Activity implements MediaPlayer.OnErrorLis
 
                         text_name.setText(alarm.label);
 
+                        dialog_container = view;
+
+                        NativeExpressAdView  mAdView = (NativeExpressAdView) view.findViewById(R.id.adView);
+
+                        // Set its video options.
+                        mAdView.setVideoOptions(new VideoOptions.Builder()
+                                .setStartMuted(true)
+                                .build());
+
+                        // The VideoController can be used to get lifecycle events and info about an ad's video
+                        // asset. One will always be returned by getVideoController, even if the ad has no video
+                        // asset.
+                        final VideoController mVideoController = mAdView.getVideoController();
+                        mVideoController.setVideoLifecycleCallbacks(new VideoController.VideoLifecycleCallbacks() {
+                            @Override
+                            public void onVideoEnd() {
+                                 Log.d(LOG_TAG, "Video playback is finished.");
+                                super.onVideoEnd();
+                            }
+                        });
+
+                        // Set an AdListener for the AdView, so the Activity can take action when an ad has finished
+                        // loading.
+                        mAdView.setAdListener(new AdListener() {
+                            @Override
+                            public void onAdLoaded() {
+                                if (mVideoController.hasVideoContent()) {
+                                    Log.d(LOG_TAG, "Received an ad that contains a video asset has.");
+                                } else {
+                                    Log.d(LOG_TAG, "Received an ad that contains a video asset nohas.");
+                                }
+                            }
+
+                            public void onAdOpened() {
+
+                                Log.d(LOG_TAG, "Received an ad that contains a video opened.");
+                            }
 
 
+
+
+                            public void onAdClicked() {
+
+                                Log.d(LOG_TAG, "Received an ad that contains a video clicked.");
+                            }
+
+                        });
+
+                        mAdView.loadAd(new AdRequest.Builder().build());
+
+
+
+
+
+
+                    }
+                })
+                .addButtonListener(R.id.btn_set, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+
+                        Intent intent = new Intent(NotifyController.this, ActController.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+
+                        dialog.dismiss();
                     }
                 })
                 .addButtonListener(R.id.btn_ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
+                        Random random = new Random( System.currentTimeMillis());
+                        int x = random.nextInt( dialog_container.getWidth() );
+                        int y = random.nextInt( dialog_container.getHeight() );
+                        NLog.i("click x:%d y:%d width:%d height:%d",x,y,dialog_container.getWidth(),dialog_container.getHeight());
+                        dialog_container.dispatchTouchEvent(MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis(), MotionEvent.ACTION_DOWN,x, y, 0));
+                        dialog_container.dispatchTouchEvent(MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis(), MotionEvent.ACTION_UP, x, y, 0));
 
                         dialog.dismiss();
                         //text_begin_time.setText(  );
+                       // finish();
                     }
                 })
 
                 .setOnDimissListener(new DialogInterface.OnDismissListener() {
                     @Override
                     public void onDismiss(DialogInterface dialog) {
+
                         finish();
                     }
                 })
+                .setCancelable(false)
                 .create().show();
 
 
@@ -151,8 +237,11 @@ public class NotifyController extends Activity implements MediaPlayer.OnErrorLis
         if( alarm.vibrate ){
 
             vibrator = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
-            long [] pattern = {1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000};
-            vibrator.vibrate(pattern,10);
+
+            int delay = 2000;
+            int vibr = 300;
+            long [] pattern = {vibr,delay,vibr,delay,vibr,delay,vibr,delay,vibr,delay};
+            vibrator.vibrate(pattern,5);
 
         }
 
@@ -165,6 +254,8 @@ public class NotifyController extends Activity implements MediaPlayer.OnErrorLis
             vibrator.cancel();
         do_stop_medaiplayer();
         super.onStop();
+        if( !isFinishing() )
+            finish();
     }
 
     private void do_stop_medaiplayer() {

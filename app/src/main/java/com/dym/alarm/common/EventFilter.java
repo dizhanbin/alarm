@@ -19,7 +19,8 @@ public class EventFilter  {
     public  static void filter(Event event,Object value){
 
 
-
+        if( event == null )
+            return;
         switch (event) {
 
         }

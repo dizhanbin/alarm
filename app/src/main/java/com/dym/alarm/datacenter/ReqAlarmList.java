@@ -37,7 +37,7 @@ public class ReqAlarmList implements Request {
         a0.on = true;
 
 
-        a0.label = "aaa";
+        a0.label = "Healthy drinking water alarm clock";
         a0.begintime = "10:00";
         a0.repeat_weeks = new ArrayList<>();
         a0.repeat_weeks.add(0);
@@ -48,12 +48,13 @@ public class ReqAlarmList implements Request {
         a0.repeat_day = true;
 
         a0.repeat_day_unit = 0;
+        a0.repeat_day_value = 30;
 
 
 
         a0.endtime = "18:00";
 
-        a0.vibrate = true;
+        a0.vibrate = false;
 
         return a0;
 

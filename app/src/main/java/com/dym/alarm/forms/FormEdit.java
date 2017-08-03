@@ -147,10 +147,16 @@ public class FormEdit extends Form {
         group_end_time.setVisibility(model.repeat_day ? View.VISIBLE : View.GONE);
 
 
-        if( model.repeat_day) {
+       // if( model.repeat_day) {
             last_repeat_day = model.repeat_day_value + model.getDayRepeatUnitStr();
+
             setRepeatDay(last_repeat_day);
-        }
+        //}
+
+        log("last repeat day:%s",last_repeat_day);
+
+
+
 
 
         text_begin_time.setText(model.begintime);
@@ -532,7 +538,7 @@ public class FormEdit extends Form {
 
             case REP_ALARM_SAVE_SUCCESS:
                 sendMessage(Event.REQ_FORM_BACK);
-                return true;
+                return false;
             case REQ_SOUND_CHANGED:
                 updateSoundView();
                 return  true;
@@ -543,6 +549,8 @@ public class FormEdit extends Form {
 
     public void setRepeatDay(String v_u) {
 
+        if( v_u == null )
+            v_u = "M";
         int index =  v_u.endsWith("M") ? 0 : 1;
 
         repeat_day_m.setChecked(false);

@@ -1,31 +1,55 @@
 <resources>
-    <string name="app_name">TAlarm</string>
+    <string name="app_name">Alarm+</string>
     <string name="action_settings">Settings</string>
-
-    <string name="title_activity_notify_controller">NotifyController</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
-
-    <string name="title_activity_fullscreen">FullscreenActivity</string>
+    <string name="repeat_week">Repeat Week</string>
+    <string name="begin_time">Begin time：</string>
+    <string name="sound_silent">Silent</string>
+    <string name="sound_vibrate">Vibrate</string>
+    <string name="repeat_day">Repeat Day</string>
+    <string name="end_time">End time：</string>
+    <string name="delete_the_alarm">Delete the alarm</string>
+    <string name="title_open_source">Open source</string>
+    <string name="title_settings">Settings</string>
+    <string name="s_open_source">Open Source</string>
+    <string name="s_about">About</string>
+    <string name="s_feedback">Feedback</string>
+    <string name="s_rate_us">Rate us</string>
+    <string name="s_share_with_friends">Share with friends</string>
+    <string name="s_similar_app">Similar app(AD)</string>
+    <string name="s_remove_ad">Remove AD</string>
+    <string name="title_sound">Sound</string>
+    <string name="t_your_sound">Your sound</string>
+    <string name="t_device_sound">Device sound</string>
+    <string name="des_repeat">repeat</string>
+    <string name="des_no_repeat">not repeat</string>
+    <string name="des_begintime">begintime:</string>
+    <string name="des_alarm_time">alarm time:</string>
+    <string name="des_one_alarm">one alarm/</string>
+    <string name="des_unit">minute</string>
+    <string name="des_unit_hour">hour</string>
+    <string name="des_endtime">endtime:</string>
+    <string name="des_next_alarm">next alarm time:</string>
+    <string name="btn_close">Close</string>
+    <string name="btn_to_set">To Set</string>
 
     <array name="about_titles">
 
-        <item>循环闹钟</item>
-        <item>时间限制</item>
-        <item>设置闹钟铃声</item>
-        <item>设置手机音乐铃声</item>
-        <item>感谢开源社区</item>
+        <item>Loop alarm clock</item>
+        <item>Time limit</item>
+        <item>Set the alarm tone</item>
+        <item>Set the phone music ringtones</item>
+        <item>Thanks open source community</item>
 
 
     </array>
 
     <array name="about_descripts">
 
-        <item>简单几步添加当天间隔闹钟</item>
-        <item>设置当天开始时间、结束时间、间隔时间</item>
-        <item>可以选择系统铃声或静音</item>
-        <item>通过系统选择手机音乐作为铃声</item>
-        <item>查看本软件引入的开源代码</item>
+        <item>Just a few steps to add the day interval alarm clock</item>
+        <item>Set the day start time, end time, interval time</item>
+        <item>You can select system ringtone or mute</item>
+        <item>Through the system to select the phone music as a ringtone</item>
+        <item>View the open source code introduced by the software</item>
 
     </array>
 

@@ -32,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"
-            android:text="Open source"
+            android:text="@string/title_open_source"
             android:textColor="@android:color/white"
             android:textSize="@dimen/toolbar_title_size" />
 

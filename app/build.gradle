@@ -120,7 +120,7 @@ android {
 
             signingConfig signingConfigs.release
             applicationId "com.dym.alarm"
-            versionCode 2
+            versionCode 5
             versionName "1.0.0"
 
         }
@@ -172,6 +172,8 @@ dependencies {
         transitive = true;
     }
 
+    //compile 'com.android.billingclient:billing:dp-1'
+    compile project(':inapppay')
 
 }
 apply plugin: 'com.google.gms.google-services'

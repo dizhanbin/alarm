@@ -14,7 +14,7 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
+        android:id="@+id/dialog_container"
         app:cardCornerRadius="7dp"
         app:cardElevation="3dp"
         app:cardPreventCornerOverlap="true"
@@ -25,7 +25,7 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="400dp"
+            android:layout_height="wrap_content"
             android:background="@android:color/white"
             >
 
@@ -49,6 +49,17 @@
                     android:textColor="@color/black"
                     />
 
+                <com.google.android.gms.ads.NativeExpressAdView
+                    android:id="@+id/adView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_alignParentBottom="true"
+                    android:background="#f4f2f4"
+                    app:adSize="360x320"
+                    app:adUnitId="ca-app-pub-2800914329604494/8726207841">
+                </com.google.android.gms.ads.NativeExpressAdView>
+
 
 
             </LinearLayout>
@@ -59,9 +70,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical|right"
                 android:paddingRight="10dp"
-                android:layout_gravity="bottom"
+                android:paddingLeft="10dp"
+                android:orientation="horizontal"
                 >
 
                 <TextView
@@ -71,8 +82,29 @@
 
                     android:padding="8dp"
                     android:clickable="true"
+                    android:id="@+id/btn_set"
+                    android:text="@string/btn_to_set"
+                    android:gravity="center"
+                    android:textColor="@android:color/black"
+                    android:background="@drawable/round_text_click"
+
+                    />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1"
+                    />
+
+                <TextView
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+
+                    android:padding="8dp"
+                    android:clickable="true"
                     android:id="@+id/btn_ok"
-                    android:text="Close"
+                    android:text="@string/btn_close"
                     android:gravity="center"
                     android:textColor="@android:color/black"
                     android:background="@drawable/round_text_click"

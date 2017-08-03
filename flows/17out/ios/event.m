@@ -12,11 +12,13 @@
   if( [eventstr isEqual:@"FORM_SETTING"] ) return FORM_SETTING;
   if( [eventstr isEqual:@"FORM_SOUND_SET"] ) return FORM_SOUND_SET;
   if( [eventstr isEqual:@"REP_ALARM_LIST"] ) return REP_ALARM_LIST;
+  if( [eventstr isEqual:@"REP_ALARM_REMOVE_SUCCESS"] ) return REP_ALARM_REMOVE_SUCCESS;
   if( [eventstr isEqual:@"REP_ALARM_SAVE_FAIL"] ) return REP_ALARM_SAVE_FAIL;
   if( [eventstr isEqual:@"REP_ALARM_SAVE_SUCCESS"] ) return REP_ALARM_SAVE_SUCCESS;
   if( [eventstr isEqual:@"REP_OPENSOURCE_LIST"] ) return REP_OPENSOURCE_LIST;
   if( [eventstr isEqual:@"REQ_ALARM_LIST"] ) return REQ_ALARM_LIST;
   if( [eventstr isEqual:@"REQ_ALARM_NEXT"] ) return REQ_ALARM_NEXT;
+  if( [eventstr isEqual:@"REQ_ALARM_REMOVE"] ) return REQ_ALARM_REMOVE;
   if( [eventstr isEqual:@"REQ_ALARM_SAVE"] ) return REQ_ALARM_SAVE;
   if( [eventstr isEqual:@"REQ_DIALOG_INFO"] ) return REQ_DIALOG_INFO;
   if( [eventstr isEqual:@"REQ_DIALOG_SURE"] ) return REQ_DIALOG_SURE;
@@ -30,8 +32,8 @@
   if( [eventstr isEqual:@"REQ_TOAST"] ) return REQ_TOAST;
   if( [eventstr isEqual:@"REQ_WAITTING_HIDE"] ) return REQ_WAITTING_HIDE;
   if( [eventstr isEqual:@"REQ_WAITTING_SHOW"] ) return REQ_WAITTING_SHOW;
-  if( [eventstr isEqual:@"REQ_ALARM_REMOVE"] ) return REQ_ALARM_REMOVE;
-  if( [eventstr isEqual:@"REP_ALARM_REMOVE_SUCCESS"] ) return REP_ALARM_REMOVE_SUCCESS;
+  if( [eventstr isEqual:@"REP_BUY_SUCCESS"] ) return REP_BUY_SUCCESS;
+  if( [eventstr isEqual:@"REP_BUY_FAIL"] ) return REP_BUY_FAIL;
   return -1;
 }
 
@@ -47,11 +49,13 @@
   case FORM_SETTING : return @"FORM_SETTING";
   case FORM_SOUND_SET : return @"FORM_SOUND_SET";
   case REP_ALARM_LIST : return @"REP_ALARM_LIST";
+  case REP_ALARM_REMOVE_SUCCESS : return @"REP_ALARM_REMOVE_SUCCESS";
   case REP_ALARM_SAVE_FAIL : return @"REP_ALARM_SAVE_FAIL";
   case REP_ALARM_SAVE_SUCCESS : return @"REP_ALARM_SAVE_SUCCESS";
   case REP_OPENSOURCE_LIST : return @"REP_OPENSOURCE_LIST";
   case REQ_ALARM_LIST : return @"REQ_ALARM_LIST";
   case REQ_ALARM_NEXT : return @"REQ_ALARM_NEXT";
+  case REQ_ALARM_REMOVE : return @"REQ_ALARM_REMOVE";
   case REQ_ALARM_SAVE : return @"REQ_ALARM_SAVE";
   case REQ_DIALOG_INFO : return @"REQ_DIALOG_INFO";
   case REQ_DIALOG_SURE : return @"REQ_DIALOG_SURE";
@@ -65,8 +69,8 @@
   case REQ_TOAST : return @"REQ_TOAST";
   case REQ_WAITTING_HIDE : return @"REQ_WAITTING_HIDE";
   case REQ_WAITTING_SHOW : return @"REQ_WAITTING_SHOW";
-  case REQ_ALARM_REMOVE : return @"REQ_ALARM_REMOVE";
-  case REP_ALARM_REMOVE_SUCCESS : return @"REP_ALARM_REMOVE_SUCCESS";
+  case REP_BUY_SUCCESS : return @"REP_BUY_SUCCESS";
+  case REP_BUY_FAIL : return @"REP_BUY_FAIL";
 }
 
   return @"not define";

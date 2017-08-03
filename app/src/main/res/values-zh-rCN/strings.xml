@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <string name="app_name">健康闹钟</string>
+    <string name="action_settings">设置</string>
+    <string name="repeat_week">周重复</string>
+    <string name="begin_time">开始时间：</string>
+    <string name="sound_silent">静音</string>
+    <string name="sound_vibrate">震动</string>
+    <string name="repeat_day">天重复</string>
+    <string name="end_time">结束时间：</string>
+    <string name="delete_the_alarm">删除闹钟</string>
+    <string name="title_open_source">开源项目</string>
+    <string name="title_settings">设置</string>
+    <string name="s_open_source">开源项目</string>
+    <string name="s_about">关于</string>
+    <string name="s_feedback">反馈</string>
+    <string name="s_rate_us">联系我们</string>
+    <string name="s_share_with_friends">分享给好友</string>
+    <string name="s_similar_app">类似应用</string>
+    <string name="s_remove_ad">去广告</string>
+    <string name="title_sound">铃声</string>
+    <string name="t_your_sound">音乐</string>
+    <string name="t_device_sound">手机铃声</string>
+    <string name="des_repeat">重复</string>
+    <string name="des_no_repeat">不重复</string>
+    <string name="des_begintime">开始时间:</string>
+    <string name="des_alarm_time">提醒时间:</string>
+    <string name="des_one_alarm">一次提醒/</string>
+    <string name="des_unit">分钟</string>
+    <string name="des_unit_hour">小时</string>
+    <string name="des_endtime">结束时间:</string>
+    <string name="des_next_alarm">下次提醒时间:</string>
+    <string name="btn_close">Close</string>
+    <string name="btn_to_set">To Set</string>
+
+    <array name="about_titles">
+
+        <item>循环闹钟</item>
+        <item>时间限制</item>
+        <item>设置闹钟铃声</item>
+        <item>设置手机音乐铃声</item>
+        <item>感谢开源社区</item>
+
+
+    </array>
+
+    <array name="about_descripts">
+
+        <item>简单几步添加当天间隔闹钟</item>
+        <item>设置当天开始时间、结束时间、间隔时间</item>
+        <item>可以选择系统铃声或静音</item>
+        <item>通过系统选择手机音乐作为铃声</item>
+        <item>查看本软件引入的开源代码</item>
+
+    </array>
+
+
+
+</resources>

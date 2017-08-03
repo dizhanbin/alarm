@@ -3,6 +3,9 @@ package com.dym.alarm.model;
 import android.text.format.DateFormat;
 
 import com.alibaba.fastjson.JSON;
+import com.dym.alarm.ActController;
+import com.dym.alarm.DUMAPP;
+import com.dym.alarm.R;
 import com.dym.alarm.RP;
 import com.dym.alarm.common.NLog;
 
@@ -70,11 +73,17 @@ public class MAlarm {
 
     }
 
+    private String getString(int rid){
+
+        return DUMAPP.getInstance().getString(rid);
+    }
+
     public String getDescript(){
+
 
         StringBuffer sb = new StringBuffer();
 
-        sb.append(repeat_week?"repeat":"not repeat");
+        sb.append(repeat_week? getString(R.string.des_repeat): getString( R.string.des_no_repeat ) );
 
         if( repeat_week ) {
             sb.append("(");
@@ -86,13 +95,13 @@ public class MAlarm {
         sb.append("\n");
 
         if( repeat_day )
-            sb.append("begintime: ").append(begintime).append("\n");
+            sb.append(getString(R.string.des_begintime)).append(begintime).append("\n");
         else
-            sb.append("alarm time: ").append(begintime);
+            sb.append(getString(R.string.des_alarm_time)).append(begintime);
         if( repeat_day ){
 
-            sb.append("one alarm/").append(repeat_day_value ).append(repeat_day_unit==0?" minute":" hour").append(repeat_day_value>1?"s":"").append("\n");
-            sb.append("endtime:    ").append(endtime).append("  ");
+            sb.append(getString(R.string.des_one_alarm)).append(repeat_day_value ).append(repeat_day_unit==0?getString(R.string.des_unit):getString(R.string.des_unit_hour)).append(repeat_day_value>1?"s":"").append("\n");
+            sb.append(getString(R.string.des_endtime)).append(endtime).append("  ");
 
         }
 
@@ -102,14 +111,13 @@ public class MAlarm {
             if (nexttime > 0) {
 
                 Date date_next = new Date(nexttime);
-                sb.append("\n").append("next alarm time:").append(date_next.toString());
+                sb.append("\n").append(getString(R.string.des_next_alarm)).append(date_next.toString());
             }
         }
 
         return sb.toString();
 
     }
-
 
     public boolean isRepeatDay(){
 

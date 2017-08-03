@@ -32,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"
-            android:text="Sound"
+            android:text="@string/title_sound"
             android:textColor="@android:color/white"
             android:textSize="@dimen/toolbar_title_size"
 
@@ -102,7 +102,7 @@
                     android:clickable="true"
                     android:onClick="onClick"
 
-                    android:text="Your sound"
+                    android:text="@string/t_your_sound"
                     android:textColor="@color/btn_def"
                     android:textSize="18sp"
 
@@ -198,7 +198,7 @@
                     android:clickable="true"
                     android:onClick="onClick"
 
-                    android:text="Device sound"
+                    android:text="@string/t_device_sound"
                     android:textColor="@color/btn_def"
                     android:textSize="18sp"
 

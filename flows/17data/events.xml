@@ -55,6 +55,12 @@
         <descript>闹钟列表</descript>
     </event>
     <event>
+        <id>20170726193657569</id>
+        <name>REP_ALARM_REMOVE_SUCCESS</name>
+        <type>1</type>
+        <descript>删除成功</descript>
+    </event>
+    <event>
         <id>20170521221107855</id>
         <name>REP_ALARM_SAVE_FAIL</name>
         <type>1</type>
@@ -83,6 +89,12 @@
         <name>REQ_ALARM_NEXT</name>
         <type>1</type>
         <descript>生成下一个闹钟</descript>
+    </event>
+    <event>
+        <id>20170726193623546</id>
+        <name>REQ_ALARM_REMOVE</name>
+        <type>1</type>
+        <descript>删除指定闹钟</descript>
     </event>
     <event>
         <id>20170521221003776</id>
@@ -163,15 +175,15 @@
         <descript>等待框</descript>
     </event>
     <event>
-        <id>20170726193623546</id>
-        <name>REQ_ALARM_REMOVE</name>
+        <id>20170803093617963</id>
+        <name>REP_BUY_SUCCESS</name>
         <type>1</type>
-        <descript>删除指定闹钟</descript>
+        <descript>购买成功</descript>
     </event>
     <event>
-        <id>20170726193657569</id>
-        <name>REP_ALARM_REMOVE_SUCCESS</name>
+        <id>20170803093630409</id>
+        <name>REP_BUY_FAIL</name>
         <type>1</type>
-        <descript>删除成功</descript>
+        <descript>购买失败</descript>
     </event>
 </events>

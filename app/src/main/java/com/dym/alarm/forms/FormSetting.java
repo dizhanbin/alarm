@@ -13,6 +13,7 @@ import com.dym.alarm.Form;
 import com.dym.alarm.R;
 import com.dym.alarm.RP;
 import com.dym.alarm.common.Event;
+import com.dym.alarm.common.PayHelper;
 import com.dym.alarm.common.Utils;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
@@ -116,6 +117,12 @@ public class FormSetting extends Form {
                 getContext().startActivity(Intent.createChooser(shareIntent, "Share using"));
 
                 break;
+            case R.id.card_purchase:
+
+                PayHelper.getInstance().buyAndDealData();
+                //helper.purchase(ActController.instance);
+
+                break;
 
         }
     }
@@ -125,5 +132,11 @@ public class FormSetting extends Form {
 
         setFormtype(FormType.FORM_TOP);
 
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        PayHelper.getInstance().handleActivityResult(requestCode,resultCode,data);
     }
 }

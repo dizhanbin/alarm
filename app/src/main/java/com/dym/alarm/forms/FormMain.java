@@ -93,7 +93,7 @@ public class FormMain extends Form implements View.OnClickListener {
     @Override
     public void onPush(boolean fromback) {
         super.onPush(fromback);
-       // if( !fromback )
+        if( !fromback )
             sendMessage(Event.REQ_ALARM_LIST);
     }
 
@@ -118,19 +118,20 @@ public class FormMain extends Form implements View.OnClickListener {
             case R.id.switch_on:
             {
 
-                SwitchCompat sw = (SwitchCompat) view;
+                if( view instanceof  SwitchCompat ) {
+                    SwitchCompat sw = (SwitchCompat) view;
 
-                int pos =  mDatas.indexOf(  getRootParentTag(R.id.view_alarm_item,view)  );
+                    int pos = mDatas.indexOf(getRootParentTag(R.id.view_alarm_item, view));
 
-                mDatas.get(pos).on = sw.isChecked();
+                    mDatas.get(pos).on = sw.isChecked();
 
-                sendMessage(Event.REQ_ALARM_SAVE,mDatas.get(pos));
+                    sendMessage(Event.REQ_ALARM_SAVE, mDatas.get(pos));
 
-                if( !mDatas.get(pos).on )
-                    AlarmUtil.cancel(getContext(),mDatas.get(pos));
-                else
-                    AlarmUtil.addAlarm(getContext(),mDatas.get(pos));
-
+                    if (!mDatas.get(pos).on)
+                        AlarmUtil.cancel(getContext(), mDatas.get(pos));
+                    else
+                        AlarmUtil.addAlarm(getContext(), mDatas.get(pos));
+                }
 
             }
             break;
@@ -168,7 +169,6 @@ public class FormMain extends Form implements View.OnClickListener {
                     public void onClick(DialogInterface dialog, int which) {
 
                         dialog.dismiss();
-
 
 
                         int pos = mDatas.indexOf(getRootParentTag(R.id.view_alarm_item, view));
@@ -210,6 +210,9 @@ public class FormMain extends Form implements View.OnClickListener {
         switch (event){
             case REP_ALARM_LIST:
                 initRecyclerView((List<MAlarm>)value);
+                return true;
+            case REP_ALARM_SAVE_SUCCESS:
+                sendMessage(Event.REQ_ALARM_LIST);
                 return true;
         }
         return false;
@@ -265,22 +268,6 @@ public class FormMain extends Form implements View.OnClickListener {
                     vh.itemView.setTag(mDatas.get(position));
                     vh.bind(mDatas.get(position));
                 }else{
-                    /*
-                    NativeExpressAdView adView = (NativeExpressAdView)holder.itemView.findViewById(R.id.adView);
-                    adView.setAdUnitId("ca-app-pub-2800914329604494/7372252828");
-                    adView.setAdSize(new AdSize(AdSize.FULL_WIDTH, UIUtil.dip2px(getContext(),200)));
-                    AdRequest request = new AdRequest.Builder()
-
-                            .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-
-                           // .addTestDevice("d8aedad4c0e4c421")
-                            .build();
-                    //request.addTestDevice(AdRequest.DEVICE_ID_EMULATOR);
-
-
-                    adView.loadAd(request);
-
-                    */
 
                     NativeExpressAdView  mAdView = (NativeExpressAdView) holder.itemView.findViewById(R.id.adView);
 

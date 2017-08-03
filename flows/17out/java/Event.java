@@ -11,11 +11,13 @@ public enum Event{
   FORM_SETTING,//设置页面
   FORM_SOUND_SET,//设置铃声
   REP_ALARM_LIST,//闹钟列表
+  REP_ALARM_REMOVE_SUCCESS,//删除成功
   REP_ALARM_SAVE_FAIL,//闹钟保存失败
   REP_ALARM_SAVE_SUCCESS,//闹钟保存成功
   REP_OPENSOURCE_LIST,//返回开源库列表
   REQ_ALARM_LIST,//闹钟列表
   REQ_ALARM_NEXT,//生成下一个闹钟
+  REQ_ALARM_REMOVE,//删除指定闹钟
   REQ_ALARM_SAVE,//保存闹钟
   REQ_DIALOG_INFO,//消息提示框
   REQ_DIALOG_SURE,//弹出确认对话框
@@ -29,7 +31,7 @@ public enum Event{
   REQ_TOAST,//提示信息
   REQ_WAITTING_HIDE,//隐藏等待框
   REQ_WAITTING_SHOW,//等待框
-  REQ_ALARM_REMOVE,//删除指定闹钟
-  REP_ALARM_REMOVE_SUCCESS;//删除成功
+  REP_BUY_SUCCESS,//购买成功
+  REP_BUY_FAIL;//购买失败
 
 }

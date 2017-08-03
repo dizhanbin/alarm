@@ -92,9 +92,9 @@ public class ActController extends AppCompatActivity implements IToDo, IControll
 
         instance = this;
 
-
-
         MobileAds.initialize(this, "ca-app-pub-2800914329604494~1692373124content_copy");
+
+        PayHelper.getInstance();
 
 
 
@@ -690,6 +690,9 @@ public class ActController extends AppCompatActivity implements IToDo, IControll
 
             form.onActivityResult(requestCode, resultCode, data);
         }
+
+
+
 
     }
 
