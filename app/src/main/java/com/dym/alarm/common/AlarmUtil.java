@@ -38,7 +38,7 @@ public class AlarmUtil {
 
             ;
            // am.cancel(sender);
-            am.setExact(0, time, sender);
+            am.setExact(AlarmManager.RTC_WAKEUP, time, sender);
 
         }
         else{

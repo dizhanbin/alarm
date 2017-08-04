@@ -58,15 +58,6 @@ import static android.content.Context.ALARM_SERVICE;
 
 public class AlarmUtils {
 
-    public static void setAlarm(){
 
-
-        AlarmManager alarmManager = (AlarmManager) DUMAPP.getInstance().getSystemService(ALARM_SERVICE);
-
-
-
-
-
-    }
 
 }

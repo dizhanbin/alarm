@@ -59,8 +59,7 @@ public class FormMain extends Form implements View.OnClickListener {
     View btn_add;
 
     boolean need_reload_list;
-
-
+    boolean had_load;
     View view_tip;
 
     @Nullable
@@ -352,22 +351,25 @@ public class FormMain extends Form implements View.OnClickListener {
         });
 
 
-        //for(mDatas.addAll(value);)
-
-        for(int i=0;i<value.size();i++){
-
-
-            MAlarm mAlarm = value.get(i);
-            mDatas.add( mAlarm );
-            mRecyclerView.getAdapter().notifyItemInserted(i);
-
-            if( mAlarm.on )
-                AlarmUtil.addAlarm(getContext(),mAlarm);
-            else
-                AlarmUtil.cancel(getContext(),mAlarm);
-
-
+        if( had_load ) {
+            mDatas.addAll(value);
+            mRecyclerView.getAdapter().notifyDataSetChanged();
         }
+        else
+            for (int i = 0; i < value.size(); i++) {
+                had_load = true;
+
+                MAlarm mAlarm = value.get(i);
+                mDatas.add(mAlarm);
+                mRecyclerView.getAdapter().notifyItemInserted(i);
+
+                if (mAlarm.on)
+                    AlarmUtil.addAlarm(getContext(), mAlarm);
+                else
+                    AlarmUtil.cancel(getContext(), mAlarm);
+
+
+            }
 
 
 
