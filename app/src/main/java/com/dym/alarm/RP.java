@@ -2,6 +2,7 @@ package com.dym.alarm;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
@@ -9,6 +10,7 @@ import com.dym.alarm.common.NLog;
 
 import java.io.File;
 import java.util.Calendar;
+import java.util.Random;
 
 import qiu.niorgai.StatusBarCompat;
 
@@ -68,6 +70,8 @@ public class RP {
 
 
         static boolean isVip;
+        static int userRandomID;
+
         public static int getStartTimes() {
 
             SharedPreferences sp = getPreferences();
@@ -81,13 +85,28 @@ public class RP {
         public static void setIsVip(boolean vip){
             isVip = vip;
             if( isVip ){
-                getPreferences().edit().putBoolean("vip",true);
+                getPreferences().edit().putBoolean("vip",true).commit();
             }
         }
 
 
         public static void loadVipData() {
             isVip = getPreferences().getBoolean("vip",false);
+        }
+
+
+        public static int getUserRandomID(){
+
+            userRandomID = getPreferences().getInt("UserRandomID",0);
+            if( userRandomID == 0 ){
+
+                Random random = new Random(System.currentTimeMillis());
+                userRandomID =  random.nextInt(10);
+                getPreferences().edit().putInt("UserRandomID",userRandomID).commit();
+
+            }
+            return userRandomID;
+
         }
     }
 
@@ -223,4 +242,22 @@ public class RP {
     }
 
 
+    public static class Locale {
+
+        static int ischinese = -1;
+
+        public static boolean isChinese() {
+
+            if( ischinese == -1 ) {
+
+                Configuration config = DUMAPP.getInstance().getResources().getConfiguration();
+                if (config != null && config.locale != null && config.locale.getCountry().toString().indexOf("CN") > -1) {
+                    ischinese = 1;
+                }
+                else
+                    ischinese = 0;
+            }
+            return ischinese==1;
+        }
+    }
 }

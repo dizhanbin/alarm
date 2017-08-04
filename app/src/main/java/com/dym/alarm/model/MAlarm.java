@@ -1,5 +1,6 @@
 package com.dym.alarm.model;
 
+import android.content.res.Configuration;
 import android.text.format.DateFormat;
 
 import com.alibaba.fastjson.JSON;
@@ -9,10 +10,12 @@ import com.dym.alarm.R;
 import com.dym.alarm.RP;
 import com.dym.alarm.common.NLog;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by dizhanbin on 17/5/20.
@@ -96,11 +99,14 @@ public class MAlarm {
 
         if( repeat_day )
             sb.append(getString(R.string.des_begintime)).append(begintime).append("\n");
-        else
+        else {
             sb.append(getString(R.string.des_alarm_time)).append(begintime);
+
+        }
         if( repeat_day ){
 
-            sb.append(getString(R.string.des_one_alarm)).append(repeat_day_value ).append(repeat_day_unit==0?getString(R.string.des_unit):getString(R.string.des_unit_hour)).append(repeat_day_value>1?"s":"").append("\n");
+
+            sb.append(getString(R.string.des_one_alarm)).append(repeat_day_value ).append(repeat_day_unit==0?getString(R.string.des_unit):getString(R.string.des_unit_hour)).append(repeat_day_value>1&&RP.Locale.isChinese()?"s":"").append("\n");
             sb.append(getString(R.string.des_endtime)).append(endtime).append("  ");
 
         }
@@ -136,20 +142,27 @@ public class MAlarm {
 
     public int getNextRepeatDay(){
 
-        for(int i=0;i<repeat_weeks.size();i++){
-
-            if( repeat_weeks.get(i) +1  == RP.today ){
-
-                if( i+1 < repeat_weeks.size() ){
-
-                    return repeat_weeks.get(i+1)+1;
-                }
-
-            }
+        if( RP.today == 7 ){
+            if( repeat_weeks.size()>0)
+                return repeat_weeks.get(0)+1;
         }
-        return 0;
-        //return repeat_weeks.get(0)+1;
+        else{
 
+            for(int d : repeat_weeks)
+            {
+                if( d+1 == RP.today+1  )
+                    return d+1;
+            }
+
+        }
+
+
+        if( repeat_weeks.size() > 0 ){
+            if( repeat_weeks.get(0)+1 != RP.today )
+                return repeat_weeks.get(0)+1;
+        }
+
+        return 0;
     }
 
 
@@ -159,13 +172,25 @@ public class MAlarm {
         //if( !on )
         //    return 0;
 
+        NLog.log(getClass(),"getNextTime today:%d",RP.today);
+
         long notify_time = getDayNextTime(RP.today);
 
         if( notify_time > 0 )
             return notify_time;
 
         if( repeat_week ){
-           notify_time = getDayNextTime( getNextRepeatDay() );
+
+            int next_repeat_day = getNextRepeatDay();
+
+            NLog.log(getClass(),"next repeat day:%d",next_repeat_day);
+
+            if( next_repeat_day > 0 ) {
+
+                notify_time = getDayNextTime(next_repeat_day);
+            }
+            else
+                return 0;
         }
 
         return notify_time;
@@ -185,8 +210,8 @@ public class MAlarm {
 
         calendar.set(Calendar.HOUR_OF_DAY,h);
         calendar.set(Calendar.MINUTE,m);
-        calendar.set(Calendar.SECOND,59);
-        calendar.set(Calendar.MILLISECOND,999);
+        calendar.set(Calendar.SECOND,0);
+        calendar.set(Calendar.MILLISECOND,000);
 
         return calendar.getTimeInMillis();
 
@@ -194,16 +219,32 @@ public class MAlarm {
     }
 
 
+    private void printTime(String tag,long t){
 
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        NLog.log(getClass(),"%s:%s",tag,sdf.format(new Date(t)) );
+
+    }
 
 
     public long getDayNextTime(int day){
 
         Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.DAY_OF_WEEK,day);
+
+
+        if( day < RP.today )
+            calendar.add(Calendar.DAY_OF_WEEK,7-RP.today+day);
+        else
+            calendar.set(Calendar.DAY_OF_WEEK,day);
 
         long begin_time = getMillion(calendar,begintime);
         long end_tiem = getMillion(calendar,endtime);
+
+       // NLog.log(getClass(),"day :%d",day);
+       // printTime("day begin:",begin_time);
+       // printTime("day end:",end_tiem);
+
 
         long current = System.currentTimeMillis();
         long notify_time = begin_time;

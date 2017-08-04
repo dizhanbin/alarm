@@ -61,6 +61,8 @@ public class FormMain extends Form implements View.OnClickListener {
     boolean need_reload_list;
 
 
+    View view_tip;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -82,7 +84,8 @@ public class FormMain extends Form implements View.OnClickListener {
             SlideInLeftAnimator animator = new SlideLeftRemoveGiftAnimator();
             animator.setInterpolator(new OvershootInterpolator());
 
-
+            view_tip = ViewInject(R.id.alarm_add_tip);
+            view_tip.setVisibility(View.GONE);
 
 
             mRecyclerView.setItemAnimator(animator);
@@ -334,15 +337,17 @@ public class FormMain extends Form implements View.OnClickListener {
             public int getItemCount() {
 
                 int item_count = RP.Data.isVip() ? mDatas.size() :  (mDatas.size()>0? mDatas.size()+1 : 0 );
-
                 if( item_count ==0 ){
                     rotateAddButton();
+                    view_tip.setVisibility(View.VISIBLE);
                 }
                 else{
-
+                    view_tip.setVisibility(View.GONE);
                     rotateAddButtonCancel();
                 }
+                log("update recycle count:%d",item_count);
                 return item_count;
+
             }
         });
 

@@ -59,19 +59,26 @@
         </LinearLayout>
     </android.support.v7.widget.Toolbar>
 
-
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/actionbar_height"
+        >
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/actionbar_height"
         android:background="@color/content"
         android:paddingTop="5dp"
+        />
 
-        >
+    <include layout="@layout/view_none_alarm"
+        android:id="@+id/alarm_add_tip"
+        />
+
+    </FrameLayout>
 
 
-    </android.support.v7.widget.RecyclerView>
 
 
     <android.support.design.widget.FloatingActionButton

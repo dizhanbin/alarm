@@ -38,7 +38,7 @@ public class AlarmUtil {
 
             ;
            // am.cancel(sender);
-            am.set(0, time, sender);
+            am.setExact(0, time, sender);
 
         }
         else{

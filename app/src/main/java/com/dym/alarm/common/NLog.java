@@ -31,6 +31,13 @@ public class NLog {
 		}
 
 	}
+
+	public static void log(Class classz,String format,Object ...args)
+	{
+
+		log(classz.getSimpleName(),format,args);
+
+	}
 	
 	public static void i(String format,Object ...args)
 	{
