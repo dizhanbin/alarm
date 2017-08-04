@@ -12,6 +12,7 @@ import android.view.View;
 
 import com.dym.alarm.ActController;
 import com.dym.alarm.R;
+import com.dym.alarm.common.NLog;
 
 import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator;
 import tyrantgit.explosionfield.ExplosionAnimator;
@@ -42,8 +43,6 @@ public class SlideLeftRemoveGiftAnimator extends SlideInLeftAnimator {
         ExplosionField explosionField = ExplosionField.attach2Window(ActController.instance);
         //holder.itemView.setBackgroundResource(R.drawable.btn_def);
         explosionField.explode(holder.itemView);
-
-
 
 
 

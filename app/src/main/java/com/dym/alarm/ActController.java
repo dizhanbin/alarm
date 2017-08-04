@@ -86,8 +86,8 @@ public class ActController extends AppCompatActivity implements IToDo, IControll
         NLog.i("Main thread id:%d", thread_main);
 
         form_manager = new FormManager(this);
-        MessageCenter.sendMessage(Event.FORM_MAIN);
-
+        //MessageCenter.sendMessage(Event.FORM_MAIN);
+        MessageCenter.sendMessage(Event.FORM_FLASH);
 
 
         instance = this;

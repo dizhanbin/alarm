@@ -205,10 +205,16 @@ public class FormMain extends Form implements View.OnClickListener {
 
                         dialog.dismiss();
 
-
                         sendMessage(Event.REQ_ALARM_REMOVE,mDatas.get(pos));
                         mDatas.remove(pos);
                         mRecyclerView.getAdapter().notifyItemRemoved(pos);
+
+                        mainThreadExecuteDelay(new Thread(){
+                            public void run(){
+                                mRecyclerView.getAdapter().notifyDataSetChanged();
+                            }
+                        },600);
+
 
 
                     }
@@ -299,9 +305,16 @@ public class FormMain extends Form implements View.OnClickListener {
                 NLog.i("onBindViewHolder %d  size:%d",position,mDatas.size());
 
                 if( holder instanceof  VHAlarmItem ) {
+
+
+
                     VHAlarmItem vh = (VHAlarmItem) holder;
                     vh.itemView.setTag(mDatas.get(position));
                     vh.bind(mDatas.get(position));
+
+
+
+
                 }else{
 
 
