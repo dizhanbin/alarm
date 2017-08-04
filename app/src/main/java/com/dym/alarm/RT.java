@@ -11,4 +11,6 @@ public class RT {
 
     public static final String GOOGLE_PAY_PRODUCT_REMOVEAD = "alarm_ad_remove";
 
+    public static boolean VISIBLE_ALARM_ITEM_AD = false;
+
 }

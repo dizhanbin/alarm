@@ -172,7 +172,7 @@ public class MAlarm {
         //if( !on )
         //    return 0;
 
-        NLog.log(getClass(),"getNextTime today:%d",RP.today);
+       // NLog.log(getClass(),"getNextTime today:%d",RP.today);
 
         long notify_time = getDayNextTime(RP.today);
 
@@ -183,7 +183,7 @@ public class MAlarm {
 
             int next_repeat_day = getNextRepeatDay();
 
-            NLog.log(getClass(),"next repeat day:%d",next_repeat_day);
+           // NLog.log(getClass(),"next repeat day:%d",next_repeat_day);
 
             if( next_repeat_day > 0 ) {
 
@@ -309,5 +309,9 @@ public class MAlarm {
 
     }
 
+    public String toString(){
+
+        return createtime;
+    }
 
 }

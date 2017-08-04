@@ -243,7 +243,10 @@ public class Form extends Fragment {
         else
             return context;
     }
+    public String getContextString(int rid){
 
+        return getContext().getResources().getString(rid);
+    }
 
 
     public View ViewInject(View parent,int id){

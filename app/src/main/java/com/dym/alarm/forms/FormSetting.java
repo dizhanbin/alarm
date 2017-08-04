@@ -112,9 +112,9 @@ public class FormSetting extends Form {
                 shareIntent.setAction(Intent.ACTION_SEND);
                 shareIntent.setType("text/plain");
 
-                shareIntent.putExtra(android.content.Intent.EXTRA_TEXT, "A heath alarm "+ RP.Url.market_https);
-                shareIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "A heath alarm");
-                getContext().startActivity(Intent.createChooser(shareIntent, "Share using"));
+                shareIntent.putExtra(android.content.Intent.EXTRA_TEXT, getContextString(R.string.share_tip)+ RP.Url.market_https);
+                shareIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, getContextString(R.string.share_tip));
+                getContext().startActivity(Intent.createChooser(shareIntent, getString(R.string.share_us)));
 
                 break;
             case R.id.card_purchase:

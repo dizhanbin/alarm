@@ -32,9 +32,11 @@
     <string name="des_unit_hour">小时</string>
     <string name="des_endtime">结束时间:</string>
     <string name="des_next_alarm">下次提醒时间:</string>
-    <string name="btn_close">Close</string>
-    <string name="btn_to_set">To Set</string>
+    <string name="btn_close">关闭</string>
+    <string name="btn_to_set">设置</string>
     <string name="add_tip">添加一个闹钟</string>
+    <string name="share_tip">健康闹钟还不错哦</string>
+    <string name="share_us">分享</string>
 
     <array name="about_titles">
 

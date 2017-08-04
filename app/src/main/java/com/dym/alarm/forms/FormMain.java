@@ -25,6 +25,7 @@ import com.dym.alarm.ActController;
 import com.dym.alarm.Form;
 import com.dym.alarm.R;
 import com.dym.alarm.RP;
+import com.dym.alarm.RT;
 import com.dym.alarm.common.AlarmUtil;
 import com.dym.alarm.common.DDialog;
 import com.dym.alarm.common.Event;
@@ -61,6 +62,8 @@ public class FormMain extends Form implements View.OnClickListener {
     boolean need_reload_list;
     boolean had_load;
     View view_tip;
+
+
 
     @Nullable
     @Override
@@ -140,6 +143,7 @@ public class FormMain extends Form implements View.OnClickListener {
 
                     int pos = mDatas.indexOf(getRootParentTag(R.id.view_alarm_item, view));
 
+
                     mDatas.get(pos).on = sw.isChecked();
 
 
@@ -162,6 +166,16 @@ public class FormMain extends Form implements View.OnClickListener {
             case R.id.btn_del: {
 
                 need_reload_list = false;
+
+                Object obj = getRootParentTag(R.id.view_alarm_item, view);
+
+                final int pos = mDatas.indexOf(obj);
+
+                log("remove alaram obj pos:%d  obj:%s",pos,obj);
+
+                if( pos == -1 )
+                    return;
+
 
                 new DDialog.Builder(getContext()).setContentView(R.layout.dialog_confirm).setInitListener(new DDialog.ViewInitListener() {
                     @Override
@@ -192,9 +206,6 @@ public class FormMain extends Form implements View.OnClickListener {
                         dialog.dismiss();
 
 
-                        int pos = mDatas.indexOf(getRootParentTag(R.id.view_alarm_item, view));
-                        if( pos == -1 )
-                            return;
                         sendMessage(Event.REQ_ALARM_REMOVE,mDatas.get(pos));
                         mDatas.remove(pos);
                         mRecyclerView.getAdapter().notifyItemRemoved(pos);
@@ -275,15 +286,17 @@ public class FormMain extends Form implements View.OnClickListener {
             @Override
             public int getItemViewType(int position) {
 
-                if( RP.Data.isVip() )
+                if( RP.Data.isVip() || !RT.VISIBLE_ALARM_ITEM_AD)
                     return 0;
                 return getItemCount() -1 == position ? 1 : 0;
             }
 
+
+
             @Override
             public void onBindViewHolder(ViewHolder holder, int position) {
 
-                NLog.i("onBindViewHolder %d",position);
+                NLog.i("onBindViewHolder %d  size:%d",position,mDatas.size());
 
                 if( holder instanceof  VHAlarmItem ) {
                     VHAlarmItem vh = (VHAlarmItem) holder;
@@ -291,8 +304,10 @@ public class FormMain extends Form implements View.OnClickListener {
                     vh.bind(mDatas.get(position));
                 }else{
 
-                    NativeExpressAdView  mAdView = (NativeExpressAdView) holder.itemView.findViewById(R.id.adView);
 
+
+
+                    NativeExpressAdView  mAdView = (NativeExpressAdView) holder.itemView.findViewById(R.id.adView);
                     // Set its video options.
                     mAdView.setVideoOptions(new VideoOptions.Builder()
                             .setStartMuted(true)
@@ -335,7 +350,7 @@ public class FormMain extends Form implements View.OnClickListener {
             @Override
             public int getItemCount() {
 
-                int item_count = RP.Data.isVip() ? mDatas.size() :  (mDatas.size()>0? mDatas.size()+1 : 0 );
+                int item_count = RP.Data.isVip() || !RT.VISIBLE_ALARM_ITEM_AD ? mDatas.size() :  (mDatas.size()>0? mDatas.size()+1 : 0 );
                 if( item_count ==0 ){
                     rotateAddButton();
                     view_tip.setVisibility(View.VISIBLE);
@@ -344,7 +359,7 @@ public class FormMain extends Form implements View.OnClickListener {
                     view_tip.setVisibility(View.GONE);
                     rotateAddButtonCancel();
                 }
-                log("update recycle count:%d",item_count);
+                //log("update recycle count:%d",item_count);
                 return item_count;
 
             }
