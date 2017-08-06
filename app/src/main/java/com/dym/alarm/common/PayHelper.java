@@ -46,8 +46,7 @@ public class PayHelper {
        return pHelper;
 
    }
-
-    boolean init_ok;
+   int init_ok = -1;
    private void initHelper(){
 
        if( helper == null ) {
@@ -57,7 +56,7 @@ public class PayHelper {
                @Override
                public void onIabSetupFinished(IabResult result) {
 
-                   init_ok = result.isSuccess();
+                   init_ok = result.isSuccess()? 1  : 0;
 
                    NLog.log("PayHelper","initHelper :%s :%s",init_ok,result.getMessage());
 
@@ -239,13 +238,7 @@ public class PayHelper {
    public void buyAndDealData(){
 
 
-       while (!init_ok){
-           try {
-               Thread.sleep(100);
-           } catch (InterruptedException e) {
-               e.printStackTrace();
-           }
-       }
+
 
        buy(new PayListener() {
            @Override

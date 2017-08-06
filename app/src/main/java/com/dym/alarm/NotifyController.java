@@ -221,6 +221,7 @@ public class NotifyController extends Activity implements MediaPlayer.OnErrorLis
                         // Set its video options.
                         mAdView.setVideoOptions(new VideoOptions.Builder()
                                 .setStartMuted(true)
+
                                 .build());
 
                         // The VideoController can be used to get lifecycle events and info about an ad's video
