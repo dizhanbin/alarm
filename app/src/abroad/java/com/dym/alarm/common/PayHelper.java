@@ -9,6 +9,7 @@ import android.github.inapp.Purchase;
 import com.crashlytics.android.Crashlytics;
 import com.dym.alarm.ActController;
 import com.dym.alarm.DUMAPP;
+import com.dym.alarm.RT;
 
 import java.util.ArrayList;
 import java.util.Collections;
