@@ -148,6 +148,7 @@ public class RP {
     public class Key{
 
         public final static String key_starttimes = "StartTimes";
+        public final static String key_intent_alarmone = "com.dym.alarm.one";
 
 
     }
@@ -263,5 +264,14 @@ public class RP {
             }
             return ischinese==1;
         }
+    }
+
+    public static class UI{
+
+        public static int getColor(int resid){
+
+            return DUMAPP.getInstance().getResources().getColor(resid);
+        }
+
     }
 }

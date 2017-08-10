@@ -31,6 +31,7 @@
     <string name="des_next_alarm">next alarm time:</string>
     <string name="btn_close">Close</string>
     <string name="btn_to_set">To Set</string>
+    <string name="btn_to_pause">Pause</string>
     <string name="add_tip">Add an alarm clock</string>
     <string name="share_tip">A heath alarm clock</string>
     <string name="share_us">Share using</string>

@@ -143,9 +143,7 @@ public class FormMain extends Form implements View.OnClickListener {
 
                     int pos = mDatas.indexOf(getRootParentTag(R.id.view_alarm_item, view));
 
-
                     mDatas.get(pos).on = sw.isChecked();
-
 
                     sendMessage(Event.REQ_ALARM_SAVE, mDatas.get(pos));
 
@@ -153,6 +151,9 @@ public class FormMain extends Form implements View.OnClickListener {
                         AlarmUtil.cancel(getContext(), mDatas.get(pos));
                     else
                         AlarmUtil.addAlarm(getContext(), mDatas.get(pos));
+
+                    mRecyclerView.getAdapter().notifyItemChanged(pos);
+                    
                 }
 
             }

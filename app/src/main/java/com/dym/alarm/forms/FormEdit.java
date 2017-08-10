@@ -296,7 +296,15 @@ public class FormEdit extends Form {
 
                                 TimePicker tp = (TimePicker) DDialog.ddialog.findViewById(R.id.timePicker);
                                 NLog.i("hour :%d minute :%d ", tp.getCurrentHour(), tp.getCurrentMinute());
-                                text_end_time.setText(String.format("%02d:%02d", tp.getCurrentHour(), tp.getCurrentMinute()));
+
+                                int h = tp.getCurrentHour();
+                                int minute = tp.getCurrentMinute();
+
+                                if( h == 0 && minute == 0  ){
+
+                                    h = 24;
+                                }
+                                text_end_time.setText(String.format("%02d:%02d", h, tp.getCurrentMinute()));
 
                                 dialog.dismiss();
                                 //text_begin_time.setText(  );

@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.dym.alarm.R;
+import com.dym.alarm.RP;
 import com.dym.alarm.model.MAlarm;
 
 /**
@@ -29,6 +30,7 @@ public class VHAlarmItem extends ViewHolder {
         switch_on = (SwitchCompat) itemView.findViewById(R.id.switch_on);
         text_descript = (TextView) itemView.findViewById(R.id.text_descript);
         btn_del = itemView.findViewById(R.id.btn_del);
+
     }
 
 
@@ -37,6 +39,12 @@ public class VHAlarmItem extends ViewHolder {
         text_label.setText(mAlarm.label);
         switch_on.setChecked( mAlarm.on );
         text_descript.setText(mAlarm.getDescript());
+
+
+        if( mAlarm.on )
+            text_label.setTextColor(  RP.UI.getColor( R.color.colorPrimary ) );
+        else
+            text_label.setTextColor( RP.UI.getColor(R.color.gray) );
 
     }
 }

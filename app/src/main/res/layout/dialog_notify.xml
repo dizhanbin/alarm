@@ -82,8 +82,8 @@
 
                     android:padding="8dp"
                     android:clickable="true"
-                    android:id="@+id/btn_set"
-                    android:text="@string/btn_to_set"
+                    android:id="@+id/btn_pause"
+                    android:text="@string/btn_to_pause"
                     android:gravity="center"
                     android:textColor="@android:color/black"
                     android:background="@drawable/round_text_click"

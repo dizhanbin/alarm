@@ -81,7 +81,7 @@ public class DataCenter {
 
         String strs = JSON.toJSONString(datas);
 
-
+        NLog.i("save json data:%s",strs);
         try {
             FileOutputStream fout = new FileOutputStream(data_path);
             fout.write(strs.getBytes("utf-8"));
@@ -92,6 +92,7 @@ public class DataCenter {
 
     }
 
+
     public static void save(MAlarm alarm){
 
 
@@ -99,6 +100,7 @@ public class DataCenter {
             NLog.i("not contain alarm add");
             datas.add(alarm);
         }
+        datas.set(datas.indexOf(alarm),alarm);
         saveAlarms();
 
     }

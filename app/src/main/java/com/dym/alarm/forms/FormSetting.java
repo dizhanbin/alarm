@@ -24,6 +24,8 @@ import com.google.android.gms.ads.VideoOptions;
 public class FormSetting extends Form {
 
 
+    View view_ad_container;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -33,12 +35,15 @@ public class FormSetting extends Form {
             mView = inflater.inflate(R.layout.form_setting, null);
             setView(mView);
 
-            NativeExpressAdView mAdView = (NativeExpressAdView) mView.findViewById(R.id.adView);
+           final NativeExpressAdView mAdView = (NativeExpressAdView) mView.findViewById(R.id.adView);
 
             // Set its video options.
             mAdView.setVideoOptions(new VideoOptions.Builder()
                     .setStartMuted(true)
                     .build());
+
+
+            view_ad_container = ViewInject(R.id.ad_container);
 
             // The VideoController can be used to get lifecycle events and info about an ad's video
             // asset. One will always be returned by getVideoController, even if the ad has no video
@@ -62,7 +67,16 @@ public class FormSetting extends Form {
                     } else {
 
                     }
+
+                    view_ad_container.setVisibility(View.VISIBLE);
+
                 }
+
+
+
+                public void onAdClicked() {
+                }
+
             });
 
             mAdView.loadAd(new AdRequest.Builder().build());

@@ -315,7 +315,8 @@
         app:cardElevation="3dp"
         app:cardPreventCornerOverlap="true"
         app:cardUseCompatPadding="true"
-
+        android:id="@+id/ad_container"
+        android:visibility="gone"
         >
 
         <com.google.android.gms.ads.NativeExpressAdView

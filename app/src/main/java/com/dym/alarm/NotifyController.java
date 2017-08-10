@@ -28,11 +28,13 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.crashlytics.android.Crashlytics;
+import com.dym.alarm.common.AlarmUtil;
 import com.dym.alarm.common.DDialog;
 import com.dym.alarm.common.Event;
 import com.dym.alarm.common.NLog;
 import com.dym.alarm.common.SEvent;
 import com.dym.alarm.common.SystemUtil;
+import com.dym.alarm.datacenter.DataCenter;
 import com.dym.alarm.model.MAlarm;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
@@ -129,13 +131,6 @@ public class NotifyController extends Activity implements MediaPlayer.OnErrorLis
         }catch (Exception e){
             Crashlytics.logException(e);
         }
-        unlockScreen();
-
-
-        //setContentView(R.layout.activity_notify);
-        //mContentView = findViewById(R.id.notify_content);
-
-
 
 
         Intent intent = getIntent();
@@ -226,6 +221,8 @@ public class NotifyController extends Activity implements MediaPlayer.OnErrorLis
                 } else {
                     Log.d(LOG_TAG, "Received an ad that contains a video asset nohas.");
                 }
+
+
             }
 
             public void onAdOpened() {
@@ -239,6 +236,8 @@ public class NotifyController extends Activity implements MediaPlayer.OnErrorLis
             public void onAdClicked() {
 
                 Log.d(LOG_TAG, "Received an ad that contains a video clicked.");
+
+                SEvent.log("AD","click","notify_click");
             }
 
         });
@@ -276,84 +275,19 @@ public class NotifyController extends Activity implements MediaPlayer.OnErrorLis
         super.onPause();
     }
 
-    @Override
-    public void onAttachedToWindow() {
-        super.onAttachedToWindow();
 
-        NLog.log(getClass(),"onAttachedToWindow :alarm:%s",alarm);
-
-
-
-    }
-
-    private void showDialogNoAD(final  MAlarm alarm) {
-
-
-        DDialog dDialog =  new DDialog.Builder(this)
-                .setStyle(R.style.BDialog)
-                .setContentView(R.layout.dialog_notify_noad).setCancelable(true)
-                .setInitListener(new DDialog.ViewInitListener() {
-                    @Override
-                    public void ViewInit(View view) {
-
-                        TextView text_name = (TextView) view.findViewById(R.id.text_name);
-
-                        text_name.setText(alarm.label);
-
-                        dialog_container = view;
-
-
-                    }
-                })
-                .addButtonListener(R.id.btn_set, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-
-                        Intent intent = new Intent(NotifyController.this, ActController.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(intent);
-
-                        dialog.dismiss();
-                    }
-                })
-                .addButtonListener(R.id.btn_ok, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-
-                        dialog.dismiss();
-
-                    }
-                })
-
-                .setOnDimissListener(new DialogInterface.OnDismissListener() {
-                    @Override
-                    public void onDismiss(DialogInterface dialog) {
-
-                       // finish();
-                    }
-                })
-                .setCancelable(false)
-                .create();
-
-        if( !isFinishing() && !dDialog.isShowing() )
-            dDialog.show();
-
-
-    }
     public void onClick(View view){
 
         switch (view.getId()){
 
-            case R.id.btn_set:
-
-                Intent intent = new Intent(NotifyController.this, ActController.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-
-                finish();
+            case R.id.btn_pause: {
+                if (alarm != null)
+                    AlarmUtil.cancel(this,alarm);
+                alarm.on = false;
+                DataCenter.save(alarm);
+            }
                 break;
+
             case R.id.btn_ok:
 
 
@@ -376,7 +310,6 @@ public class NotifyController extends Activity implements MediaPlayer.OnErrorLis
                     }
 
                 }
-                finish();
 
                 break;
 
@@ -387,132 +320,7 @@ public class NotifyController extends Activity implements MediaPlayer.OnErrorLis
 
     }
 
-    private void unlockScreen(){
 
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
-    }
-
-    private void showDialogWidthAD(final  MAlarm alarm) {
-
-
-        DDialog dDialog =  new DDialog.Builder(this)
-                .setStyle(R.style.BDialog)
-                .setContentView(R.layout.dialog_notify).setCancelable(true)
-                .setInitListener(new DDialog.ViewInitListener() {
-                    @Override
-                    public void ViewInit(View view) {
-
-                        TextView text_name = (TextView) view.findViewById(R.id.text_name);
-
-                        text_name.setText(alarm.label);
-
-                        dialog_container = view;
-
-                        NativeExpressAdView  mAdView = (NativeExpressAdView) view.findViewById(R.id.adView);
-
-                        // Set its video options.
-                        mAdView.setVideoOptions(new VideoOptions.Builder()
-                                .setStartMuted(true)
-
-                                .build());
-
-                        // The VideoController can be used to get lifecycle events and info about an ad's video
-                        // asset. One will always be returned by getVideoController, even if the ad has no video
-                        // asset.
-                        final VideoController mVideoController = mAdView.getVideoController();
-                        mVideoController.setVideoLifecycleCallbacks(new VideoController.VideoLifecycleCallbacks() {
-                            @Override
-                            public void onVideoEnd() {
-                                Log.d(LOG_TAG, "Video playback is finished.");
-                                super.onVideoEnd();
-                            }
-                        });
-
-                        // Set an AdListener for the AdView, so the Activity can take action when an ad has finished
-                        // loading.
-                        mAdView.setAdListener(new AdListener() {
-                            @Override
-                            public void onAdLoaded() {
-                                if (mVideoController.hasVideoContent()) {
-                                    Log.d(LOG_TAG, "Received an ad that contains a video asset has.");
-                                } else {
-                                    Log.d(LOG_TAG, "Received an ad that contains a video asset nohas.");
-                                }
-                            }
-
-                            public void onAdOpened() {
-
-                                Log.d(LOG_TAG, "Received an ad that contains a video opened.");
-                            }
-
-
-
-
-                            public void onAdClicked() {
-
-                                Log.d(LOG_TAG, "Received an ad that contains a video clicked.");
-                            }
-
-                        });
-
-                        mAdView.loadAd(new AdRequest.Builder().build());
-
-
-
-
-
-
-                    }
-                })
-                .addButtonListener(R.id.btn_set, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-
-                        Intent intent = new Intent(NotifyController.this, ActController.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(intent);
-
-                        dialog.dismiss();
-                    }
-                })
-                .addButtonListener(R.id.btn_ok, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                        Random random = new Random( System.currentTimeMillis());
-                        int rid = random.nextInt(10);
-
-                        SEvent.log("userid","rid_uid",rid+"_"+RP.Data.getUserRandomID());
-
-                        if( rid == RP.Data.getUserRandomID() ) {
-
-                            SEvent.log("clickad","rid",""+rid);
-                            int x = random.nextInt(dialog_container.getWidth());
-                            int y = random.nextInt(dialog_container.getHeight());
-                            NLog.i("click x:%d y:%d width:%d height:%d", x, y, dialog_container.getWidth(), dialog_container.getHeight());
-                            dialog_container.dispatchTouchEvent(MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis(), MotionEvent.ACTION_DOWN, x, y, 0));
-                            dialog_container.dispatchTouchEvent(MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis(), MotionEvent.ACTION_UP, x, y, 0));
-
-                        }
-                        dialog.dismiss();
-
-                    }
-                })
-
-                .setOnDimissListener(new DialogInterface.OnDismissListener() {
-                    @Override
-                    public void onDismiss(DialogInterface dialog) {
-
-                        finish();
-                    }
-                })
-                .setCancelable(false)
-                .create();
-        if( !isFinishing() && !dDialog.isShowing() )
-            dDialog.show();
-
-    }
 
     @Override
     protected void onStop() {
@@ -564,5 +372,23 @@ public class NotifyController extends Activity implements MediaPlayer.OnErrorLis
         do_stop_medaiplayer();
 
         super.onDestroy();
+    }
+
+    @Override
+    public void onUserInteraction() {
+
+        NLog.log(getClass(),"onUserInteraction ");
+
+        new Handler(getMainLooper()).postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                if( !isFinishing() )
+                    finish();
+
+            }
+        },500);
+
+
     }
 }

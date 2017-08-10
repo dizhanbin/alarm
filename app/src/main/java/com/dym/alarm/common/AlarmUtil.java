@@ -8,6 +8,7 @@ import android.net.Uri;
 
 import com.dym.alarm.BuildConfig;
 import com.dym.alarm.DUMAPP;
+import com.dym.alarm.RP;
 import com.dym.alarm.model.MAlarm;
 
 import java.util.Calendar;
@@ -29,7 +30,7 @@ public class AlarmUtil {
         if (time > 0) {
 
             AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-            Intent intent = new Intent("com.dym.alarm.one");
+            Intent intent = new Intent(RP.Key.key_intent_alarmone);
             intent.putExtra("json", alarm.toJson());
            // intent.setData(Uri.parse(url_alarm+alarm.getId()));
            //intent.setClass(context,AlarmUtil.class);
@@ -68,18 +69,11 @@ public class AlarmUtil {
     public static void cancel(Context context, MAlarm alarm) {
 
 
-        long time = alarm.getNextTime();
-
-        NLog.i("notify time:%d %s",time,alarm);
-
-        if (time > 0) {
+            NLog.i("notify cancel:%s",alarm);
 
             AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-            Intent intent = new Intent("com.dym.alarm.one");
+            Intent intent = new Intent(RP.Key.key_intent_alarmone);
             intent.putExtra("json", alarm.toJson());
-           // intent.setData(Uri.parse(url_alarm+alarm.getId()));
-           //intent.setClass(context,AlarmUtil.class);
-
             PendingIntent sender = PendingIntent.getBroadcast(context, alarm.getId(), intent, PendingIntent
                     .FLAG_CANCEL_CURRENT);
             ;
@@ -87,26 +81,6 @@ public class AlarmUtil {
             sender.cancel();
             am.cancel(sender);
 
-
-            if (BuildConfig.DEBUG && time > 0) {
-
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTimeInMillis(time);
-                NLog.i("notify time:%d-%02d-%02d %02d:%02d  request id:%d canceled",
-                        calendar.get(Calendar.YEAR),
-                        calendar.get(Calendar.MONTH),
-                        calendar.get(Calendar.DAY_OF_MONTH),
-                        calendar.get(Calendar.HOUR_OF_DAY),
-                        calendar.get(Calendar.MINUTE),
-                        alarm.getId()
-
-                );
-
-            }
-
-
-
-        }
 
     }
 }

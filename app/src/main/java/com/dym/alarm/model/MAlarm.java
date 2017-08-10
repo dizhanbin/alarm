@@ -41,6 +41,14 @@ public class MAlarm {
     public String createtime;//yyyy-mm-dd hh:mm:ss
 
 
+    public String getEndtimeDisplay(){
+
+      return  "00:00".equals(endtime) ? "24:00" : endtime;
+
+
+    }
+
+
     public List<MSound> your_sounds = new ArrayList<>();
 
 
@@ -106,7 +114,7 @@ public class MAlarm {
         if( repeat_day ){
 
             sb.append(getString(R.string.des_one_alarm)).append(repeat_day_value ).append(repeat_day_unit==0?getString(R.string.des_unit):getString(R.string.des_unit_hour)).append(repeat_day_value>1&&!RP.Locale.isChinese()?"s":"").append("\n");
-            sb.append(getString(R.string.des_endtime)).append(endtime).append("  ");
+            sb.append(getString(R.string.des_endtime)).append(getEndtimeDisplay()).append("  ");
 
         }
 
@@ -238,7 +246,7 @@ public class MAlarm {
             calendar.set(Calendar.DAY_OF_WEEK,day);
 
         long begin_time = getMillion(calendar,begintime);
-        long end_tiem = getMillion(calendar,endtime);
+        long end_tiem = getMillion(calendar,("00:00".equals(endtime)?"23:59" :endtime));
 
        // NLog.log(getClass(),"day :%d",day);
        // printTime("day begin:",begin_time);
