@@ -102,3 +102,19 @@
 -keep class com.google.android.gms.ads.** {*;}
 -dontwarn com.google.android.gms.internal.**
 -keep class com.google.android.gms.internal.** {*;}
+
+
+
+# qq ad  --
+-dontwarn com.androidquery.**
+-keep class com.androidquery.** { *;}
+
+# 嵌入广点通sdk时必须添加
+-keep class com.qq.e.** {
+    public protected *;
+}
+
+# 嵌入广点通sdk时必须添加
+-keep class android.support.v4.**{ *;}
+
+# qq ad  --

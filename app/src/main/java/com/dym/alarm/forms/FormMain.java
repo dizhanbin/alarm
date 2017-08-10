@@ -1,36 +1,26 @@
 /* create my 17 */
 package com.dym.alarm.forms;
 
-import android.animation.Animator;
-import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
-import android.animation.ValueAnimator;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.support.v7.widget.SwitchCompat;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.OvershootInterpolator;
 import android.widget.TextView;
 
-import com.dym.alarm.ActController;
 import com.dym.alarm.Form;
 import com.dym.alarm.R;
 import com.dym.alarm.RP;
-import com.dym.alarm.RT;
 import com.dym.alarm.common.AlarmUtil;
 import com.dym.alarm.common.DDialog;
 import com.dym.alarm.common.Event;
 import com.dym.alarm.common.NLog;
-import com.dym.alarm.common.UIUtil;
 import com.dym.alarm.common.ViewMoveTouchListener;
 import com.dym.alarm.model.MAlarm;
 import com.dym.alarm.views.DGridLayoutManager;
@@ -38,7 +28,6 @@ import com.dym.alarm.views.SlideLeftRemoveGiftAnimator;
 import com.dym.alarm.views.VHAlarmItem;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.NativeExpressAdView;
 import com.google.android.gms.ads.VideoController;
 import com.google.android.gms.ads.VideoOptions;
@@ -153,7 +142,7 @@ public class FormMain extends Form implements View.OnClickListener {
                         AlarmUtil.addAlarm(getContext(), mDatas.get(pos));
 
                     mRecyclerView.getAdapter().notifyItemChanged(pos);
-                    
+
                 }
 
             }

@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.dym.alarm.ActController;
 import com.dym.alarm.Form;
 import com.dym.alarm.R;
 import com.dym.alarm.RP;

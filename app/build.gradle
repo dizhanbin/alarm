@@ -28,13 +28,13 @@ android {
         debug {
             keyAlias 'dym_alarm'
             keyPassword 'dym_alarm'
-            storeFile file('src/main/dym_alarm.jks')
+            storeFile file('src/abroad/dym_alarm.jks')
             storePassword 'dym_alarm'
         }
         release {
             keyAlias 'dym_alarm'
             keyPassword 'dym_alarm'
-            storeFile file('src/main/dym_alarm.jks')
+            storeFile file('src/abroad/dym_alarm.jks')
             storePassword 'dym_alarm'
         }
     }
@@ -124,15 +124,26 @@ android {
             versionName "1.0.0"
 
         }
+        qqad {
+
+            signingConfig signingConfigs.release
+            applicationId "com.dym.alarm"
+            versionCode 5
+            versionName "1.0.0"
+
+        }
+
+
     }
 
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile('com.github.niorgai:StatusBarCompat:2.1.3', {
-        exclude group: 'com.android.support'
-    })
+
+    qqadCompile fileTree(dir: 'src/qqad/libs', include: ['*.jar'])
+
+
+
 
     //firebase
     /*
@@ -145,7 +156,10 @@ dependencies {
     compile 'com.google.firebase:firebase-config:10.2.1'
     */
 
-    compile 'com.google.android.gms:play-services-ads:11.0.0'
+    abroadCompile 'com.google.android.gms:play-services-ads:11.0.0'
+    abroadCompile project(':inapppay')
+
+
     compile 'com.google.android.gms:play-services:11.0.0'
     compile 'com.android.support:appcompat-v7:25.3.1'
     //compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha7'
@@ -156,9 +170,6 @@ dependencies {
     compile 'com.airbnb.android:lottie:2.0.0-rc1'
     compile 'uk.co.chrisjenx:calligraphy:2.3.0'
     compile 'com.android.support:support-v4:25.3.1'
-    compile('com.crashlytics.sdk.android:crashlytics:2.6.8@aar') {
-        transitive = true;
-    }
 
 
     compile 'jp.wasabeef:recyclerview-animators:2.2.6'
@@ -171,11 +182,16 @@ dependencies {
     compile('com.crashlytics.sdk.android:crashlytics:2.6.8@aar') {
         transitive = true;
     }
+    compile('com.github.niorgai:StatusBarCompat:2.1.3', {
+        exclude group: 'com.android.support'
+    })
 
     //compile 'com.android.billingclient:billing:dp-1'
-    compile project(':inapppay')
+
 
 }
+
+
 apply plugin: 'com.google.gms.google-services'
 
 afterEvaluate {

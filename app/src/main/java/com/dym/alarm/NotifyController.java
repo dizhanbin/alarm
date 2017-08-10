@@ -56,7 +56,6 @@ public class NotifyController extends Activity implements MediaPlayer.OnErrorLis
 
 
 
-    private View mContentView;
     View dialog_container;
 
     MediaPlayer mMediaPlayer;
@@ -68,31 +67,7 @@ public class NotifyController extends Activity implements MediaPlayer.OnErrorLis
 
     PowerManager.WakeLock mWakelock;
 
-    private final Runnable mHidePart2Runnable = new Runnable() {
-        @SuppressLint("InlinedApi")
-        @Override
-        public void run() {
-            // Delayed removal of status and navigation bar
 
-            // Note that some of these constants are new as of API 16 (Jelly Bean)
-            // and API 19 (KitKat). It is safe to use them, as they are inlined
-            // at compile-time and do nothing on earlier devices.
-
-
-
-
-
-            /*
-
-            mContentView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE
-                    | View.SYSTEM_UI_FLAG_FULLSCREEN
-                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                    | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                    | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                    | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
-                    */
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,11 +78,6 @@ public class NotifyController extends Activity implements MediaPlayer.OnErrorLis
 
         final Window win = getWindow();
         win.addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED | WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD | WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON | WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
-
-
-
-
-
 
         try {
             KeyguardManager km = (KeyguardManager) getSystemService(Context.KEYGUARD_SERVICE);
@@ -191,58 +161,11 @@ public class NotifyController extends Activity implements MediaPlayer.OnErrorLis
 
         //dialog_container = view;
 
-        NativeExpressAdView  mAdView = (NativeExpressAdView) findViewById(R.id.adView);
-
-        // Set its video options.
-        mAdView.setVideoOptions(new VideoOptions.Builder()
-                .setStartMuted(true)
-
-                .build());
-
-        // The VideoController can be used to get lifecycle events and info about an ad's video
-        // asset. One will always be returned by getVideoController, even if the ad has no video
-        // asset.
-        final VideoController mVideoController = mAdView.getVideoController();
-        mVideoController.setVideoLifecycleCallbacks(new VideoController.VideoLifecycleCallbacks() {
-            @Override
-            public void onVideoEnd() {
-                Log.d(LOG_TAG, "Video playback is finished.");
-                super.onVideoEnd();
-            }
-        });
-
-        // Set an AdListener for the AdView, so the Activity can take action when an ad has finished
-        // loading.
-        mAdView.setAdListener(new AdListener() {
-            @Override
-            public void onAdLoaded() {
-                if (mVideoController.hasVideoContent()) {
-                    Log.d(LOG_TAG, "Received an ad that contains a video asset has.");
-                } else {
-                    Log.d(LOG_TAG, "Received an ad that contains a video asset nohas.");
-                }
-
-
-            }
-
-            public void onAdOpened() {
-
-                Log.d(LOG_TAG, "Received an ad that contains a video opened.");
-            }
 
 
 
+        //NativeExpressAdView  mAdView = (NativeExpressAdView) findViewById(R.id.adView);
 
-            public void onAdClicked() {
-
-                Log.d(LOG_TAG, "Received an ad that contains a video clicked.");
-
-                SEvent.log("AD","click","notify_click");
-            }
-
-        });
-
-        mAdView.loadAd(new AdRequest.Builder().build());
 
 
     }
