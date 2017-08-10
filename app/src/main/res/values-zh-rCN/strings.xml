@@ -16,7 +16,7 @@
     <string name="s_open_source">开源项目</string>
     <string name="s_about">关于</string>
     <string name="s_feedback">反馈</string>
-    <string name="s_rate_us">联系我们</string>
+    <string name="s_rate_us">评价我们</string>
     <string name="s_share_with_friends">分享给好友</string>
     <string name="s_similar_app">类似应用</string>
     <string name="s_remove_ad">去广告</string>
@@ -37,6 +37,21 @@
     <string name="add_tip">添加一个闹钟</string>
     <string name="share_tip">健康闹钟还不错哦</string>
     <string name="share_us">分享</string>
+    <string name="alarm_edit">编辑闹钟</string>
+    <string name="week_sun">七</string>
+    <string name="week_mon">一</string>
+    <string name="week_tue">二</string>
+    <string name="week_wen">三</string>
+    <string name="week_thu">四</string>
+    <string name="week_fri">五</string>
+    <string name="week_sat">六</string>
+    <string name="edit_slient">静音</string>
+    <string name="dialog_title_confirm">确认</string>
+    <string name="msg_delete_alarm">delete the alarm?</string>
+    <string name="btn_delete">Delete</string>
+    <string name="btn_cancel">Cancel</string>
+    <string name="repeat_day_unit_m">M</string>
+    <string name="repeat_day_unit_h">H</string>
 
     <array name="about_titles">
 

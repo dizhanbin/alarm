@@ -181,7 +181,7 @@ public class FormEdit extends Form {
             Drawable drawable_left = getContext().getResources().getDrawable(R.drawable.quantum_ic_volume_off_grey600_36);
             drawable_left.setBounds(0, 0, drawable_left.getMinimumWidth(), drawable_left.getMinimumHeight());
             text_sound.setCompoundDrawablesRelative(drawable_left,null,null,null);
-            text_sound.setText("Slient");
+            text_sound.setText(R.string.edit_slient);
 
 
         }
@@ -327,16 +327,16 @@ public class FormEdit extends Form {
                         TextView text_msg = (TextView) view.findViewById(R.id.text_msg);
 
 
-                        text_title.setText("Confirm");
-                        text_msg.setText("delete the alarm?");
+                        text_title.setText(R.string.dialog_title_confirm);
+                        text_msg.setText(R.string.msg_delete_alarm);
 
 
                         TextView text_ok = (TextView) view.findViewById(R.id.btn_ok);
                         TextView text_cancel = (TextView) view.findViewById(R.id.btn_cancel);
 
 
-                        text_ok.setText("Delete");
-                        text_cancel.setText("Cancel");
+                        text_ok.setText(R.string.btn_delete);
+                        text_cancel.setText(R.string.btn_cancel);
 
 
 
@@ -490,11 +490,11 @@ public class FormEdit extends Form {
                             switch (index) {
 
                                 case 0:
-                                    repeat_day_m.setTextOn(np.getValue() + "M");
+                                    repeat_day_m.setTextOn(np.getValue() + getContextString(R.string.repeat_day_unit_m));
                                     last_repeat_day = repeat_day_m.getTextOn().toString();
                                     break;
                                 case 1:
-                                    repeat_day_h.setTextOn(np.getValue() + "H");
+                                    repeat_day_h.setTextOn(np.getValue() + getContextString(R.string.repeat_day_unit_h));
                                     last_repeat_day = repeat_day_h.getTextOn().toString();
                                     break;
                             }
@@ -550,8 +550,8 @@ public class FormEdit extends Form {
     public void setRepeatDay(String v_u) {
 
         if( v_u == null )
-            v_u = "M";
-        int index =  v_u.endsWith("M") ? 0 : 1;
+            v_u = getContextString(R.string.repeat_day_unit_m);
+        int index =  v_u.endsWith(getContextString(R.string.repeat_day_unit_m)) ? 0 : 1;
 
         repeat_day_m.setChecked(false);
         repeat_day_h.setChecked(false);
@@ -564,14 +564,14 @@ public class FormEdit extends Form {
                 if (v_u.length() > 1)
                     repeat_day_m.setTextOn(v_u);
                 else
-                    repeat_day_m.setTextOn("M");
+                    repeat_day_m.setTextOn(getContextString(R.string.repeat_day_unit_m));
                 break;
             case 1:
                 repeat_day_h.setChecked(true);
                 if (v_u.length() > 1)
                     repeat_day_h.setTextOn(v_u);
                 else
-                    repeat_day_h.setTextOn("H");
+                    repeat_day_h.setTextOn(getContextString(R.string.repeat_day_unit_h));
                 break;
 
         }

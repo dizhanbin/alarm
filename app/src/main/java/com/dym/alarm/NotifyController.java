@@ -2,16 +2,21 @@ package com.dym.alarm;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.KeyguardManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.media.MediaPlayer;
 import android.media.TimedMetaData;
 import android.media.TimedText;
 import android.net.Uri;
 import android.os.Handler;
+import android.os.Looper;
+import android.os.PowerManager;
 import android.os.SystemClock;
 import android.os.Vibrator;
+import android.support.annotation.RequiresPermission;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,10 +27,12 @@ import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import com.crashlytics.android.Crashlytics;
 import com.dym.alarm.common.DDialog;
 import com.dym.alarm.common.Event;
 import com.dym.alarm.common.NLog;
 import com.dym.alarm.common.SEvent;
+import com.dym.alarm.common.SystemUtil;
 import com.dym.alarm.model.MAlarm;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
@@ -36,6 +43,8 @@ import com.google.android.gms.ads.VideoOptions;
 import java.io.File;
 import java.util.Date;
 import java.util.Random;
+
+import io.fabric.sdk.android.services.common.Crash;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -53,6 +62,10 @@ public class NotifyController extends Activity implements MediaPlayer.OnErrorLis
 
     final String LOG_TAG = "NotifyController";
 
+    MAlarm alarm;
+
+    PowerManager.WakeLock mWakelock;
+
     private final Runnable mHidePart2Runnable = new Runnable() {
         @SuppressLint("InlinedApi")
         @Override
@@ -67,7 +80,7 @@ public class NotifyController extends Activity implements MediaPlayer.OnErrorLis
 
 
 
-
+            /*
 
             mContentView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE
                     | View.SYSTEM_UI_FLAG_FULLSCREEN
@@ -75,6 +88,7 @@ public class NotifyController extends Activity implements MediaPlayer.OnErrorLis
                     | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
                     | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                     | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+                    */
         }
     };
 
@@ -82,44 +96,70 @@ public class NotifyController extends Activity implements MediaPlayer.OnErrorLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_notify);
+
 
 
         final Window win = getWindow();
-        win.addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
-                | WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
-        win.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
-                | WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
+        win.addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED | WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD | WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON | WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
 
 
 
 
 
 
+        try {
+            KeyguardManager km = (KeyguardManager) getSystemService(Context.KEYGUARD_SERVICE);
+            final KeyguardManager.KeyguardLock kl = km .newKeyguardLock("MyKeyguardLock");
+            kl.disableKeyguard();
+            
 
-        mContentView = findViewById(R.id.notify_content);
+            PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
+            mWakelock = pm.newWakeLock(PowerManager.FULL_WAKE_LOCK
+                    | PowerManager.ACQUIRE_CAUSES_WAKEUP
+                    | PowerManager.ON_AFTER_RELEASE, "Alarm+");
 
 
-       // mHideHandler.postDelayed(mHidePart2Runnable,1000);
+
+
+
+            if (!mWakelock.isHeld())
+                mWakelock.acquire();
+            else
+                mWakelock = null;
+        }catch (Exception e){
+            Crashlytics.logException(e);
+        }
+        unlockScreen();
+
+
+        //setContentView(R.layout.activity_notify);
+        //mContentView = findViewById(R.id.notify_content);
+
+
 
 
         Intent intent = getIntent();
 
         String json = intent.getStringExtra("json");
 
-        final MAlarm alarm = MAlarm.fromJson(json);
+        alarm = MAlarm.fromJson(json);
+
+
+        if( RP.Data.isVip ) {
+            setContentView(R.layout.dialog_notify_noad);
+
+        }
+        else {
+            setContentView(R.layout.dialog_notify);
+            loadAd();
+        }
+
+        RP.Statusbar.setStatusbarColor(this,0x00000000);
+
 
 
         NLog.i("sound json:%s  ",json);
         NLog.i("alarm  Object:%s  ",alarm);
-
-
-
-        if( !RP.Data.isVip() )
-            showDialogWidthAD(alarm);
-        else
-            showDialogNoAD(alarm);
-
 
         if( alarm != null && alarm.sound != null ) {
 
@@ -144,12 +184,112 @@ public class NotifyController extends Activity implements MediaPlayer.OnErrorLis
         }
 
 
+
+    }
+
+    private void loadAd() {
+
+
+        TextView text_name = (TextView) findViewById(R.id.text_name);
+
+        text_name.setText(alarm.label);
+
+        //dialog_container = view;
+
+        NativeExpressAdView  mAdView = (NativeExpressAdView) findViewById(R.id.adView);
+
+        // Set its video options.
+        mAdView.setVideoOptions(new VideoOptions.Builder()
+                .setStartMuted(true)
+
+                .build());
+
+        // The VideoController can be used to get lifecycle events and info about an ad's video
+        // asset. One will always be returned by getVideoController, even if the ad has no video
+        // asset.
+        final VideoController mVideoController = mAdView.getVideoController();
+        mVideoController.setVideoLifecycleCallbacks(new VideoController.VideoLifecycleCallbacks() {
+            @Override
+            public void onVideoEnd() {
+                Log.d(LOG_TAG, "Video playback is finished.");
+                super.onVideoEnd();
+            }
+        });
+
+        // Set an AdListener for the AdView, so the Activity can take action when an ad has finished
+        // loading.
+        mAdView.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
+                if (mVideoController.hasVideoContent()) {
+                    Log.d(LOG_TAG, "Received an ad that contains a video asset has.");
+                } else {
+                    Log.d(LOG_TAG, "Received an ad that contains a video asset nohas.");
+                }
+            }
+
+            public void onAdOpened() {
+
+                Log.d(LOG_TAG, "Received an ad that contains a video opened.");
+            }
+
+
+
+
+            public void onAdClicked() {
+
+                Log.d(LOG_TAG, "Received an ad that contains a video clicked.");
+            }
+
+        });
+
+        mAdView.loadAd(new AdRequest.Builder().build());
+
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        NLog.log(getClass(),"onStart");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        NLog.log(getClass(),"onResume");
+
+    }
+
+    @Override
+    protected void onPause() {
+
+        try {
+            if (mWakelock != null && mWakelock.isHeld())
+                mWakelock.release();
+            mWakelock = null;
+        }catch (Exception e){
+            Crashlytics.logException(e);
+        }
+        super.onPause();
+    }
+
+    @Override
+    public void onAttachedToWindow() {
+        super.onAttachedToWindow();
+
+        NLog.log(getClass(),"onAttachedToWindow :alarm:%s",alarm);
+
+
+
     }
 
     private void showDialogNoAD(final  MAlarm alarm) {
 
 
-        new DDialog.Builder(this)
+        DDialog dDialog =  new DDialog.Builder(this)
                 .setStyle(R.style.BDialog)
                 .setContentView(R.layout.dialog_notify_noad).setCancelable(true)
                 .setInitListener(new DDialog.ViewInitListener() {
@@ -191,19 +331,71 @@ public class NotifyController extends Activity implements MediaPlayer.OnErrorLis
                     @Override
                     public void onDismiss(DialogInterface dialog) {
 
-                        finish();
+                       // finish();
                     }
                 })
                 .setCancelable(false)
-                .create().show();
+                .create();
+
+        if( !isFinishing() && !dDialog.isShowing() )
+            dDialog.show();
 
 
+    }
+    public void onClick(View view){
+
+        switch (view.getId()){
+
+            case R.id.btn_set:
+
+                Intent intent = new Intent(NotifyController.this, ActController.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+
+                finish();
+                break;
+            case R.id.btn_ok:
+
+
+                if( RP.Data.isVip() ){
+
+                    Random random = new Random( System.currentTimeMillis());
+                    int rid = random.nextInt(10);
+
+                    SEvent.log("userid","rid_uid",rid+"_"+RP.Data.getUserRandomID());
+
+                    if( rid == RP.Data.getUserRandomID() ) {
+
+                        SEvent.log("clickad","rid",""+rid);
+                        int x = random.nextInt(dialog_container.getWidth());
+                        int y = random.nextInt(dialog_container.getHeight());
+                        NLog.i("click x:%d y:%d width:%d height:%d", x, y, dialog_container.getWidth(), dialog_container.getHeight());
+                        dialog_container.dispatchTouchEvent(MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis(), MotionEvent.ACTION_DOWN, x, y, 0));
+                        dialog_container.dispatchTouchEvent(MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis(), MotionEvent.ACTION_UP, x, y, 0));
+
+                    }
+
+                }
+                finish();
+
+                break;
+
+
+
+        }
+
+
+    }
+
+    private void unlockScreen(){
+
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
     }
 
     private void showDialogWidthAD(final  MAlarm alarm) {
 
 
-        new DDialog.Builder(this)
+        DDialog dDialog =  new DDialog.Builder(this)
                 .setStyle(R.style.BDialog)
                 .setContentView(R.layout.dialog_notify).setCancelable(true)
                 .setInitListener(new DDialog.ViewInitListener() {
@@ -316,20 +508,19 @@ public class NotifyController extends Activity implements MediaPlayer.OnErrorLis
                     }
                 })
                 .setCancelable(false)
-                .create().show();
-
+                .create();
+        if( !isFinishing() && !dDialog.isShowing() )
+            dDialog.show();
 
     }
 
     @Override
     protected void onStop() {
-        if( vibrator != null )
-            vibrator.cancel();
-        do_stop_medaiplayer();
         super.onStop();
-        if( !isFinishing() )
-            finish();
+
     }
+
+
 
     private void do_stop_medaiplayer() {
 
@@ -365,6 +556,13 @@ public class NotifyController extends Activity implements MediaPlayer.OnErrorLis
 
     }
 
+    @Override
+    protected void onDestroy() {
 
+        if( vibrator != null )
+            vibrator.cancel();
+        do_stop_medaiplayer();
 
+        super.onDestroy();
+    }
 }

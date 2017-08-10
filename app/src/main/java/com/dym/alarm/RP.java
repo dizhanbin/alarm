@@ -1,5 +1,6 @@
 package com.dym.alarm;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -55,10 +56,13 @@ public class RP {
         public static void setStatusbarColor(int color) {
 
             StatusBarCompat.setStatusBarColor(ActController.instance, color);
-
             last_statusbar_color = color;
 
+        }
 
+        public static void setStatusbarColor(Activity activity,int color) {
+
+            StatusBarCompat.translucentStatusBar(activity);
 
 
         }

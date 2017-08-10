@@ -70,6 +70,8 @@
         android:layout_height="match_parent"
         android:background="@color/content"
         android:paddingTop="5dp"
+
+
         />
 
     <include layout="@layout/view_none_alarm"

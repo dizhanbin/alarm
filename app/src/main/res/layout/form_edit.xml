@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content"
                 fontPath="fonts/r-b.ttf"
                 android:layout_marginLeft="50dp"
-                android:text="Alarm"
+                android:text="@string/alarm_edit"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/toolbar_title_size" />
 
@@ -177,9 +177,9 @@
                             android:layout_margin="@dimen/repeat_ele_margin"
                             android:background="@drawable/circle_select"
                             android:gravity="center"
-                            android:text="S"
-                            android:textOff="S"
-                            android:textOn="S"
+                            android:text="@string/week_sun"
+                            android:textOff="@string/week_sun"
+                            android:textOn="@string/week_sun"
 
                             />
 
@@ -191,9 +191,9 @@
                             android:layout_margin="@dimen/repeat_ele_margin"
                             android:background="@drawable/circle_select"
                             android:gravity="center"
-                            android:text="M"
-                            android:textOff="M"
-                            android:textOn="M" />
+                            android:text="@string/week_mon"
+                            android:textOff="@string/week_mon"
+                            android:textOn="@string/week_mon" />
 
                         <com.dym.alarm.views.DToggleButton
                             android:id="@+id/tb_rep2"
@@ -203,9 +203,9 @@
                             android:layout_margin="@dimen/repeat_ele_margin"
                             android:background="@drawable/circle_select"
                             android:gravity="center"
-                            android:text="T"
-                            android:textOff="T"
-                            android:textOn="T" />
+                            android:text="@string/week_tue"
+                            android:textOff="@string/week_tue"
+                            android:textOn="@string/week_tue" />
 
                         <com.dym.alarm.views.DToggleButton
                             android:id="@+id/tb_rep3"
@@ -215,9 +215,9 @@
                             android:layout_margin="@dimen/repeat_ele_margin"
                             android:background="@drawable/circle_select"
                             android:gravity="center"
-                            android:text="W"
-                            android:textOff="W"
-                            android:textOn="W" />
+                            android:text="@string/week_wen"
+                            android:textOff="@string/week_wen"
+                            android:textOn="@string/week_wen" />
 
                         <com.dym.alarm.views.DToggleButton
                             android:id="@+id/tb_rep4"
@@ -227,9 +227,9 @@
                             android:layout_margin="@dimen/repeat_ele_margin"
                             android:background="@drawable/circle_select"
                             android:gravity="center"
-                            android:text="T"
-                            android:textOff="T"
-                            android:textOn="T" />
+                            android:text="@string/week_thu"
+                            android:textOff="@string/week_thu"
+                            android:textOn="@string/week_thu" />
 
                         <com.dym.alarm.views.DToggleButton
                             android:id="@+id/tb_rep5"
@@ -239,9 +239,9 @@
                             android:layout_margin="@dimen/repeat_ele_margin"
                             android:background="@drawable/circle_select"
                             android:gravity="center"
-                            android:text="F"
-                            android:textOff="F"
-                            android:textOn="F"
+                            android:text="@string/week_fri"
+                            android:textOff="@string/week_fri"
+                            android:textOn="@string/week_fri"
 
 
                             />
@@ -254,9 +254,9 @@
                             android:layout_margin="@dimen/repeat_ele_margin"
                             android:background="@drawable/circle_select"
                             android:gravity="center"
-                            android:text="S"
-                            android:textOff="S"
-                            android:textOn="S"
+                            android:text="@string/week_sat"
+                            android:textOff="@string/week_sat"
+                            android:textOn="@string/week_sat"
 
                             />
 

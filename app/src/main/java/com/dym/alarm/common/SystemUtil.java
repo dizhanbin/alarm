@@ -5,6 +5,8 @@ import android.content.Context;
 import android.os.PowerManager;
 import android.provider.Settings;
 
+import com.dym.alarm.R;
+
 /**
  * Created by dizhanbin on 17/6/5.
  */
@@ -35,6 +37,14 @@ public class SystemUtil {
 
         return flag;//如果flag为true，表示有两种状态：a、屏幕是黑的  b、目前正处于解锁状态  。
 
+
+    }
+
+    public static void wakeup(Context context){
+
+        PowerManager pm = (PowerManager)context.getSystemService(Context.POWER_SERVICE);
+        PowerManager.WakeLock mWakelock = pm.newWakeLock(PowerManager.ACQUIRE_CAUSES_WAKEUP |PowerManager.SCREEN_DIM_WAKE_LOCK, context.getString(R.string.app_name));
+        mWakelock.acquire();
 
     }
 

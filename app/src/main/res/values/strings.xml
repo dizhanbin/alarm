@@ -34,6 +34,21 @@
     <string name="add_tip">Add an alarm clock</string>
     <string name="share_tip">A heath alarm clock</string>
     <string name="share_us">Share using</string>
+    <string name="alarm_edit">Alarm</string>
+    <string name="week_sun">S</string>
+    <string name="week_mon">M</string>
+    <string name="week_tue">T</string>
+    <string name="week_wen">W</string>
+    <string name="week_thu">T</string>
+    <string name="week_fri">F</string>
+    <string name="week_sat">S</string>
+    <string name="edit_slient">Slient</string>
+    <string name="dialog_title_confirm">Confirm</string>
+    <string name="msg_delete_alarm">delete the alarm?</string>
+    <string name="btn_delete">Delete</string>
+    <string name="btn_cancel">Cancel</string>
+    <string name="repeat_day_unit_m">M</string>
+    <string name="repeat_day_unit_h">H</string>
 
     <array name="about_titles">
 

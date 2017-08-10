@@ -77,7 +77,8 @@ public class DDialog extends Dialog {
             if (DDialog.ddialog.timer != null)
                 DDialog.ddialog.timer.cancel();
             DDialog.ddialog.timer = null;
-            super.dismiss();
+            if( isShowing() )
+                super.dismiss();
             DDialog.ddialog = null;
         }catch (Exception e){
             NLog.e(e);

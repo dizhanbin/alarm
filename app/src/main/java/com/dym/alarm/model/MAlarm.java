@@ -105,8 +105,7 @@ public class MAlarm {
         }
         if( repeat_day ){
 
-
-            sb.append(getString(R.string.des_one_alarm)).append(repeat_day_value ).append(repeat_day_unit==0?getString(R.string.des_unit):getString(R.string.des_unit_hour)).append(repeat_day_value>1&&RP.Locale.isChinese()?"s":"").append("\n");
+            sb.append(getString(R.string.des_one_alarm)).append(repeat_day_value ).append(repeat_day_unit==0?getString(R.string.des_unit):getString(R.string.des_unit_hour)).append(repeat_day_value>1&&!RP.Locale.isChinese()?"s":"").append("\n");
             sb.append(getString(R.string.des_endtime)).append(endtime).append("  ");
 
         }
