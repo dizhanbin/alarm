@@ -55,7 +55,7 @@ public class MAlarm {
     public MAlarm(){
 
         on = true;
-        label = "label";
+        label = getString(R.string.alarm_label);
         begintime = "08:00";
         endtime = "18:00";
         repeat_weeks = new ArrayList<>();
@@ -124,7 +124,7 @@ public class MAlarm {
             if (nexttime > 0) {
 
                 Date date_next = new Date(nexttime);
-                sb.append("\n").append(getString(R.string.des_next_alarm)).append(date_next.toString());
+                sb.append("\n").append(getString(R.string.des_next_alarm)).append(date_next.toLocaleString());
             }
         }
 

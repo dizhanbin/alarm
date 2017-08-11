@@ -157,8 +157,16 @@ public class RP {
     public static class Const{
 
         public final static String[] weeks = new String[]{
-          "Sun","Mon","Tue","Wed","Thu","Fri","Sat"
+                UI.getString(R.string.week_sun),
+                UI.getString(R.string.week_mon),
+                UI.getString(R.string.week_tue),
+                UI.getString(R.string.week_wen),
+                UI.getString(R.string.week_thu),
+                UI.getString(R.string.week_fri),
+                UI.getString(R.string.week_sat)
         };
+
+
 
     }
 
@@ -271,6 +279,11 @@ public class RP {
         public static int getColor(int resid){
 
             return DUMAPP.getInstance().getResources().getColor(resid);
+        }
+        public static String getString(int resid){
+
+            return DUMAPP.getInstance().getResources().getString(resid);
+
         }
 
     }

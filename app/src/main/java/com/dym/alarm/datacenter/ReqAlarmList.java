@@ -1,5 +1,6 @@
 package com.dym.alarm.datacenter;
 
+import com.dym.alarm.R;
 import com.dym.alarm.RP;
 import com.dym.alarm.model.MAlarm;
 
@@ -37,11 +38,16 @@ public class ReqAlarmList implements Request {
         a0.on = true;
 
 
-        a0.label = "Healthy drinking water alarm clock";
+        a0.label = RP.UI.getString(R.string.alarm_title_def);
         a0.begintime = "10:00";
         a0.repeat_weeks = new ArrayList<>();
         a0.repeat_weeks.add(0);
         a0.repeat_weeks.add(1);
+        a0.repeat_weeks.add(2);
+        a0.repeat_weeks.add(3);
+        a0.repeat_weeks.add(4);
+        a0.repeat_weeks.add(5);
+        a0.repeat_weeks.add(6);
 
         a0.repeat_week = true;
 
@@ -54,7 +60,7 @@ public class ReqAlarmList implements Request {
 
         a0.endtime = "18:00";
 
-        a0.vibrate = false;
+        a0.vibrate = true;
 
         return a0;
 

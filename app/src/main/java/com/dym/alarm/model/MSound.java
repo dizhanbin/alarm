@@ -1,5 +1,8 @@
 package com.dym.alarm.model;
 
+import com.dym.alarm.R;
+import com.dym.alarm.RP;
+
 /**
  * Created by dizhanbin on 17/7/3.
  */
@@ -17,7 +20,7 @@ public class MSound {
 
         MSound ms = new MSound();
         ms.type =  2;
-        ms.name = "Slient";
+        ms.name = RP.UI.getString(R.string.edit_slient);
         return ms;
 
     }

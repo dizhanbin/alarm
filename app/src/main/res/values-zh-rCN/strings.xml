@@ -53,6 +53,8 @@
     <string name="btn_cancel">Cancel</string>
     <string name="repeat_day_unit_m">M</string>
     <string name="repeat_day_unit_h">H</string>
+    <string name="alarm_label">标题</string>
+    <string name="alarm_title_def">该喝水了</string>
 
     <array name="about_titles">
 

@@ -50,6 +50,8 @@
     <string name="btn_cancel">Cancel</string>
     <string name="repeat_day_unit_m">M</string>
     <string name="repeat_day_unit_h">H</string>
+    <string name="alarm_label">label</string>
+    <string name="alarm_title_def">Healthy drinking water alarm clock</string>
 
     <array name="about_titles">
 
