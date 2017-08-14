@@ -156,16 +156,8 @@ public class NotifyController extends Activity implements MediaPlayer.OnErrorLis
 
 
         TextView text_name = (TextView) findViewById(R.id.text_name);
-
+        if( alarm != null )
         text_name.setText(alarm.label);
-
-        //dialog_container = view;
-
-
-
-
-        //NativeExpressAdView  mAdView = (NativeExpressAdView) findViewById(R.id.adView);
-
 
 
     }

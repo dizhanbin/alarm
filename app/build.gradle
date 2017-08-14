@@ -132,7 +132,14 @@ android {
             versionName "1.0.0"
 
         }
+        baiduad {
 
+            signingConfig signingConfigs.release
+            applicationId "com.dym.alarm"
+            versionCode 6
+            versionName "1.0.1"
+
+        }
 
     }
 
@@ -141,6 +148,7 @@ android {
 dependencies {
 
     qqadCompile fileTree(dir: 'src/qqad/libs', include: ['*.jar'])
+    baiduadCompile fileTree(dir: 'src/baiduad/libs', include: ['*.jar'])
 
 
 
