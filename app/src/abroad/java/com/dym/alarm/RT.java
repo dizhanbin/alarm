@@ -1,5 +1,11 @@
 package com.dym.alarm;
 
+import android.view.View;
+
+import com.dym.alarm.ad.AdListener;
+import com.dym.alarm.ad.AdLoader;
+import com.dym.alarm.ad.GoogleAdLoader;
+
 /**
  * Created by dizhanbin on 2017/8/2.
  */
@@ -15,5 +21,9 @@ public class RT {
 
 
 
+    public static AdLoader getAdLoader(View view, AdListener listener){
+
+        return new GoogleAdLoader(view,listener);
+    }
 
 }

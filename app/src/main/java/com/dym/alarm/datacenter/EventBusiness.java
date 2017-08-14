@@ -4,6 +4,7 @@ import com.dym.alarm.DUMAPP;
 import com.dym.alarm.common.AlarmUtil;
 import com.dym.alarm.common.Event;
 import com.dym.alarm.common.MessageCenter;
+import com.dym.alarm.common.NLog;
 import com.dym.alarm.common.Utils;
 import com.dym.alarm.model.MAlarm;
 
@@ -44,6 +45,7 @@ public class EventBusiness {
                 AlarmUtil.cancel(DUMAPP.getInstance(), (MAlarm) value);
                 DataCenter.getDatas().remove(value);
                 DataCenter.saveAlarms();
+                NLog.log(EventBusiness.class,"remove one alarm");
                 return true;
 
         }

@@ -120,8 +120,8 @@
 # qq ad  --
 
 
-#baidu ad
+# baidu ad
 
 -keep public class com.baidu.appx.**
 -keep public class com.baidu.appx.** { *; }
--keep attributes *Annotation*,*Exceptions*,Signature
+-keepattributes *Annotation*,*Exceptions*,Signature

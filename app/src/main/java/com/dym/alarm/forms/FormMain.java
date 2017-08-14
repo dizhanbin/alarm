@@ -18,6 +18,8 @@ import com.dym.alarm.Form;
 import com.dym.alarm.R;
 import com.dym.alarm.RP;
 import com.dym.alarm.RT;
+import com.dym.alarm.ad.AdListener;
+import com.dym.alarm.ad.AdLoader;
 import com.dym.alarm.common.AlarmUtil;
 import com.dym.alarm.common.DDialog;
 import com.dym.alarm.common.Event;
@@ -27,11 +29,6 @@ import com.dym.alarm.model.MAlarm;
 import com.dym.alarm.views.DGridLayoutManager;
 import com.dym.alarm.views.SlideLeftRemoveGiftAnimator;
 import com.dym.alarm.views.VHAlarmItem;
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.NativeExpressAdView;
-import com.google.android.gms.ads.VideoController;
-import com.google.android.gms.ads.VideoOptions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,7 +74,7 @@ public class FormMain extends Form implements View.OnClickListener {
             animator.setInterpolator(new OvershootInterpolator());
 
             view_tip = ViewInject(R.id.alarm_add_tip);
-            view_tip.setVisibility(View.GONE);
+            view_tip.setVisibility(View.VISIBLE);
 
 
             mRecyclerView.setItemAnimator(animator);
@@ -208,6 +205,7 @@ public class FormMain extends Form implements View.OnClickListener {
 
 
 
+
                     }
                 }).addButtonListener(R.id.btn_cancel, new DialogInterface.OnClickListener() {
                     @Override
@@ -311,38 +309,28 @@ public class FormMain extends Form implements View.OnClickListener {
 
 
 
-                    NativeExpressAdView  mAdView = (NativeExpressAdView) holder.itemView.findViewById(R.id.adView);
-                    // Set its video options.
-                    mAdView.setVideoOptions(new VideoOptions.Builder()
-                            .setStartMuted(true)
-                            .build());
+                    View  mAdView = holder.itemView.findViewById(R.id.adView);
 
-                    // The VideoController can be used to get lifecycle events and info about an ad's video
-                    // asset. One will always be returned by getVideoController, even if the ad has no video
-                    // asset.
-                    final VideoController mVideoController = mAdView.getVideoController();
-                    mVideoController.setVideoLifecycleCallbacks(new VideoController.VideoLifecycleCallbacks() {
+
+
+                    AdLoader adLoader = RT.getAdLoader(mAdView, new AdListener() {
                         @Override
-                        public void onVideoEnd() {
-                           // Log.d(LOG_TAG, "Video playback is finished.");
-                            super.onVideoEnd();
+                        public void onLoad() {
+
+                        }
+
+                        @Override
+                        public void onError() {
+
+                        }
+
+                        @Override
+                        public void onClick() {
+
                         }
                     });
 
-                    // Set an AdListener for the AdView, so the Activity can take action when an ad has finished
-                    // loading.
-                    mAdView.setAdListener(new AdListener() {
-                        @Override
-                        public void onAdLoaded() {
-                            if (mVideoController.hasVideoContent()) {
-                                //Log.d(LOG_TAG, "Received an ad that contains a video asset.");
-                            } else {
-
-                            }
-                        }
-                    });
-
-                    mAdView.loadAd(new AdRequest.Builder().build());
+                    adLoader.load();
 
 
 

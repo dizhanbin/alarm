@@ -14,6 +14,10 @@ public class RT {
     public static boolean VISIBLE_ALARM_ITEM_AD = false;
 
 
+    public static AdLoader getAdLoader(View view, AdListener listener){
+
+        return null;
+    }
 
 
 }

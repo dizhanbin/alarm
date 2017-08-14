@@ -2,6 +2,8 @@ package com.dym.alarm.ad;
 
 import android.view.View;
 
+import com.google.android.gms.ads.NativeExpressAdView;
+
 import java.lang.ref.WeakReference;
 
 /**
@@ -23,6 +25,8 @@ public abstract class AdLoader {
         this.listener = listener;
 
     }
+
+
 
     public View getAdView(){
 
