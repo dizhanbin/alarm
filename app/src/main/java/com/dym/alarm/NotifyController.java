@@ -1,52 +1,32 @@
 package com.dym.alarm;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.KeyguardManager;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.media.MediaPlayer;
-import android.media.TimedMetaData;
-import android.media.TimedText;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Handler;
-import android.os.Looper;
 import android.os.PowerManager;
 import android.os.SystemClock;
 import android.os.Vibrator;
-import android.support.annotation.RequiresPermission;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
-import android.widget.TimePicker;
 
 import com.crashlytics.android.Crashlytics;
+import com.dym.alarm.ad.AdLoader;
 import com.dym.alarm.common.AlarmUtil;
-import com.dym.alarm.common.DDialog;
-import com.dym.alarm.common.Event;
 import com.dym.alarm.common.NLog;
 import com.dym.alarm.common.SEvent;
-import com.dym.alarm.common.SystemUtil;
 import com.dym.alarm.datacenter.DataCenter;
 import com.dym.alarm.model.MAlarm;
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.NativeExpressAdView;
-import com.google.android.gms.ads.VideoController;
-import com.google.android.gms.ads.VideoOptions;
 
 import java.io.File;
-import java.util.Date;
 import java.util.Random;
-
-import io.fabric.sdk.android.services.common.Crash;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -158,6 +138,36 @@ public class NotifyController extends Activity implements MediaPlayer.OnErrorLis
         TextView text_name = (TextView) findViewById(R.id.text_name);
         if( alarm != null )
         text_name.setText(alarm.label);
+
+
+        View  mAdView = findViewById(R.id.adView);
+
+
+
+        AdLoader adLoader = RT.getAdLoader(mAdView, new com.dym.alarm.ad.AdListener() {
+            @Override
+            public void onLoad() {
+
+                SEvent.log("GoogleAD","todo","onLoad");
+            }
+
+            @Override
+            public void onError() {
+
+                SEvent.log("GoogleAD","todo","onError");
+
+            }
+
+            @Override
+            public void onClick() {
+
+                SEvent.log("GoogleAD","todo","onClick");
+
+            }
+        });
+
+        adLoader.load();
+
 
 
     }

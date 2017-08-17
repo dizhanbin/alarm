@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "680124416721",
+    "firebase_url": "https://dymalarm-bb067.firebaseio.com",
+    "project_id": "dymalarm-bb067",
+    "storage_bucket": "dymalarm-bb067.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:680124416721:android:f17a6c1ec2a7258f",
+        "android_client_info": {
+          "package_name": "com.dym.alarm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "680124416721-k9is1ijmfu7t2ljm0aamj11gb7507v40.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dym.alarm",
+            "certificate_hash": "5b3734c09de160b1b72dee2d1826a505c5a36ea7"
+          }
+        },
+        {
+          "client_id": "680124416721-m92eikr6g84kmr9069je6155m1uj2tp7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDeL50VPQdyrKkc7_pY2eH27iXS9Os0YPY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "680124416721-m92eikr6g84kmr9069je6155m1uj2tp7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

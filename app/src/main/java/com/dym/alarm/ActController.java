@@ -7,7 +7,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.provider.Settings;
 import android.support.annotation.AnimRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -21,9 +20,19 @@ import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
-import com.dym.alarm.common.*;
+import com.dym.alarm.common.Event;
+import com.dym.alarm.common.FlowBox;
+import com.dym.alarm.common.FlowBoxs;
+import com.dym.alarm.common.FlowFactory;
+import com.dym.alarm.common.FormFactory;
+import com.dym.alarm.common.IToDo;
+import com.dym.alarm.common.MessageCenter;
+import com.dym.alarm.common.NLog;
+import com.dym.alarm.common.SEvent;
+import com.dym.alarm.common.Strings;
+import com.dym.alarm.common.UIUtil;
 import com.dym.alarm.datacenter.EventBusiness;
-import com.google.android.gms.ads.MobileAds;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -92,10 +101,7 @@ public class ActController extends AppCompatActivity implements IToDo, IControll
 
         instance = this;
 
-        MobileAds.initialize(this, "ca-app-pub-2800914329604494~1692373124content_copy");
-
-        PayHelper.getInstance();
-
+        RT.bus_init();
 
 
     }

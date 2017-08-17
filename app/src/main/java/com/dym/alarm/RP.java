@@ -249,8 +249,6 @@ public class RP {
 
         public static String market = "market://details?id=" +  ActController.instance.getPackageName();
 
-        public static String market_https = "https://play.google.com/store/apps/details?id=" +  ActController.instance.getPackageName();
-
 
     }
 

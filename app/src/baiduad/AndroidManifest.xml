@@ -10,12 +10,16 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
-
-
-
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.FLASHLIGHT"/>
+
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
 
     <application
         android:name=".DUMAPP"
@@ -27,8 +31,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <meta-data android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version"/>
+        <meta-data android:name="BDAPPID" android:value="10006979"/>
+        <meta-data android:name="BDAPPKEY" android:value="4XpYGsLHk0hZuPMhzshhqhxxkGVk8uj0"/>
+
         <activity
             android:name=".ActController"
             android:configChanges="keyboard|keyboardHidden|orientation|locale|screenSize"
@@ -76,8 +81,24 @@
             android:name="io.fabric.ApiKey"
             android:value="6ca46a1cd631ed7eee7cacbcf27dbe2372addfde" />
 
-        <activity android:name="com.google.android.gms.ads.AdActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"/>
+
+
+        <!--baidu-->
+
+        <receiver android:name="com.baidu.appx.app_download.CompleteReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.DOWNLOAD_COMPLETE"/>
+                <action android:name="android.intent.action.DOWNLOAD_NOTIFICATION_CLICKED"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_ADDED"/>
+
+                <data android:scheme="package"/> <!-- 注意！！ 这句必须要加，否则接收不到安装完成广播 -->
+            </intent-filter>
+        </receiver><!-- 注册SDK的activity -->
+        <activity android:configChanges="orientation|screenSize" android:name="com.baidu.appx.uikit.BDActivity">
+        </activity>
+
 
     </application>
 

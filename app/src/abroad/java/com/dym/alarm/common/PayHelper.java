@@ -239,7 +239,7 @@ public class PayHelper {
 
 
 
-
+       if( init_ok == 1 )
        buy(new PayListener() {
            @Override
            public void pay_do(PR pr, Object value) {

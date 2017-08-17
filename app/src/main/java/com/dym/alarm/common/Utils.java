@@ -10,6 +10,8 @@ import android.provider.MediaStore;
 
 import com.alibaba.fastjson.JSON;
 import com.dym.alarm.ActController;
+import com.dym.alarm.DUMAPP;
+import com.dym.alarm.R;
 import com.dym.alarm.RP;
 import com.dym.alarm.model.MOpenSource;
 import com.dym.alarm.model.MSound;
@@ -181,7 +183,7 @@ public class Utils {
 
         Intent data=new Intent(Intent.ACTION_SENDTO);
         data.setData(Uri.parse("mailto:zhanbin.di@gmail.com"));
-        data.putExtra(Intent.EXTRA_SUBJECT, "advice");
+        data.putExtra(Intent.EXTRA_SUBJECT, RP.UI.getString(R.string.suggest_title));
         data.putExtra(Intent.EXTRA_TEXT, "");
         context.startActivity(data);
 

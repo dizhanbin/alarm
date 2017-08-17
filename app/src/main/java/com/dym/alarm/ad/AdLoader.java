@@ -2,7 +2,6 @@ package com.dym.alarm.ad;
 
 import android.view.View;
 
-import com.google.android.gms.ads.NativeExpressAdView;
 
 import java.lang.ref.WeakReference;
 

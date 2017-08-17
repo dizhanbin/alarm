@@ -4,9 +4,6 @@ import android.view.View;
 
 import com.dym.alarm.ad.AdListener;
 import com.dym.alarm.ad.AdLoader;
-import com.dym.alarm.ad.GoogleAdLoader;
-import com.dym.alarm.common.PayHelper;
-import com.google.android.gms.ads.MobileAds;
 
 /**
  * Created by dizhanbin on 2017/8/2.
@@ -21,22 +18,22 @@ public class RT {
 
     public static boolean VISIBLE_ALARM_ITEM_AD = false;
 
-
-    public static String market_https = "https://play.google.com/store/apps/details?id=" + DUMAPP.getInstance().getPackageName();
+    public static String market_https = "http://a.app.qq.com/o/simple.jsp?pkgname=com.dym.alarm";//https://mobile.baidu.com/item?docid=22052028&source=s1001";
 
 
     public static AdLoader getAdLoader(View view, AdListener listener){
 
-        return new GoogleAdLoader(view,listener);
+        return new AdLoader(view,listener) {
+            @Override
+            public void load() {
+
+            }
+        };
     }
 
     public static void bus_init() {
 
-        PayHelper.getInstance();
 
-        //admob init
-        MobileAds.initialize(DUMAPP.getInstance(), "ca-app-pub-2800914329604494~1692373124content_copy");
 
     }
-
 }

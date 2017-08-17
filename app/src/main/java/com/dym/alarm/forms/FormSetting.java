@@ -10,15 +10,13 @@ import android.view.ViewGroup;
 
 import com.dym.alarm.Form;
 import com.dym.alarm.R;
-import com.dym.alarm.RP;
+import com.dym.alarm.RT;
+import com.dym.alarm.ad.AdListener;
+import com.dym.alarm.ad.AdLoader;
 import com.dym.alarm.common.Event;
 import com.dym.alarm.common.PayHelper;
 import com.dym.alarm.common.Utils;
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.NativeExpressAdView;
-import com.google.android.gms.ads.VideoController;
-import com.google.android.gms.ads.VideoOptions;
+
 
 public class FormSetting extends Form {
 
@@ -34,51 +32,34 @@ public class FormSetting extends Form {
             mView = inflater.inflate(R.layout.form_setting, null);
             setView(mView);
 
-           final NativeExpressAdView mAdView = (NativeExpressAdView) mView.findViewById(R.id.adView);
 
-            // Set its video options.
-            mAdView.setVideoOptions(new VideoOptions.Builder()
-                    .setStartMuted(true)
-                    .build());
 
 
             view_ad_container = ViewInject(R.id.ad_container);
+            View adView =  ViewInject(R.id.adView);
 
-            // The VideoController can be used to get lifecycle events and info about an ad's video
-            // asset. One will always be returned by getVideoController, even if the ad has no video
-            // asset.
-            final VideoController mVideoController = mAdView.getVideoController();
-            mVideoController.setVideoLifecycleCallbacks(new VideoController.VideoLifecycleCallbacks() {
+
+
+
+            AdLoader adLoader = RT.getAdLoader(adView, new AdListener() {
                 @Override
-                public void onVideoEnd() {
-                    // Log.d(LOG_TAG, "Video playback is finished.");
-                    super.onVideoEnd();
-                }
-            });
-
-            // Set an AdListener for the AdView, so the Activity can take action when an ad has finished
-            // loading.
-            mAdView.setAdListener(new AdListener() {
-                @Override
-                public void onAdLoaded() {
-                    if (mVideoController.hasVideoContent()) {
-                        //Log.d(LOG_TAG, "Received an ad that contains a video asset.");
-                    } else {
-
-                    }
-
+                public void onLoad() {
                     view_ad_container.setVisibility(View.VISIBLE);
+                }
+
+                @Override
+                public void onError() {
 
                 }
 
+                @Override
+                public void onClick() {
 
-
-                public void onAdClicked() {
                 }
-
             });
 
-            mAdView.loadAd(new AdRequest.Builder().build());
+            adLoader.load();
+
 
 
         }
@@ -124,9 +105,10 @@ public class FormSetting extends Form {
 
                 shareIntent.setAction(Intent.ACTION_SEND);
                 shareIntent.setType("text/plain");
-
-                shareIntent.putExtra(android.content.Intent.EXTRA_TEXT, getContextString(R.string.share_tip)+ RP.Url.market_https);
+                shareIntent.putExtra(android.content.Intent.EXTRA_TEXT, getContextString(R.string.share_tip)+"\n"+ RT.market_https);
                 shareIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, getContextString(R.string.share_tip));
+                //shareIntent.setPackage(getContextString(R.string.app_name));
+
                 getContext().startActivity(Intent.createChooser(shareIntent, getString(R.string.share_us)));
 
                 break;

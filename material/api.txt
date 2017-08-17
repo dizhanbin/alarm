@@ -3,3 +3,103 @@
         int flag = Settings.System.getInt(getContentResolver(),Settings.System.ACCELEROMETER_ROTATION, 0);
 
         NLog.i("auto-rotate :%d",flag);
+2.防卸载
+
+public class AdminUtil {
+
+
+    public static boolean isActive(Context context) {
+        try {
+            ComponentName uncn = new ComponentName("com.fotoable.calculator.plus",
+                    "com.fotoable.photoplus.service.UninstallDeviceReceiver");
+
+
+            DevicePolicyManager devicePolicyManager = (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE);
+
+            return devicePolicyManager.isAdminActive(uncn);
+
+            /*
+            for (ComponentName cn : devicePolicyManager.getActiveAdmins()) {
+                Log.i("cname", "name:" + cn.getClassName() + " pname:" + cn.getPackageName());
+                if (cn.getClassName().equals(uncn.getClassName()) && uncn.getPackageName().equals(cn.getPackageName())) {
+                    return true;
+                }
+
+            }
+            */
+        } catch (Exception e) {
+
+            NLog.e(e);
+            Crashlytics.logException(e);
+        }
+        return false;
+    }
+
+    public static void cancel(Context context) {
+
+        try {
+            ComponentName uncn = new ComponentName("com.fotoable.calculator.plus",
+                    "com.fotoable.photoplus.service.UninstallDeviceReceiver");
+            DevicePolicyManager devicePolicyManager = (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE);
+            devicePolicyManager.removeActiveAdmin(uncn);
+        } catch (Exception e) {
+
+            NLog.e(e);
+            Crashlytics.logException(e);
+        }
+
+    }
+
+    public static void active(Context context) {
+
+        try {
+            ComponentName uncn = new ComponentName("com.fotoable.calculator.plus",
+                    "com.fotoable.photoplus.service.UninstallDeviceReceiver");
+            Intent intent = new Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
+            intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, uncn);
+            intent.putExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION,
+                    context.getResources().getString(R.string.uninstall_protect_1));
+
+
+            context.startActivity(intent);
+        } catch (Exception e) {
+
+            NLog.e(e);
+            Crashlytics.logException(e);
+        }
+
+    }
+
+    public static String getGoogleAccount() {
+
+
+        if(RP.Permission.checkAccountPermission(ActController.instance))
+        try {
+            NLog.i("Admin account get ");
+            Pattern emailPattern = Patterns.EMAIL_ADDRESS; // API level 8+
+            Account[] accounts = AccountManager.get(ActController.instance).getAccounts();
+
+
+            NLog.i("Admin account %d ",accounts.length);
+
+            for (Account account : accounts) {
+                NLog.i("Admin account:%s type:%s",account.name,account.type);
+                    String possibleEmail = account.name;
+                    if ( "com.google".equals( account.type ) )
+                        return possibleEmail;
+
+            }
+        } catch (Exception e) {
+            NLog.e(e);
+            Crashlytics.logException(e);
+        }
+
+        return null;
+
+    }
+
+
+}
+
+
+

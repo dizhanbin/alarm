@@ -2,13 +2,10 @@
 package com.dym.alarm.forms;
 
 import android.content.DialogInterface;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.media.RingtoneManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatCheckBox;
-import android.support.v7.widget.DrawableUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,17 +18,13 @@ import android.widget.ToggleButton;
 
 import com.dym.alarm.ActController;
 import com.dym.alarm.Form;
-import com.dym.alarm.common.AlarmUtil;
-import com.dym.alarm.common.AnalyseUtil;
-import com.dym.alarm.common.DDialog;
-import com.dym.alarm.common.FileUtils;
-import com.dym.alarm.model.MAlarm;
 import com.dym.alarm.R;
+import com.dym.alarm.common.AlarmUtil;
+import com.dym.alarm.common.DDialog;
 import com.dym.alarm.common.Event;
+import com.dym.alarm.common.FileUtils;
 import com.dym.alarm.common.NLog;
-import com.dym.alarm.model.MSound;
-
-import java.io.File;
+import com.dym.alarm.model.MAlarm;
 
 import tyrantgit.explosionfield.ExplosionField;
 
@@ -225,7 +218,7 @@ public class FormEdit extends Form {
 
             case R.id.btn_save:
 
-                AnalyseUtil.addEvent("formedit","operator","click_save");
+
                 saveAlarm();
 
                 if( model.on )

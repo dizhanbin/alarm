@@ -51,7 +51,8 @@
     <string name="repeat_day_unit_m">M</string>
     <string name="repeat_day_unit_h">H</string>
     <string name="alarm_label">label</string>
-    <string name="alarm_title_def">Healthy drinking water alarm clock</string>
+    <string name="alarm_title_def">Drinking water time is up</string>
+    <string name="suggest_title">Suggestions for Improvement</string>
 
     <array name="about_titles">
 

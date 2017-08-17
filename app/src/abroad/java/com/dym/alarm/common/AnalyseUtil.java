@@ -2,9 +2,8 @@ package com.dym.alarm.common;
 
 import android.os.Bundle;
 
+import com.crashlytics.android.Crashlytics;
 import com.dym.alarm.DUMAPP;
-import com.google.android.gms.analytics.GoogleAnalytics;
-import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
@@ -47,7 +46,11 @@ public class AnalyseUtil {
 
     public static void addEvent(String category,String key,String value){
 
-        googleTracker(category,key,value);
+        try {
+            googleTracker(category, key, value);
+        }catch (Exception e){
+            Crashlytics.logException(e);
+        }
 
     }
 }

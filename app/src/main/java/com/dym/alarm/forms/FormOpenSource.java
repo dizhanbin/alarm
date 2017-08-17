@@ -1,7 +1,6 @@
 /* create my 17 */
 package com.dym.alarm.forms;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
@@ -12,16 +11,12 @@ import android.view.ViewGroup;
 import android.view.animation.OvershootInterpolator;
 import android.widget.TextView;
 
-import com.alibaba.fastjson.JSON;
 import com.dym.alarm.Form;
 import com.dym.alarm.R;
 import com.dym.alarm.common.Event;
 import com.dym.alarm.common.NLog;
 import com.dym.alarm.common.Utils;
-import com.dym.alarm.model.MAlarm;
 import com.dym.alarm.model.MOpenSource;
-import com.dym.alarm.views.VHAlarmItem;
-import com.google.android.gms.vision.text.Text;
 
 import java.util.ArrayList;
 import java.util.List;

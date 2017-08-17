@@ -1,5 +1,10 @@
 package com.dym.alarm;
 
+
+import android.view.View;
+
+import com.dym.alarm.ad.AdListener;
+import com.dym.alarm.ad.AdLoader;
 /**
  * Created by dizhanbin on 2017/8/2.
  */
@@ -13,11 +18,22 @@ public class RT {
 
     public static boolean VISIBLE_ALARM_ITEM_AD = false;
 
+    public static String market_https = "http://a.app.qq.com/o/simple.jsp?pkgname=com.dym.alarm";
+
 
     public static AdLoader getAdLoader(View view, AdListener listener){
 
-        return null;
-    }
+        return new AdLoader(view,listener) {
+            @Override
+            public void load() {
 
+            }
+        };
+    }
+    public static void bus_init() {
+
+
+
+    }
 
 }
