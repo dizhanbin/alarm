@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
 
-            android:drawableLeft="@drawable/ic_audiotrack_light"
+            android:drawableLeft="@mipmap/ic_audiotrack_light"
             android:drawablePadding="20dp"
             android:ellipsize="middle"
             android:paddingBottom="10dp"
