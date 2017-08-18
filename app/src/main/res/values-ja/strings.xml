@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">目覚まし時計+</string>
+    <string name="action_settings">設定</string>
+    <string name="repeat_week">リピートウィーク</string>
+    <string name="begin_time">時間を開始する：</string>
+    <string name="sound_silent">サイレント</string>
+    <string name="sound_vibrate">振動する</string>
+    <string name="repeat_day">繰り返し日</string>
+    <string name="end_time">終了時間：</string>
+    <string name="delete_the_alarm">目覚まし時計を削除する</string>
+    <string name="title_open_source">オープンソース</string>
+    <string name="title_settings">設定</string>
+    <string name="s_open_source">オープンソース</string>
+    <string name="s_about">約</string>
+    <string name="s_feedback">フィードバック</string>
+    <string name="s_rate_us">私たちを評価してください</string>
+    <string name="s_share_with_friends">友人たちと分ける</string>
+    <string name="s_similar_app">同様のアプリ（AD）</string>
+    <string name="s_remove_ad">ADを削除</string>
+    <string name="title_sound">音</string>
+    <string name="t_your_sound">あなたの音</string>
+    <string name="t_device_sound">デバイスサウンド</string>
+    <string name="des_repeat">繰り返す</string>
+    <string name="des_no_repeat">繰り返さない</string>
+    <string name="des_begintime">始まる:</string>
+    <string name="des_alarm_time">目覚まし時計時刻:</string>
+    <string name="des_one_alarm">1つの目覚まし時計/</string>
+    <string name="des_unit">分</string>
+    <string name="des_unit_hour">時</string>
+    <string name="des_endtime">終了時間:</string>
+    <string name="des_next_alarm">次の目覚まし時計時刻:</string>
+    <string name="btn_close">閉じる</string>
+    <string name="btn_to_set">設定する</string>
+    <string name="btn_to_pause">停止</string>
+    <string name="add_tip">目覚まし時計を追加する</string>
+    <string name="share_tip">ヒース目覚まし時計クロック</string>
+    <string name="share_us">を使用して共有</string>
+    <string name="alarm_edit">目覚まし時計</string>
+    <string name="week_sun">S</string>
+    <string name="week_mon">M</string>
+    <string name="week_tue">T</string>
+    <string name="week_wen">W</string>
+    <string name="week_thu">T</string>
+    <string name="week_fri">F</string>
+    <string name="week_sat">S</string>
+    <string name="edit_slient">サイレント</string>
+    <string name="dialog_title_confirm">確認</string>
+    <string name="msg_delete_alarm">アラームを削除する?</string>
+    <string name="btn_delete">削除</string>
+    <string name="btn_cancel">キャンセル</string>
+    <string name="repeat_day_unit_m">M</string>
+    <string name="repeat_day_unit_h">H</string>
+    <string name="alarm_label">タイトル</string>
+    <string name="alarm_title_def">飲用水の時間が増えています</string>
+    <string name="suggest_title">提案を改善する</string>
+
+    <array name="about_titles">
+
+        <item>ループアラームクロック</item>
+        <item>制限時間</item>
+        <item>アラーム音を設定する</item>
+        <item>電話機の音楽着メロを設定する</item>
+        <item>おかげさまでオープンソースコミュニティ</item>
+
+
+    </array>
+
+    <array name="about_descripts">
+
+        <item>昼間の目覚まし時計を追加するためのわずかな手順</item>
+        <item>日の開始時刻、終了時刻、インターバル時間を設定する</item>
+        <item>システムの着信音またはミュートを選択できます</item>
+        <item>システムを介して着信音として電話の音楽を選択する</item>
+        <item>ソフトウェアでオープンソースコードを表示する</item>
+
+    </array>
+
+
+</resources>
