@@ -147,8 +147,8 @@ android {
 
 dependencies {
 
-    qqadCompile fileTree(dir: 'src/qqad/libs', include: ['*.jar'])
-    baiduadCompile fileTree(dir: 'src/baiduad/libs', include: ['*.jar'])
+   qqadCompile fileTree(dir: 'src/qqad/libs', include: ['*.jar'])
+    //baiduadCompile fileTree(dir: 'src/baiduad/libs', include: ['*.jar'])
 
 
 
@@ -168,7 +168,7 @@ dependencies {
     abroadCompile project(':inapppay')
 
 
-    compile 'com.google.android.gms:play-services:11.0.0'
+    abroadCompile 'com.google.android.gms:play-services:11.0.0'
     compile 'com.android.support:appcompat-v7:25.3.1'
     //compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha7'
     compile 'com.android.support:design:25.3.1'

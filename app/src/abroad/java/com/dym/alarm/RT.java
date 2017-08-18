@@ -1,5 +1,6 @@
 package com.dym.alarm;
 
+import android.content.Context;
 import android.view.View;
 
 import com.dym.alarm.ad.AdListener;
@@ -21,6 +22,8 @@ public class RT {
 
     public static boolean VISIBLE_ALARM_ITEM_AD = false;
 
+    public static boolean VISIBLE_AD = false;
+
 
     public static String market_https = "https://play.google.com/store/apps/details?id=" + DUMAPP.getInstance().getPackageName();
 
@@ -39,4 +42,7 @@ public class RT {
 
     }
 
+    public static String getShareText() {
+       return  RP.UI.getString(R.string.share_tip)+"\n"+ RT.market_https;
+    }
 }

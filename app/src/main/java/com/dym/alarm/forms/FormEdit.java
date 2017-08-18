@@ -171,7 +171,7 @@ public class FormEdit extends Form {
         if( model.sound == null ){
 
 
-            Drawable drawable_left = getContext().getResources().getDrawable(R.drawable.quantum_ic_volume_off_grey600_36);
+            Drawable drawable_left = getContext().getResources().getDrawable(R.mipmap.quantum_ic_volume_off_grey600_36);
             drawable_left.setBounds(0, 0, drawable_left.getMinimumWidth(), drawable_left.getMinimumHeight());
             text_sound.setCompoundDrawablesRelative(drawable_left,null,null,null);
             text_sound.setText(R.string.edit_slient);

@@ -1,5 +1,8 @@
 package com.dym.alarm;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.app.KeyguardManager;
 import android.content.Context;
@@ -13,8 +16,10 @@ import android.os.SystemClock;
 import android.os.Vibrator;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.AnimationSet;
 import android.widget.TextView;
 
 import com.crashlytics.android.Crashlytics;
@@ -22,6 +27,7 @@ import com.dym.alarm.ad.AdLoader;
 import com.dym.alarm.common.AlarmUtil;
 import com.dym.alarm.common.NLog;
 import com.dym.alarm.common.SEvent;
+import com.dym.alarm.common.UIUtil;
 import com.dym.alarm.datacenter.DataCenter;
 import com.dym.alarm.model.MAlarm;
 
@@ -36,7 +42,7 @@ public class NotifyController extends Activity implements MediaPlayer.OnErrorLis
 
 
 
-    View dialog_container;
+    ViewGroup dialog_container;
 
     MediaPlayer mMediaPlayer;
     Vibrator vibrator;
@@ -47,6 +53,7 @@ public class NotifyController extends Activity implements MediaPlayer.OnErrorLis
 
     PowerManager.WakeLock mWakelock;
 
+    View view_clock;
 
 
     @Override
@@ -90,13 +97,15 @@ public class NotifyController extends Activity implements MediaPlayer.OnErrorLis
         alarm = MAlarm.fromJson(json);
 
 
-        if( RP.Data.isVip ) {
+        if( RP.Data.isVip || !RT.VISIBLE_AD ) {
             setContentView(R.layout.dialog_notify_noad);
-
+            startClockAnimator();
         }
         else {
             setContentView(R.layout.dialog_notify);
+            startClockAnimator();
             loadAd();
+
         }
 
         RP.Statusbar.setStatusbarColor(this,0x00000000);
@@ -129,6 +138,52 @@ public class NotifyController extends Activity implements MediaPlayer.OnErrorLis
         }
 
 
+        TextView text_name = (TextView) findViewById(R.id.text_name);
+        text_name.setText(alarm.label);
+
+
+
+    }
+
+    private void startClockAnimator() {
+
+        dialog_container = (ViewGroup)findViewById(R.id.dialog_container);
+
+        view_clock = findViewById(R.id.image_clock);
+        /*
+        final ObjectAnimator animator = ObjectAnimator.ofFloat(view_clock,"rotation",-30f,0,30);
+        animator.setDuration(3000);
+        animator.setRepeatMode(ValueAnimator.REVERSE);
+        animator.setRepeatCount(ValueAnimator.INFINITE);
+        animator.start();
+        */
+
+
+        /*
+
+        ViewGroup root_parent = (ViewGroup) findViewById(R.id.root_parent);
+
+        root_parent.getOverlay().add(view_clock);
+
+        view_clock.setX(300);
+        view_clock.setY(1500);
+
+        */
+        int off = 150;
+        int off2 = 130;
+
+        final ObjectAnimator t_y = ObjectAnimator.ofFloat(view_clock,"y",UIUtil.height/3);
+        t_y.setDuration(1000);
+
+        final ObjectAnimator d_y = ObjectAnimator.ofFloat(view_clock,"translationY",UIUtil.height/3,off,off2,off,off2,off,off2,off,off2);
+        d_y.setDuration(1000);
+        d_y.setRepeatMode(ValueAnimator.REVERSE);
+        d_y.setRepeatCount(ValueAnimator.INFINITE);
+        AnimatorSet set = new AnimatorSet();
+        set.play(t_y).before(d_y);
+        set.start();
+
+
 
     }
 
@@ -140,7 +195,8 @@ public class NotifyController extends Activity implements MediaPlayer.OnErrorLis
         text_name.setText(alarm.label);
 
 
-        View  mAdView = findViewById(R.id.adView);
+
+        final View  mAdView = findViewById(R.id.adView);
 
 
 
@@ -149,6 +205,11 @@ public class NotifyController extends Activity implements MediaPlayer.OnErrorLis
             public void onLoad() {
 
                 SEvent.log("GoogleAD","todo","onLoad");
+
+                if( view_clock != null )
+                    view_clock.setVisibility(View.GONE);
+                mAdView.setVisibility(View.VISIBLE);
+
             }
 
             @Override

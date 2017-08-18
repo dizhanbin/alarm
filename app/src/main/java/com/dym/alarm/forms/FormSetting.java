@@ -105,7 +105,7 @@ public class FormSetting extends Form {
 
                 shareIntent.setAction(Intent.ACTION_SEND);
                 shareIntent.setType("text/plain");
-                shareIntent.putExtra(android.content.Intent.EXTRA_TEXT, getContextString(R.string.share_tip)+"\n"+ RT.market_https);
+                shareIntent.putExtra(android.content.Intent.EXTRA_TEXT, RT.getShareText());
                 shareIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, getContextString(R.string.share_tip));
                 //shareIntent.setPackage(getContextString(R.string.app_name));
 

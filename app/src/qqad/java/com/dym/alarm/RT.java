@@ -36,4 +36,8 @@ public class RT {
 
     }
 
+    public static String getShareText() {
+        return  RP.UI.getString(R.string.share_tip)+"\n"+RT.market_https;
+    }
+
 }

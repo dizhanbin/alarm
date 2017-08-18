@@ -18,7 +18,7 @@ public class RT {
 
     public static boolean VISIBLE_ALARM_ITEM_AD = false;
 
-    public static String market_https = "http://a.app.qq.com/o/simple.jsp?pkgname=com.dym.alarm";//https://mobile.baidu.com/item?docid=22052028&source=s1001";
+    public static String market_https = "https://mobile.baidu.com/item?docid=22052028&source=s1001";
 
 
     public static AdLoader getAdLoader(View view, AdListener listener){
@@ -36,4 +36,9 @@ public class RT {
 
 
     }
+
+    public static String getShareText() {
+        return  RP.UI.getString(R.string.share_tip)+"\n"+RT.market_https;
+    }
+
 }
