@@ -20,6 +20,7 @@ public class RT {
 
     public static String market_https = "http://a.app.qq.com/o/simple.jsp?pkgname=com.dym.alarm";
 
+    public static boolean VISIBLE_AD = false;
 
     public static AdLoader getAdLoader(View view, AdListener listener){
 
