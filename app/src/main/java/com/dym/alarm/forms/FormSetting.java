@@ -58,7 +58,9 @@ public class FormSetting extends Form {
                 }
             });
 
-            adLoader.load();
+
+            if( RT.VISIBLE_AD )
+                adLoader.load();
 
 
 
