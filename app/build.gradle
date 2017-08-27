@@ -120,24 +120,24 @@ android {
 
             signingConfig signingConfigs.release
             applicationId "com.dym.alarm"
-            versionCode 11
-            versionName "1.0.4"
+            versionCode 13
+            versionName "1.0.6"
 
         }
         qqad {
 
             signingConfig signingConfigs.release
             applicationId "com.dym.alarm"
-            versionCode 11
-            versionName "1.0.4"
+            versionCode 13
+            versionName "1.0.6"
 
         }
         baiduad {
 
             signingConfig signingConfigs.release
             applicationId "com.dym.alarm"
-            versionCode 11
-            versionName "1.0.4"
+            versionCode 13
+            versionName "1.0.6"
 
         }
 

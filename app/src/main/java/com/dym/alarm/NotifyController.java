@@ -19,7 +19,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.animation.AnimationSet;
 import android.widget.TextView;
 
 import com.crashlytics.android.Crashlytics;
@@ -33,6 +32,8 @@ import com.dym.alarm.model.MAlarm;
 
 import java.io.File;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -54,6 +55,10 @@ public class NotifyController extends Activity implements MediaPlayer.OnErrorLis
     PowerManager.WakeLock mWakelock;
 
     View view_clock;
+
+
+    Timer timer;
+    boolean finish_from_timer = false;
 
 
     @Override
@@ -142,8 +147,21 @@ public class NotifyController extends Activity implements MediaPlayer.OnErrorLis
         text_name.setText(alarm.label);
 
 
+        timer = new Timer();
+
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                finish_from_timer = true;
+                finish();
+            }
+        },15000);
+
+
 
     }
+
+
 
     private void startClockAnimator() {
 
@@ -259,6 +277,7 @@ public class NotifyController extends Activity implements MediaPlayer.OnErrorLis
             Crashlytics.logException(e);
         }
         super.onPause();
+
     }
 
 
@@ -356,6 +375,18 @@ public class NotifyController extends Activity implements MediaPlayer.OnErrorLis
         if( vibrator != null )
             vibrator.cancel();
         do_stop_medaiplayer();
+
+        if( !finish_from_timer ){
+            if( timer != null ) {
+                try {
+                    timer.cancel();
+                }catch (Exception e){
+                    NLog.e(e);
+                }
+                timer  = null;
+            }
+
+        }
 
         super.onDestroy();
     }
