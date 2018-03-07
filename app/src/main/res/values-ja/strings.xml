@@ -76,5 +76,6 @@
 
     </array>
 
+    <string name="user_stop">20秒後に自動的に閉</string>
 
 </resources>

@@ -1,10 +1,8 @@
 package com.dym.alarm.model;
 
-import android.content.res.Configuration;
 import android.text.format.DateFormat;
 
 import com.alibaba.fastjson.JSON;
-import com.dym.alarm.ActController;
 import com.dym.alarm.DUMAPP;
 import com.dym.alarm.R;
 import com.dym.alarm.RP;
@@ -15,7 +13,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 /**
  * Created by dizhanbin on 17/5/20.
@@ -39,6 +36,8 @@ public class MAlarm {
     public int repeat_day_value=1;//重复值
 
     public String createtime;//yyyy-mm-dd hh:mm:ss
+
+    public boolean stop_auto;
 
 
     public String getEndtimeDisplay(){

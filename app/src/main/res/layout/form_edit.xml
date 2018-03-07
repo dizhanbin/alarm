@@ -294,11 +294,20 @@
                         android:id="@+id/checkbox_vibrate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
                         android:layout_gravity="right|center_vertical"
                         android:text="@string/sound_vibrate" />
 
 
                 </FrameLayout>
+
+                <CheckBox
+                    android:id="@+id/checkbox_userstop"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/user_stop" />
+
             </LinearLayout>
 
 

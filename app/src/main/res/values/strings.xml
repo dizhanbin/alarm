@@ -73,6 +73,7 @@
         <item>View the open source code introduced by the software</item>
 
     </array>
+    <string name="user_stop">Automatically shut down after 20 seconds</string>
 
 
 </resources>

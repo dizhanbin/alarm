@@ -7,7 +7,9 @@ import android.app.Activity;
 import android.app.KeyguardManager;
 import android.content.Context;
 import android.content.Intent;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -59,6 +61,9 @@ public class NotifyController extends Activity implements MediaPlayer.OnErrorLis
 
     Timer timer;
     boolean finish_from_timer = false;
+
+
+    int vol_music;
 
 
     @Override
@@ -115,18 +120,32 @@ public class NotifyController extends Activity implements MediaPlayer.OnErrorLis
 
         RP.Statusbar.setStatusbarColor(this,0x00000000);
 
+        AudioManager audioManager = (AudioManager) this.getSystemService(Context.AUDIO_SERVICE);
+
+        final int vol = audioManager.getStreamVolume(AudioManager.STREAM_ALARM);
+        final int vol_a_max = audioManager.getStreamMaxVolume(AudioManager.STREAM_ALARM);
+        final int vol_m_max = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
 
 
-        NLog.i("sound json:%s  ",json);
-        NLog.i("alarm  Object:%s  ",alarm);
+        int vv = vol_m_max * vol / vol_a_max;
+
+
+        NLog.i("sound json:%s ",json);
+        NLog.i("alarm  vol:%d/%d  music:%d vv:%d",vol,vol_a_max,vol_m_max,vv);
 
         if( alarm != null && alarm.sound != null ) {
 
             Uri uri = Uri.fromFile(new File(alarm.sound));
+
+
             mMediaPlayer = MediaPlayer.create(this,uri);
             mMediaPlayer.setLooping(true);
             mMediaPlayer.setOnErrorListener(this);
             mMediaPlayer.setOnCompletionListener(this);
+
+
+            mMediaPlayer.setVolume( vv,vv );
+
             mMediaPlayer.start();
             NLog.i("sound path:%s",alarm.sound);
         }
@@ -149,13 +168,16 @@ public class NotifyController extends Activity implements MediaPlayer.OnErrorLis
 
         timer = new Timer();
 
+        if( alarm.stop_auto )
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
                 finish_from_timer = true;
                 finish();
             }
-        },15000);
+        },20000);
+
+
 
 
 

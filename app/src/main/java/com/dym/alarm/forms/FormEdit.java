@@ -59,6 +59,8 @@ public class FormEdit extends Form {
 
     CheckBox checkbox_vibrate;
 
+    CheckBox checkBox_userstop;
+
     //
 
 
@@ -110,6 +112,9 @@ public class FormEdit extends Form {
 
             text_sound = (TextView) ViewInject(R.id.text_sound);
 
+
+            checkBox_userstop = (CheckBox) ViewInject(R.id.checkbox_userstop);
+
             initUI();
 
         }
@@ -160,6 +165,7 @@ public class FormEdit extends Form {
         text_alarm_descript.setText(model.getDescript());
 
 
+        checkBox_userstop.setChecked(model.stop_auto);
 
         updateSoundView();
 
@@ -418,6 +424,8 @@ public class FormEdit extends Form {
             last_repeat_day = model.getDayRepeatUnitStr();
 
         }
+
+        model.stop_auto = checkBox_userstop.isChecked();
 
 
         sendMessage(Event.REQ_ALARM_SAVE, model);

@@ -19,9 +19,9 @@ apply plugin: 'io.fabric'
 
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
-
+    compileSdkVersion 26
+    buildToolsVersion "27.0.2"
+    //flavorDimensions "default"
 
     signingConfigs {
 
@@ -44,7 +44,7 @@ android {
     defaultConfig {
         applicationId "com.dym.alarm"
         minSdkVersion 21
-        targetSdkVersion 25
+        targetSdkVersion 26
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
@@ -98,7 +98,7 @@ android {
                             //def fileName = "FotoRus_v${defaultConfig.versionName}_${today}.apk"
                             def fileName = "${variant.productFlavors[0].name}_v${variant.productFlavors[0].versionName}_${today}_release.apk"
 
-                            output.outputFile = new File(outputFile.parent, fileName)
+                            //output.outputFile = new File(outputFile.parent, fileName)
                         }
                     }
 
@@ -114,30 +114,32 @@ android {
         }
     }
 
+
+    flavorDimensions "default"
     //多渠道打包
     productFlavors {
         abroad {
 
             signingConfig signingConfigs.release
             applicationId "com.dym.alarm"
-            versionCode 13
-            versionName "1.0.6"
+            versionCode 14
+            versionName "1.0.7"
 
         }
         qqad {
 
             signingConfig signingConfigs.release
             applicationId "com.dym.alarm"
-            versionCode 13
-            versionName "1.0.6"
+            versionCode 14
+            versionName "1.0.7"
 
         }
         baiduad {
 
             signingConfig signingConfigs.release
             applicationId "com.dym.alarm"
-            versionCode 13
-            versionName "1.0.6"
+            versionCode 14
+            versionName "1.0.7"
 
         }
 
@@ -166,22 +168,18 @@ dependencies {
 
     abroadCompile 'com.google.android.gms:play-services-ads:11.0.0'
     abroadCompile project(':inapppay')
-
-
     abroadCompile 'com.google.android.gms:play-services:11.0.0'
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    //compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha7'
-    compile 'com.android.support:design:25.3.1'
-    compile 'com.android.support:multidex:1.0.1'
 
-    compile 'com.android.support:cardview-v7:25.3.1'
+    compile 'com.android.support:appcompat-v7:27.0.2'
+    compile 'com.android.support:design:27.0.2'
+    compile 'com.android.support:cardview-v7:27.0.2'
+    compile 'com.android.support:support-v4:27.0.2'
+
+    compile 'com.android.support:multidex:1.0.1'
     compile 'com.airbnb.android:lottie:2.0.0-rc1'
     compile 'uk.co.chrisjenx:calligraphy:2.3.0'
-    compile 'com.android.support:support-v4:25.3.1'
-
-
     compile 'jp.wasabeef:recyclerview-animators:2.2.6'
-    compile 'com.alibaba:fastjson:1.1.58.android'
+    compile 'com.alibaba:fastjson:1.2.46'
 
     //图片粉碎
     compile 'tyrantgit:explosionfield:1.0.1'

@@ -10,6 +10,7 @@ import com.dym.alarm.BuildConfig;
 import com.dym.alarm.DUMAPP;
 import com.dym.alarm.RP;
 import com.dym.alarm.model.MAlarm;
+import com.dym.alarm.services.AlarmReceiver;
 
 import java.util.Calendar;
 
@@ -31,6 +32,7 @@ public class AlarmUtil {
 
             AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
             Intent intent = new Intent(RP.Key.key_intent_alarmone);
+            intent.setClass(context, AlarmReceiver.class);
             intent.putExtra("json", alarm.toJson());
            // intent.setData(Uri.parse(url_alarm+alarm.getId()));
            //intent.setClass(context,AlarmUtil.class);
@@ -73,6 +75,7 @@ public class AlarmUtil {
 
             AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
             Intent intent = new Intent(RP.Key.key_intent_alarmone);
+            intent.setClass(context,AlarmReceiver.class);
             intent.putExtra("json", alarm.toJson());
             PendingIntent sender = PendingIntent.getBroadcast(context, alarm.getId(), intent, PendingIntent
                     .FLAG_CANCEL_CURRENT);
